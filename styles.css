@@ -1,0 +1,151 @@
+/* BASE */
+body{
+  font:16px Arial, sans-serif;
+  margin:0;
+  background:#f4f6fb;
+  color:#333;
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* HEADER */
+header{
+  background:#1a1a2e;
+  color:#fff;
+  padding:20px 0;
+  border-bottom:3px solid #d63384;
+}
+
+.highlight{
+  color:#d63384;
+}
+
+/* NAV */
+header ul{
+  list-style:none;
+  padding:0;
+}
+
+header li{
+  display:inline-block;
+  padding:0 15px;
+}
+
+header a{
+  color:#fff;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+header a:hover{
+  color:#d63384;
+}
+
+/* HERO STYLE */
+#hero{
+  background:linear-gradient(120deg,#1a1a2e,#2a2a4a);
+  color:#fff;
+  text-align:center;
+  padding:90px 20px;
+}
+
+#hero h1{
+  font-size:40px;
+}
+
+#hero p{
+  font-size:18px;
+  opacity:0.9;
+}
+
+/* BOXES (SERVICES STYLE) */
+.box{
+  background:#fff;
+  padding:25px;
+  margin:15px;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:0.3s;
+}
+
+.box:hover{
+  transform:translateY(-6px);
+}
+
+/* BUTTON */
+.button_1{
+  display:inline-block;
+  background:#d63384;
+  color:#fff;
+  padding:12px 25px;
+  border-radius:8px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.button_1:hover{
+  background:#b0256c;
+}
+
+/* CTA SECTION */
+#cta{
+  background:#ffffff;
+  text-align:center;
+  padding:60px 20px;
+}
+
+/* SECTIONS */
+section{
+  padding:20px 0;
+}
+
+/* DARK BOX */
+.dark{
+  background:#1f1f2e;
+  color:#fff;
+  padding:20px;
+  border-radius:10px;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:14px 18px;
+  border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  font-weight:bold;
+}
+
+/* FORM */
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+input:focus, textarea:focus{
+  border-color:#d63384;
+  outline:none;
+}
+#services img{
+  display:block;
+  margin:10px auto;
+  width:70px;
+  height:auto;
+}
+
+#services li{
+  text-align:center;
+}
