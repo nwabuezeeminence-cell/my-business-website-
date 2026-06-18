@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXA Digital Services | Contact</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d63384">  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    (function(){
+      emailjs.init("YcRcjMQ721YmHvYtH");
+    })();
+  </script>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div id="branding">
+      <h1><span class="highlight">NEXA</span> Digital Services</h1>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li class="current"><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="main">
+  <div class="container">
+
+    <article id="main-col">
+      <h1 class="page-title">Contact Us</h1>
+
+      <p>
+        Reach out for any digital services including document formatting, writing, PDF conversion, and more.
+      </p>
+
+      <div class="dark">
+        <p>WhatsApp: 07085299106</p>
+        <p>WhatsApp Business: 07025279121</p>
+        <p>Email: nwabuezeeminence@gmail.com</p>
+      </div>
+    </article>
+
+    <aside id="sidebar">
+      <div class="dark">
+
+        <h3>Send a Message</h3>
+
+        <form id="contact-form">
+
+          <label>Name</label><br>
+          <input type="text" name="user_name" required><br><br>
+
+          <label>Email</label><br>
+          <input type="email" name="user_email" required><br><br>
+
+          <label>Phone</label><br>
+          <input type="text" name="phone"><br><br>
+
+          <label>Message</label><br>
+          <textarea name="message" required></textarea><br><br>
+
+          <button class="button_1" type="submit">Send Message</button>
+
+        </form>
+
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<footer>
+  <p>NEXA Digital Services | All Rights Reserved &copy; 2026</p>
+</footer>
+
+<!-- EmailJS Script -->
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_g7t1o1",
+    "template_t8sgv11",
+    this
+  ).then(() => {
+    alert("Message sent successfully!");
+    this.reset();
+  }).catch((err) => {
+    alert("Failed to send message.");
+    console.log(err);
+  });
+
+});
+</script>
+
+</body>
+</html>
