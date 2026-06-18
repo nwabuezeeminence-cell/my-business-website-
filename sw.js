@@ -14,7 +14,7 @@ self.addEventListener("install", (event) => {
         "/about.html",
         "/services.html",
         "/contact.html",
-        "/css/style.css"
+        "/style.css"
       ]);
     })
   );
