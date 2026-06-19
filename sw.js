@@ -27,3 +27,11 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+function sendMessage() {
+  let msg = document.getElementById("chatInput").value;
+
+  // send to database (Firebase later)
+  console.log("Message sent:", msg);
+
+  document.getElementById("chatInput").value = "";
+}
