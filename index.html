@@ -189,5 +189,31 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
 </script>
+<button id="chatButton" onclick="openChat()">
+  💬 Chat With Us
+</button>
+
+<div id="chatWindow">
+
+  <div class="chat-header">
+    NEXA Support
+  </div>
+
+  <div id="chatMessages">
+    Welcome! How can we help?
+  </div>
+
+  <div class="chat-input-area">
+    <input
+      id="chatInput"
+      placeholder="Type a message..."
+    >
+
+    <button onclick="sendMessage()">
+      Send
+    </button>
+  </div>
+
+</div>
 </body>
 </html>
