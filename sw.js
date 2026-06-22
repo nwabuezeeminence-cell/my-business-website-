@@ -86,3 +86,16 @@ const db = firebase.database();
 db.ref("test").set({
   status: "NEXA Connected"
 });
+function sendMessage() {
+  let text = document.getElementById("chatInput").value;
+
+  if (text === "") return;
+
+  db.ref("chats/defaultUser").push({
+    sender: "user",
+    text: text,
+    time: Date.now()
+  });
+
+  document.getElementById("chatInput").value = "";
+}
