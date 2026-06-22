@@ -156,3 +156,11 @@ db.ref("notifications").on("child_added", (snapshot) => {
   // optional popup alert
   alert(data.title + " - " + data.message);
 });
+function sendNotification(title, message) {
+  db.ref("notifications").push({
+    title: title,
+    message: message,
+    time: Date.now(),
+    read: false
+  });
+}
