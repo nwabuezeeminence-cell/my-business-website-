@@ -120,3 +120,12 @@ function sendMessage() {
 
   document.getElementById("chatInput").value = "";
 }
+db.ref("chats/" + userId).on("child_added", (snapshot) => {
+  let msg = snapshot.val();
+
+  let div = document.createElement("div");
+
+  div.textContent = (msg.sender === "admin" ? "Admin: " : "You: ") + msg.text;
+
+  document.getElementById("messages").appendChild(div);
+});
