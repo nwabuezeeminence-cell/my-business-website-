@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NEXA Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>👨‍💼 NEXA Admin Panel</h2>
+
+<div class="admin-container">
+
+  <!-- USERS LIST -->
+  <div class="users-box">
+    <h3>👥 Users</h3>
+    <div id="usersList"></div>
+  </div>
+
+  <!-- CHAT BOX -->
+  <div class="chat-box">
+    <h3>💬 Chat</h3>
+
+    <div id="adminMessages"></div>
+
+    <input id="adminInput" placeholder="Type reply..." />
+    <button onclick="sendAdminMessage()">Send</button>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div class="notif-box">
+    <h3>🔔 Notifications</h3>
+
+    <input id="notifTitle" placeholder="Title">
+    <input id="notifMsg" placeholder="Message">
+
+    <button onclick="sendNotification()">Send Notification</button>
+
+    <div id="notifPreview"></div>
+  </div>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
