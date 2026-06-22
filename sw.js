@@ -107,3 +107,16 @@ db.ref("chats/defaultUser").on("child_added", (snapshot) => {
 
   document.getElementById("messages").appendChild(div);
 });
+function sendMessage() {
+  let text = document.getElementById("chatInput").value;
+
+  if (!text) return;
+
+  db.ref("chats/" + userId).push({
+    text: text,
+    sender: "user",
+    time: Date.now()
+  });
+
+  document.getElementById("chatInput").value = "";
+}
