@@ -47,3 +47,37 @@ function toggleNotifications(){
   }
 
 }
+
+function openChat(){
+
+  let chat =
+    document.getElementById("chatWindow");
+
+  if(chat.style.display === "block"){
+    chat.style.display = "none";
+  } else {
+    chat.style.display = "block";
+  }
+
+}
+
+function sendMessage(){
+
+  let input =
+    document.getElementById("chatInput");
+
+  let message = input.value.trim();
+
+  if(message === "") return;
+
+  let area =
+    document.getElementById("chatMessages");
+
+  area.innerHTML +=
+    "<div><strong>You:</strong> " +
+    message +
+    "</div>";
+
+  input.value = "";
+
+}
