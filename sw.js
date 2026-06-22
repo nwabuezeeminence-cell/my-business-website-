@@ -99,3 +99,11 @@ function sendMessage() {
 
   document.getElementById("chatInput").value = "";
 }
+db.ref("chats/defaultUser").on("child_added", (snapshot) => {
+  let msg = snapshot.val();
+
+  let div = document.createElement("div");
+  div.textContent = msg.sender + ": " + msg.text;
+
+  document.getElementById("messages").appendChild(div);
+});
