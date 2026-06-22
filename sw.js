@@ -129,3 +129,12 @@ db.ref("chats/" + userId).on("child_added", (snapshot) => {
 
   document.getElementById("messages").appendChild(div);
 });
+function toggleNotifications() {
+  const box = document.getElementById("notifDropdown");
+
+  if (box.style.display === "none") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
