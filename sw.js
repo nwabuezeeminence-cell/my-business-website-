@@ -138,3 +138,21 @@ function toggleNotifications() {
     box.style.display = "none";
   }
 }
+db.ref("notifications").on("child_added", (snapshot) => {
+  let data = snapshot.val();
+
+  let div = document.createElement("div");
+  div.innerHTML = `
+    <b>${data.title}</b><br>
+    <small>${data.message}</small>
+  `;
+
+  document.getElementById("notifList").prepend(div);
+
+  // update count
+  let count = document.getElementById("notifCount");
+  count.innerText = parseInt(count.innerText) + 1;
+
+  // optional popup alert
+  alert(data.title + " - " + data.message);
+});
