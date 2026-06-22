@@ -81,3 +81,5 @@ function sendMessage(){
   input.value = "";
 
 }
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
