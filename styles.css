@@ -149,3 +149,30 @@ input:focus, textarea:focus{
 #services li{
   text-align:center;
 }
+.notification-wrapper{
+  position:relative;
+}
+
+#notificationBtn{
+  cursor:pointer;
+  padding:10px;
+  border-radius:10px;
+}
+
+.notification-dropdown{
+  display:none;
+  position:absolute;
+  right:0;
+  top:50px;
+  width:280px;
+  background:white;
+  border:1px solid #ccc;
+  border-radius:12px;
+  padding:10px;
+  z-index:1000;
+}
+
+.notification-item{
+  padding:8px;
+  border-bottom:1px solid #eee;
+}
