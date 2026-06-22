@@ -83,3 +83,6 @@ function sendMessage(){
 }
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+db.ref("test").set({
+  status: "NEXA Connected"
+});
