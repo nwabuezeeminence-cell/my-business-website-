@@ -117,7 +117,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </nav>
 
 <script src="menu.js"></script>
-<script src="chat.js"></script>
+<script src="firebase-chat.js"></script>
 
 </body>
 </html>
