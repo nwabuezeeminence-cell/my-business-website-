@@ -1,4 +1,5 @@
 <header class="topbar">
+<link rel="stylesheet" href="css/menu.css">
 
     <button class="menu-btn" onclick="openMenu()">
         ☰
