@@ -67,3 +67,4 @@ function logout() {
 
 // Auto run
 window.onload = loadProfile;
+
