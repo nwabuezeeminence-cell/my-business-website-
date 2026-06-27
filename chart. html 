@@ -3,38 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXA Chat</title>
-<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d63384">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
-<div class="chat-container">
+<header class="topbar">
 
-    <div class="chat-header">
-        <button onclick="goBack()">⬅ Back</button>
-        <h2 id="chatName">Loading...</h2>
-    </div>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-    <div id="messages" class="messages"></div>
+<div class="logo">
+<img src="img/NEXA.png" alt="Logo">
+<h2>Chats</h2>
+</div>
 
-    <div class="chat-input">
+<div class="top-icons">
+<a href="notifications.html"><i class="fas fa-bell"></i></a>
+<a href="profile.html"><i class="fas fa-user"></i></a>
+</div>
 
-        <input
-            type="text"
-            id="messageInput"
-            placeholder="Type your message..."
-        >
+</header>
 
-        <button onclick="sendMessage()">
-            Send
-        </button>
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
 
-    </div>
+<button class="close-btn" onclick="closeMenu()">✖</button>
+
+<a href="index.html">🏠 Home</a>
+<a href="community.html">👥 Community</a>
+<a href="groups.html">👨‍👩‍👧 Groups</a>
+<a href="chat.html">💬 Chats</a>
+<a href="services.html">💼 Services</a>
+<a href="contact.html">📞 Contact</a>
+<a href="profile.html">👤 Profile</a>
+<a href="settings.html">⚙ Settings</a>
 
 </div>
 
-<script type="module" src="js/chat.js"></script>
+<!-- CHAT LIST -->
+<main class="container">
+
+<h2>Messages</h2>
+
+<div class="chat-list">
+
+<div class="chat-item" onclick="openChat('Admin')">
+<img src="img/default-user.png">
+<div>
+<h4>Admin</h4>
+<p>Tap to start chatting...</p>
+</div>
+</div>
+
+<div class="chat-item" onclick="openChat('Support')">
+<img src="img/default-user.png">
+<div>
+<h4>Support</h4>
+<p>We are online 24/7</p>
+</div>
+</div>
+
+<div class="chat-item" onclick="openChat('Community')">
+<img src="img/default-user.png">
+<div>
+<h4>Community</h4>
+<p>Join discussions</p>
+</div>
+</div>
+
+</div>
+
+<!-- CHAT WINDOW -->
+<div id="chatWindow" class="chat-window hidden">
+
+<div class="chat-header">
+<h3 id="chatTitle">Chat</h3>
+<button onclick="closeChat()">✖</button>
+</div>
+
+<div id="messages" class="messages"></div>
+
+<div class="chat-input">
+
+<input id="messageInput" placeholder="Type a message...">
+
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+</div>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+<a href="index.html">🏠</a>
+<a href="community.html">👥</a>
+<a href="chat.html">💬</a>
+<a href="groups.html">👨‍👩‍👧</a>
+<a href="profile.html">👤</a>
+
+</nav>
+
+<script src="menu.js"></script>
+<script src="chat.js"></script>
 
 </body>
 </html>
