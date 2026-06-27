@@ -1,78 +1,61 @@
-const db = firebase.database();
+// ===== NEXA ADMIN PANEL SYSTEM =====
 
-// ========================
-// LOAD USERS
-// ========================
+// Load all users
 function loadUsers() {
-  db.ref("chats").on("value", (snapshot) => {
+
     const usersList = document.getElementById("usersList");
-    usersList.innerHTML = "";
 
-    snapshot.forEach(userSnap => {
-      let userId = userSnap.key;
+    firebase.database().ref("users").on("value", (snapshot) => {
 
-      let div = document.createElement("div");
-      div.textContent = userId;
+        usersList.innerHTML = "";
 
-      div.onclick = () => loadChat(userId);
+        snapshot.forEach((child) => {
 
-      usersList.appendChild(div);
+            const user = child.val();
+
+            const div = document.createElement("div");
+
+            div.className = "card";
+
+            div.innerHTML = `
+                <strong>${user.name || "No Name"}</strong><br>
+                ${user.email || ""}
+            `;
+
+            usersList.appendChild(div);
+
+        });
+
     });
-  });
+
 }
 
-let currentUser = null;
+// Load messages (global view)
+function loadMessages() {
 
-// ========================
-// LOAD CHAT
-// ========================
-function loadChat(userId) {
-  currentUser = userId;
+    const messagesList = document.getElementById("messagesList");
 
-  db.ref("chats/" + userId).on("child_added", (snap) => {
-    let msg = snap.val();
+    firebase.database().ref("chats/global").on("child_added", (snapshot) => {
 
-    let div = document.createElement("div");
-    div.textContent = msg.sender + ": " + msg.text;
+        const msg = snapshot.val();
 
-    document.getElementById("adminMessages").appendChild(div);
-  });
+        const div = document.createElement("div");
+
+        div.className = "card";
+
+        div.innerHTML = `
+            <strong>${msg.sender}</strong><br>
+            ${msg.message}
+        `;
+
+        messagesList.appendChild(div);
+
+    });
+
 }
 
-// ========================
-// SEND ADMIN MESSAGE
-// ========================
-function sendAdminMessage() {
-  let text = document.getElementById("adminInput").value;
-
-  if (!currentUser || !text) return;
-
-  db.ref("chats/" + currentUser).push({
-    sender: "admin",
-    text: text,
-    time: Date.now()
-  });
-
-  document.getElementById("adminInput").value = "";
-}
-
-// ========================
-// SEND NOTIFICATION
-// ========================
-function sendNotification() {
-  let title = document.getElementById("notifTitle").value;
-  let msg = document.getElementById("notifMsg").value;
-
-  db.ref("notifications").push({
-    title: title,
-    message: msg,
-    time: Date.now(),
-    read: false
-  });
-
-  alert("Notification Sent!");
-}
-
-// START
-loadUsers();
-onclick="history.back()"
+// Start admin panel
+window.onload = function () {
+    loadUsers();
+    loadMessages();
+};
