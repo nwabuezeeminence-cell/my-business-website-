@@ -75,3 +75,4 @@ function sendNotification() {
 
 // START
 loadUsers();
+onclick="history.back()"
