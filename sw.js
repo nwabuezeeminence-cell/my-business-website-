@@ -198,3 +198,4 @@ await set(ref(database, "users/" + user.uid), {
     role: "user",
     status: "Available"
 });
+onclick="history.back()"
