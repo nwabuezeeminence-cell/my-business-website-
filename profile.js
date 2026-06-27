@@ -41,3 +41,4 @@ window.logout = async function(){
     location.href="login.html";
 
 }
+onclick="history.back()"
