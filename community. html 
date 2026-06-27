@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXA Community</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <h2>👥 NEXA Community</h2>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+</header>
+
+<div class="search-box">
+    <input
+        type="text"
+        id="searchUser"
+        placeholder="Search users..."
+    >
+</div>
+
+<div id="userList">
+
+    <!-- Users will appear here -->
+
+</div>
+
+<script type="module" src="js/community.js"></script>
+
+</body>
+</html>
