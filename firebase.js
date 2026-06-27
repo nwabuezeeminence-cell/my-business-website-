@@ -1,7 +1,7 @@
 // Firebase Configuration
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "apiKey: "AIzaSyDluVqK67XEYtc4f9rkML2diChbSvgiYiU"",
     authDomain: "nexa-digital-services.firebaseapp.com",
     databaseURL: "https://nexa-digital-services-default-rtdb.firebaseio.com",
     projectId: "nexa-digital-services",
