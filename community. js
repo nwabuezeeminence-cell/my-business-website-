@@ -38,3 +38,10 @@ onValue(ref(database, "users"), (snapshot) => {
     });
 
 });
+window.openChat = function(uid){
+
+    localStorage.setItem("chatUser", uid);
+
+    window.location.href = "chat.html";
+
+}
