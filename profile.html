@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile | NEXA</title>
 
-<link rel="stylesheet" href="css/style.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>My Profile</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="menu.css">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
-<div class="profile-container">
+<header class="topbar">
 
-    <div class="profile-header">
+<button class="menu-btn"
+onclick="openMenu()">
 
-        <img
-            id="profilePhoto"
-            src="img/default-user.png"
-            alt="Profile Photo"
-            class="profile-photo"
-        >
+☰
 
-        <h2 id="profileName">Loading...</h2>
+</button>
 
-        <p id="profileUsername">@username</p>
+<div class="logo">
 
-        <span id="profileStatus">🟢 Available</span>
+<img src="img/NEXA.png" alt="Logo">
 
-    </div>
-
-    <div class="profile-body">
-
-        <label>Full Name</label>
-
-        <input
-            id="fullName"
-            type="text"
-        >
-
-        <label>Bio</label>
-
-        <textarea
-            id="bio"
-            rows="4"
-        ></textarea>
-
-        <button onclick="saveProfile()">
-            💾 Save Changes
-        </button>
-
-        <button onclick="logout()">
-            🚪 Logout
-        </button>
-
-    </div>
+<h2>My Profile</h2>
 
 </div>
 
-<script type="module" src="js/profile.js"></script>
+<div class="top-icons">
+
+<a href="notifications.html">
+
+<i class="fas fa-bell"></i>
+
+</a>
+
+</div>
+
+</header>
+
+<div id="sideMenu" class="side-menu">
+
+<button class="close-btn"
+onclick="closeMenu()">
+
+✖
+
+</button>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="community.html">👥 Community</a>
+
+<a href="chat.html">💬 Chats</a>
+
+<a href="groups.html">👥 Groups</a>
+
+<a href="settings.html">⚙ Settings</a>
+
+<a href="admin.html">🛡 Admin Panel</a>
+
+</div>
+
+<section class="container">
+
+<center>
+
+<img
+
+src="img/default-user.png"
+
+id="profileImage"
+
+style="width:120px;height:120px;border-radius:50%;"
+
+>
+
+<h2 id="profileName">
+
+Guest User
+
+</h2>
+
+<p id="profileEmail">
+
+guest@nexa.com
+
+</p>
+
+</center>
+
+<hr>
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="fullName">
+
+<label>Bio</label>
+
+<textarea
+id="bio">
+
+</textarea>
+
+<br><br>
+
+<button
+class="button_1"
+onclick="saveProfile()">
+
+Save Profile
+
+</button>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 NEXA Digital Services
+
+</p>
+
+</footer>
+
+<script src="menu.js"></script>
+
+<script src="profile.js"></script>
 
 </body>
+
 </html>
