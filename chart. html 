@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXA Chat</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+        <button onclick="goBack()">⬅ Back</button>
+        <h2 id="chatName">Loading...</h2>
+    </div>
+
+    <div id="messages" class="messages"></div>
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="messageInput"
+            placeholder="Type your message..."
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/chat.js"></script>
+
+</body>
+</html>
