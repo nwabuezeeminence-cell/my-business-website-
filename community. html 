@@ -6,34 +6,142 @@
 
 <title>NEXA Community</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#d63384">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-<header class="top-bar">
-    <h2>👥 NEXA Community</h2>
+<header class="topbar">
 
-    <button onclick="logout()">
-        Logout
-    </button>
+<button class="menu-btn" onclick="openMenu()">
+☰
+</button>
+
+<div class="logo">
+<img src="img/NEXA.png" alt="NEXA Logo">
+<h2>NEXA Community</h2>
+</div>
+
+<div class="top-icons">
+<a href="notifications.html"><i class="fas fa-bell"></i></a>
+<a href="profile.html"><i class="fas fa-user-circle"></i></a>
+</div>
+
 </header>
 
-<div class="search-box">
-    <input
-        type="text"
-        id="searchUser"
-        placeholder="Search users..."
-    >
+<div id="sideMenu" class="side-menu">
+
+<button class="close-btn" onclick="closeMenu()">✖</button>
+
+<a href="index.html">🏠 Home</a>
+<a href="community.html">👥 Community</a>
+<a href="chat.html">💬 Chats</a>
+<a href="groups.html">👨‍👩‍👧 Groups</a>
+<a href="services.html">💼 Services</a>
+<a href="contact.html">📞 Contact</a>
+<a href="profile.html">👤 Profile</a>
+<a href="settings.html">⚙ Settings</a>
+<a href="admin.html">🛠 Admin</a>
+
 </div>
 
-<div id="userList">
+<main class="community-page">
 
-    <!-- Users will appear here -->
+<div class="create-post">
+
+<h3>Create Post</h3>
+
+<textarea
+id="postInput"
+placeholder="What's on your mind?">
+</textarea>
+
+<input
+type="file"
+id="postImage"
+accept="image/*">
+
+<button onclick="createPost()">
+Post
+</button>
 
 </div>
 
-<script type="module" src="js/community.js"></script>
+<div id="feed">
+
+<div class="post">
+
+<div class="post-header">
+
+<img
+src="img/default-user.png"
+class="avatar">
+
+<div>
+
+<h4>NEXA Digital Services</h4>
+
+<small>Just now</small>
+
+</div>
+
+</div>
+
+<p>
+🎉 Welcome to the NEXA Community.
+Share ideas, ask questions, and connect with everyone.
+</p>
+
+<div class="post-actions">
+
+<button>👍 Like</button>
+
+<button>💬 Comment</button>
+
+<button>📤 Share</button>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<nav class="bottom-nav">
+
+<a href="index.html">
+🏠
+</a>
+
+<a href="community.html">
+👥
+</a>
+
+<a href="chat.html">
+💬
+</a>
+
+<a href="notifications.html">
+🔔
+</a>
+
+<a href="profile.html">
+👤
+</a>
+
+</nav>
+
+<script src="firebase.js"></script>
+<script src="menu.js"></script>
+<script src="community.js"></script>
 
 </body>
 </html>
