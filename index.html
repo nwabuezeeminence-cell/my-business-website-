@@ -326,6 +326,84 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </div>
 
 </section>   
- 
+<!-- ===== LIVE CHAT ===== -->
+
+<div id="chatWindow" class="chat-window">
+
+    <div class="chat-header">
+        <h3>NEXA Live Support</h3>
+    </div>
+
+    <div id="chatMessages" class="chat-messages">
+        <p>Welcome to NEXA Digital Services 👋</p>
+    </div>
+
+    <div class="chat-input-area">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Type your message..."
+        >
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ===== NOTIFICATION PANEL ===== -->
+
+<div id="notificationList" class="notification-list">
+
+    <div class="notification-item">
+        🎉 Welcome to NEXA Digital Services.
+    </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+    <div class="container">
+
+        <h3>NEXA Digital Services</h3>
+
+        <p>
+            Professional Digital Services for Students,
+            Businesses and Organizations.
+        </p>
+
+        <p>
+            &copy; 2026 NEXA Digital Services.
+            All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+<!-- ===== JAVASCRIPT FILES ===== -->
+
+<script src="menu.js"></script>
+<script src="chat.js"></script>
+<script src="notifications.js"></script>
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker
+        .register("sw.js")
+        .then(() => console.log("Service Worker Registered"))
+        .catch(console.error);
+
+}
+
+</script>
+
 </body>
 </html>
