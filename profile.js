@@ -34,3 +34,10 @@ window.saveProfile = async function(){
     alert("✅ Profile updated successfully!");
 
 }
+window.logout = async function(){
+
+    await signOut(auth);
+
+    location.href="login.html";
+
+}
