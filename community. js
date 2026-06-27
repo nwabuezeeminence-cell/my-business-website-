@@ -45,3 +45,4 @@ window.openChat = function(uid){
     window.location.href = "chat.html";
 
 }
+onclick="history.back()"
