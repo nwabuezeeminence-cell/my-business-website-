@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | NEXA</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <div class="profile-header">
+
+        <img
+            id="profilePhoto"
+            src="img/default-user.png"
+            alt="Profile Photo"
+            class="profile-photo"
+        >
+
+        <h2 id="profileName">Loading...</h2>
+
+        <p id="profileUsername">@username</p>
+
+        <span id="profileStatus">🟢 Available</span>
+
+    </div>
+
+    <div class="profile-body">
+
+        <label>Full Name</label>
+
+        <input
+            id="fullName"
+            type="text"
+        >
+
+        <label>Bio</label>
+
+        <textarea
+            id="bio"
+            rows="4"
+        ></textarea>
+
+        <button onclick="saveProfile()">
+            💾 Save Changes
+        </button>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/profile.js"></script>
+
+</body>
+</html>
