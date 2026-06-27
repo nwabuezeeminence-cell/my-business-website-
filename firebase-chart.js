@@ -45,12 +45,20 @@ function sendMessage() {
 
     if (text === "" || !currentUser) return;
 
-    db.ref("chats/" + currentChat).push({
-        message: text,
-        sender: currentUser.displayName,
-        uid: currentUser.uid,
-        time: Date.now()
-    });
+  const msgData = {
+    message: text,
+    sender: currentUser.displayName,
+    uid: currentUser.uid,
+    time: Date.now()
+};
+
+db.ref("chats/" + currentChat).push(msgData);
+
+// Add notification
+db.ref("notifications").push({
+    message: `${currentUser.displayName} sent a message`,
+    time: Date.now()
+});
 
     input.value = "";
 }
