@@ -184,5 +184,17 @@ window.login = async function () {
       error.message;
 
   }
-
 }
+await set(ref(database, "users/" + user.uid), {
+    uid: user.uid,
+    fullName: fullName,
+    username: "@" + fullName.toLowerCase().replace(/\s+/g, ""),
+    email: email,
+    bio: "Hello! I'm new on NEXA.",
+    profilePhoto: "",
+    joined: new Date().toISOString(),
+    online: true,
+    lastSeen: Date.now(),
+    role: "user",
+    status: "Available"
+});
