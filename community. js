@@ -1,59 +1,54 @@
-// Community Page Script
+// community.js
 
-const feed = document.getElementById("feed");
+document.addEventListener("DOMContentLoaded", () => {
 
-function createPost() {
+    const usersList = document.getElementById("usersList");
+    const searchBox = document.getElementById("searchUsers");
 
-    const input = document.getElementById("postInput");
+    // Temporary demo users
+    const users = [
+        "Eminence",
+        "NEXA Support",
+        "John Doe",
+        "Jane Smith",
+        "Community Member"
+    ];
 
-    const text = input.value.trim();
+    function displayUsers(filter = "") {
 
-    if (text === "") {
-        alert("Write something first.");
-        return;
+        usersList.innerHTML = "";
+
+        const filteredUsers = users.filter(user =>
+            user.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        if (filteredUsers.length === 0) {
+            usersList.innerHTML = "<p>No users found.</p>";
+            return;
+        }
+
+        filteredUsers.forEach(user => {
+
+            const card = document.createElement("div");
+            card.className = "user-card";
+
+            card.innerHTML = `
+                <h3>${user}</h3>
+                <button onclick="location.href='chat.html'">
+                    Open Chat
+                </button>
+            `;
+
+            usersList.appendChild(card);
+
+        });
+
     }
 
-    const post = document.createElement("div");
-    post.className = "post";
+    displayUsers();
 
-    post.innerHTML = `
-        <div class="post-header">
-            <img src="img/default-user.png" class="avatar">
+    searchBox.addEventListener("input", () => {
+        displayUsers(searchBox.value);
+    });
 
-            <div>
-                <h4>You</h4>
-                <small>${new Date().toLocaleString()}</small>
-            </div>
-        </div>
-
-        <p>${text}</p>
-
-        <div class="post-actions">
-            <button onclick="likePost(this)">👍 Like</button>
-            <button onclick="commentPost()">💬 Comment</button>
-            <button onclick="sharePost()">📤 Share</button>
-        </div>
-    `;
-
-    feed.prepend(post);
-
-    input.value = "";
-}
-
-function likePost(button) {
-
-    if (button.innerHTML === "👍 Like") {
-        button.innerHTML = "❤️ Liked";
-    } else {
-        button.innerHTML = "👍 Like";
-    }
-
-}
-
-function commentPost() {
-    alert("Comments will be added in the next update.");
-}
-
-function sharePost() {
-    alert("Share feature coming soon.");
-}
+});
