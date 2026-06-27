@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create NEXA Account</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="signup-container">
+
+    <h1>Create Account</h1>
+
+    <input
+        type="text"
+        id="fullName"
+        placeholder="Full Name"
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+    >
+
+    <button onclick="signUp()">
+        Create Account
+    </button>
+
+    <p>
+        Already have an account?
+        <a href="login.html">Login</a>
+    </p>
+
+    <p id="status"></p>
+
+</div>
+
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>
