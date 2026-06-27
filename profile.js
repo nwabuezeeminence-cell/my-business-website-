@@ -1,70 +1,43 @@
-// ===== NEXA PROFILE SYSTEM (Firebase Realtime DB) =====
+// profile.js
 
-const user = firebase.auth().currentUser;
+document.addEventListener("DOMContentLoaded", loadProfile);
 
-// Save profile
-function saveProfile() {
-
-    const name = document.getElementById("fullName").value;
-    const bio = document.getElementById("bio").value;
-
-    const user = firebase.auth().currentUser;
-
-    if (!user) {
-        alert("You must be logged in!");
-        return;
-    }
-
-    firebase.database().ref("users/" + user.uid).set({
-        name: name,
-        bio: bio,
-        email: user.email
-    });
-
-    alert("Profile saved!");
-}
-
-// Load profile
 function loadProfile() {
 
-    firebase.auth().onAuthStateChanged((user) => {
+    const profile = JSON.parse(localStorage.getItem("nexaProfile"));
 
-        if (user) {
+    if (profile) {
 
-            firebase.database().ref("users/" + user.uid).once("value")
-            .then((snapshot) => {
+        document.getElementById("profileName").textContent = profile.name;
+        document.getElementById("profileEmail").textContent = profile.email;
+        document.getElementById("fullName").value = profile.name;
+        document.getElementById("bio").value = profile.bio;
 
-                const data = snapshot.val();
+    } else {
 
-                if (data) {
+        document.getElementById("fullName").value = "";
+        document.getElementById("bio").value = "";
 
-                    document.getElementById("fullName").value = data.name || "";
-                    document.getElementById("bio").value = data.bio || "";
-
-                    document.getElementById("profileName").innerText = data.name || "No Name";
-                    document.getElementById("profileUsername").innerText = user.email;
-
-                } else {
-                    document.getElementById("profileUsername").innerText = user.email;
-                }
-
-            });
-
-        } else {
-            window.location.href = "login.html";
-        }
-
-    });
+    }
 
 }
 
-// Logout
-function logout() {
-    firebase.auth().signOut().then(() => {
-        window.location.href = "login.html";
-    });
+function saveProfile() {
+
+    const profile = {
+
+        name: document.getElementById("fullName").value.trim() || "Guest User",
+
+        email: document.getElementById("profileEmail").textContent,
+
+        bio: document.getElementById("bio").value.trim()
+
+    };
+
+    localStorage.setItem("nexaProfile", JSON.stringify(profile));
+
+    document.getElementById("profileName").textContent = profile.name;
+
+    alert("Profile saved successfully!");
+
 }
-
-// Auto run
-window.onload = loadProfile;
-
