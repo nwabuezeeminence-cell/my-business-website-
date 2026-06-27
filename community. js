@@ -1,48 +1,59 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+// Community Page Script
 
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+const feed = document.getElementById("feed");
 
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
-const app = initializeApp(firebaseConfig);
+function createPost() {
 
-const database = getDatabase(app);
+    const input = document.getElementById("postInput");
 
-const auth = getAuth(app);
-const userList = document.getElementById("userList");
-window.logout = async function(){
+    const text = input.value.trim();
 
-    await signOut(auth);
+    if (text === "") {
+        alert("Write something first.");
+        return;
+    }
 
-    window.location.href = "login.html";
+    const post = document.createElement("div");
+    post.className = "post";
 
-}
-onValue(ref(database, "users"), (snapshot) => {
+    post.innerHTML = `
+        <div class="post-header">
+            <img src="img/default-user.png" class="avatar">
 
-    userList.innerHTML = "";
-
-    snapshot.forEach((child) => {
-
-        const user = child.val();
-
-        userList.innerHTML += `
-            <div class="user-card"
-                 onclick="openChat('${user.uid}')">
-
-                <h3>${user.fullName}</h3>
-
-                <p>${user.email}</p>
-
+            <div>
+                <h4>You</h4>
+                <small>${new Date().toLocaleString()}</small>
             </div>
-        `;
+        </div>
 
-    });
+        <p>${text}</p>
 
-});
-window.openChat = function(uid){
+        <div class="post-actions">
+            <button onclick="likePost(this)">👍 Like</button>
+            <button onclick="commentPost()">💬 Comment</button>
+            <button onclick="sharePost()">📤 Share</button>
+        </div>
+    `;
 
-    localStorage.setItem("chatUser", uid);
+    feed.prepend(post);
 
-    window.location.href = "chat.html";
+    input.value = "";
+}
+
+function likePost(button) {
+
+    if (button.innerHTML === "👍 Like") {
+        button.innerHTML = "❤️ Liked";
+    } else {
+        button.innerHTML = "👍 Like";
+    }
 
 }
-onclick="history.back()"
+
+function commentPost() {
+    alert("Comments will be added in the next update.");
+}
+
+function sharePost() {
+    alert("Share feature coming soon.");
+}
