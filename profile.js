@@ -1,0 +1,13 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    update
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+
+import {
+    getAuth,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
