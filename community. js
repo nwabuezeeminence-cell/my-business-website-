@@ -9,7 +9,13 @@ const database = getDatabase(app);
 
 const auth = getAuth(app);
 const userList = document.getElementById("userList");
+window.logout = async function(){
 
+    await signOut(auth);
+
+    window.location.href = "login.html";
+
+}
 onValue(ref(database, "users"), (snapshot) => {
 
     userList.innerHTML = "";
