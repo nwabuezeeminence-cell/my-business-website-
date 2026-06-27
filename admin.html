@@ -1,39 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Panel | NEXA</title>
+<title>NEXA Admin Panel</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="menu.css">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
 
 <header class="topbar">
-    <h2>👨‍💼 Admin Panel</h2>
-</header>
 
-<div class="container">
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-    <h3>Users</h3>
-    <div id="usersList"></div>
+<div class="logo">
 
-    <h3>Recent Messages</h3>
-    <div id="messagesList"></div>
+<img src="img/NEXA.png" alt="Logo">
+
+<h2>Admin Panel</h2>
 
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</header>
 
-<script src="firebase.js"></script>
-<script src="admin-protect.js"></script>
+<div id="sideMenu" class="side-menu">
+
+<button class="close-btn" onclick="closeMenu()">✖</button>
+
+<a href="index.html">🏠 Home</a>
+<a href="community.html">👥 Community</a>
+<a href="chat.html">💬 Chats</a>
+<a href="groups.html">👥 Groups</a>
+<a href="profile.html">👤 My Profile</a>
+<a href="settings.html">⚙ Settings</a>
+
+</div>
+
+<section class="container">
+
+<h1>Administrator Dashboard</h1>
+
+<div class="user-card">
+
+<h3>Total Users</h3>
+
+<p id="totalUsers">0</p>
+
+</div>
+
+<div class="user-card">
+
+<h3>Total Groups</h3>
+
+<p id="totalGroups">0</p>
+
+</div>
+
+<div class="user-card">
+
+<h3>Total Messages</h3>
+
+<p id="totalMessages">0</p>
+
+</div>
+
+<br>
+
+<button class="button_1"
+onclick="refreshDashboard()">
+
+Refresh Dashboard
+
+</button>
+
+</section>
+
+<footer>
+
+<p>© 2026 NEXA Digital Services</p>
+
+</footer>
+
+<script src="menu.js"></script>
 <script src="admin.js"></script>
 
 </body>
+
 </html>
