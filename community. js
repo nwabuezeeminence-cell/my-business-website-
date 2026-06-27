@@ -8,3 +8,27 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const auth = getAuth(app);
+const userList = document.getElementById("userList");
+
+onValue(ref(database, "users"), (snapshot) => {
+
+    userList.innerHTML = "";
+
+    snapshot.forEach((child) => {
+
+        const user = child.val();
+
+        userList.innerHTML += `
+            <div class="user-card"
+                 onclick="openChat('${user.uid}')">
+
+                <h3>${user.fullName}</h3>
+
+                <p>${user.email}</p>
+
+            </div>
+        `;
+
+    });
+
+});
