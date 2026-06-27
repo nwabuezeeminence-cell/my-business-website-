@@ -1,44 +1,69 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+// ===== NEXA PROFILE SYSTEM (Firebase Realtime DB) =====
 
-import {
-    getDatabase,
-    ref,
-    get,
-    update
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-database.js";
+const user = firebase.auth().currentUser;
 
-import {
-    getAuth,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
-const app = initializeApp(firebaseConfig);
+// Save profile
+function saveProfile() {
 
-const auth = getAuth(app);
+    const name = document.getElementById("fullName").value;
+    const bio = document.getElementById("bio").value;
 
-const db = getDatabase(app);
-window.saveProfile = async function(){
+    const user = firebase.auth().currentUser;
 
-    const currentUser = auth.currentUser;
+    if (!user) {
+        alert("You must be logged in!");
+        return;
+    }
 
-    await update(
-        ref(db,"users/"+currentUser.uid),
-        {
-            fullName:
-                document.getElementById("fullName").value,
+    firebase.database().ref("users/" + user.uid).set({
+        name: name,
+        bio: bio,
+        email: user.email
+    });
 
-            bio:
-                document.getElementById("bio").value
+    alert("Profile saved!");
+}
+
+// Load profile
+function loadProfile() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+
+        if (user) {
+
+            firebase.database().ref("users/" + user.uid).once("value")
+            .then((snapshot) => {
+
+                const data = snapshot.val();
+
+                if (data) {
+
+                    document.getElementById("fullName").value = data.name || "";
+                    document.getElementById("bio").value = data.bio || "";
+
+                    document.getElementById("profileName").innerText = data.name || "No Name";
+                    document.getElementById("profileUsername").innerText = user.email;
+
+                } else {
+                    document.getElementById("profileUsername").innerText = user.email;
+                }
+
+            });
+
+        } else {
+            window.location.href = "login.html";
         }
-    );
 
-    alert("✅ Profile updated successfully!");
-
-}
-window.logout = async function(){
-
-    await signOut(auth);
-
-    location.href="login.html";
+    });
 
 }
-onclick="history.back()"
+
+// Logout
+function logout() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
+    });
+}
+
+// Auto run
+window.onload = loadProfile;
