@@ -16,3 +16,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const db = getDatabase(app);
+window.saveProfile = async function(){
+
+    const currentUser = auth.currentUser;
+
+    await update(
+        ref(db,"users/"+currentUser.uid),
+        {
+            fullName:
+                document.getElementById("fullName").value,
+
+            bio:
+                document.getElementById("bio").value
+        }
+    );
+
+    alert("✅ Profile updated successfully!");
+
+}
