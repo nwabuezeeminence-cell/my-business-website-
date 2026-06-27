@@ -1,164 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NEXA Digital Services | Services</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d63384"></head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Services | NEXA Digital Services</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="menu.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
 
 <body>
+
 <header class="topbar">
 
-    <button class="menu-btn" onclick="openMenu()">
-        ☰
-    </button>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-    <div class="logo">
+<div class="logo">
 
-        <img src="img/NEXA.png" alt="Logo">
+<img src="img/NEXA.png" alt="NEXA Logo">
 
-        <h2>NEXA Digital Services</h2>
+<h2>NEXA Digital Services</h2>
 
-    </div>
+</div>
 
-    <div class="top-icons">
+<div class="top-icons">
 
-        <a href="notifications.html">
-            🔔
-        </a>
+<a href="notifications.html"><i class="fas fa-bell"></i></a>
 
-        <a href="profile.html">
-            👤
-        </a>
+<a href="profile.html"><i class="fas fa-user-circle"></i></a>
 
-    </div>
+</div>
 
 </header>
 
 <div id="sideMenu" class="side-menu">
 
-    <button class="close-btn" onclick="closeMenu()">
-        ✖
-    </button>
+<button class="close-btn" onclick="closeMenu()">✖</button>
 
-    <a href="index.html">🏠 Home</a>
+<a href="index.html"><i class="fas fa-home"></i> Home</a>
+<a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+<a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+<a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
 
-    <a href="about.html">ℹ About</a>
+<hr>
 
-    <a href="services.html">💼 Services</a>
+<a href="community.html"><i class="fas fa-users"></i> Community</a>
+<a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
+<a href="groups.html"><i class="fas fa-user-friends"></i> Groups</a>
+<a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+<a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
 
-    <a href="contact.html">📞 Contact</a>
+<hr>
 
-    <hr>
-
-    <a href="community.html">👥 Community</a>
-
-    <a href="chat.html">💬 Chats</a>
-
-    <a href="groups.html">👥 Groups</a>
-
-    <a href="notifications.html">🔔 Notifications</a>
-
-    <a href="profile.html">👤 My Profile</a>
-
-    <a href="settings.html">⚙ Settings</a>
-
-    <hr>
-
-    <a href="admin.html">👨‍💼 Admin Panel</a>
-
-    <a href="javascript:history.back()">
-        ⬅ Back
-    </a>
-
-    <a href="login.html">
-        🚪 Logout
-    </a>
+<a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
 
 </div>
 
-<div id="chatBox">
-  <div id="messages"></div>
+<section class="page-header">
 
-  <input id="chatInput" placeholder="Type message..." />
-  <button onclick="sendMessage()">Send</button>
+<div class="container">
+
+<h1>Our Services</h1>
+
+<p>Professional digital solutions delivered with quality and speed.</p>
+
 </div>
-  <div class="container">
-    <div id="branding">
-      <h1><span class="highlight">NEXA</span> Digital Services</h1>
-    </div>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li class="current"><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+</section>
 
-<section id="main">
-  <div class="container">
+<section class="container">
 
-    <article id="main-col">
-      <h1 class="page-title">Services</h1>
+<div class="service-grid">
 
-      <ul id="services">
-<li>
-    <img src="word.png" alt="Word Formatting">
-    <h3>Word Formatting</h3>
-    <p>Professional document formatting.</p>
-    <p><strong>₦1,500</strong></p>
-</li>
+<div class="service-card">
+<i class="fas fa-file-word fa-3x"></i>
+<h3>Word Formatting</h3>
+<p>Professional formatting for assignments, reports and business documents.</p>
+<h4>₦1,500</h4>
+<a href="payment.html" class="button_1">Order Now</a>
+</div>
 
-<li>
-    <img src="PDF.png" alt="PDF Conversion">
-    <h3>PDF Conversion</h3>
-    <p>Convert PDF to Word or Word to PDF.</p>
-    <p><strong>₦1,000</strong></p>
-</li>
+<div class="service-card">
+<i class="fas fa-file-pdf fa-3x"></i>
+<h3>PDF Conversion</h3>
+<p>Convert PDF to Word or Word to PDF quickly and accurately.</p>
+<h4>₦1,000</h4>
+<a href="payment.html" class="button_1">Order Now</a>
+</div>
 
-<li>
-    <img src="copy.png" alt="Copywriting">
-    <h3>Copywriting</h3>
-    <p>Professional writing services.</p>
-    <p><strong>₦2,500+</strong></p>  
-</li>                                                                 
-<a href="contact.html" class="button_1">Order Now</a>
-</ul>
-    </article>
+<div class="service-card">
+<i class="fas fa-pen-nib fa-3x"></i>
+<h3>Copywriting</h3>
+<p>Professional writing for businesses, students and organizations.</p>
+<h4>From ₦2,500</h4>
+<a href="payment.html" class="button_1">Order Now</a>
+</div>
 
-    <aside id="sidebar">
-      <div class="dark">
-        <h3>Get a Quote</h3>
+<div class="service-card">
+<i class="fas fa-laptop fa-3x"></i>
+<h3>Digital Support</h3>
+<p>General computer assistance and digital solutions.</p>
+<h4>Contact Us</h4>
+<a href="contact.html" class="button_1">Request Service</a>
+</div>
 
-        <form class="quote">
+</div>
 
-          <label>Name</label><br>
-          <input type="text"><br><br>
-
-          <label>Email</label><br>
-          <input type="email"><br><br>
-
-          <label>Message</label><br>
-          <textarea></textarea><br><br>
-
-          <button class="button_1" type="submit">Send</button>
-
-        </form>
-      </div>
-    </aside>
-
-  </div>
 </section>
 
 <footer>
-  <p>NEXA Digital Services | All Rights Reserved &copy; 2026</p>
+
+<div class="container">
+
+<p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
+
+</div>
+
 </footer>
+
+<script src="menu.js"></script>
 
 </body>
 </html>
