@@ -1,187 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NEXA Digital Services | Contact</title>
 
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact Us | NEXA Digital Services</title>
+
+<meta name="description" content="Contact NEXA Digital Services for document formatting, PDF conversion, copywriting and digital support.">
+
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d63384">  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <script>
-    (function(){
-      emailjs.init("YcRcjMQ721YmHvYtH");
-    })();
-  </script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="menu.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 </head>
 
 <body>
+
 <header class="topbar">
 
-    <button class="menu-btn" onclick="openMenu()">
-        ☰
-    </button>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-    <div class="logo">
+<div class="logo">
+    <img src="img/NEXA.png" alt="NEXA Logo">
+    <h2>NEXA Digital Services</h2>
+</div>
 
-        <img src="img/NEXA.png" alt="Logo">
-
-        <h2>NEXA Digital Services</h2>
-
-    </div>
-
-    <div class="top-icons">
-
-        <a href="notifications.html">
-            🔔
-        </a>
-
-        <a href="profile.html">
-            👤
-        </a>
-
-    </div>
+<div class="top-icons">
+    <a href="notifications.html"><i class="fas fa-bell"></i></a>
+    <a href="profile.html"><i class="fas fa-user-circle"></i></a>
+</div>
 
 </header>
 
 <div id="sideMenu" class="side-menu">
 
-    <button class="close-btn" onclick="closeMenu()">
-        ✖
-    </button>
+<button class="close-btn" onclick="closeMenu()">✖</button>
 
-    <a href="index.html">🏠 Home</a>
+<a href="index.html"><i class="fas fa-home"></i> Home</a>
+<a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+<a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+<a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
 
-    <a href="about.html">ℹ About</a>
+<hr>
 
-    <a href="services.html">💼 Services</a>
+<a href="community.html"><i class="fas fa-users"></i> Community</a>
+<a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
+<a href="groups.html"><i class="fas fa-user-friends"></i> Groups</a>
+<a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+<a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
 
-    <a href="contact.html">📞 Contact</a>
+<hr>
 
-    <hr>
-
-    <a href="community.html">👥 Community</a>
-
-    <a href="chat.html">💬 Chats</a>
-
-    <a href="groups.html">👥 Groups</a>
-
-    <a href="notifications.html">🔔 Notifications</a>
-
-    <a href="profile.html">👤 My Profile</a>
-
-    <a href="settings.html">⚙ Settings</a>
-
-    <hr>
-
-    <a href="admin.html">👨‍💼 Admin Panel</a>
-
-    <a href="javascript:history.back()">
-        ⬅ Back
-    </a>
-
-    <a href="login.html">
-        🚪 Logout
-    </a>
+<a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
 
 </div>
-<header>
-  <div class="container">
-    <div id="branding">
-      <h1><span class="highlight">NEXA</span> Digital Services</h1>
-    </div>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li class="current"><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<section class="page-header">
 
-<section id="main">
-  <div class="container">
+<div class="container">
 
-    <article id="main-col">
-      <h1 class="page-title">Contact Us</h1>
+<h1>Contact Us</h1>
 
-      <p>
-        Reach out for any digital services including document formatting, writing, PDF conversion, and more.
-      </p>
+<p>We'd love to hear from you.</p>
 
-      <div class="dark">
-        <p>WhatsApp: 07085299106</p>
-        <p>WhatsApp Business: 07025279121</p>
-        <p>Email: nwabuezeeminence@gmail.com</p>
-      </div>
-    </article>
+</div>
 
-    <aside id="sidebar">
-      <div class="dark">
-
-        <h2>Send a Message</h3>
-<h3>Payment Options</h3>
-<p>Pay after order confirmation:</p>
-
-<ul>
-  <li>Bank Transfer</li>
-  <li>Paystack (coming soon)</li>
-  <li>WhatsApp confirmation</li>
-</ul>
-
-        <form id="contact-form">
-
-          <label>Name</label><br>
-          <input type="text" name="user_name" required><br><br>
-
-          <label>Email</label><br>
-          <input type="email" name="user_email" required><br><br>
-
-          <label>Phone</label><br>
-          <input type="text" name="phone"><br><br>
-          <label>Message</label><br>
-         <textarea name="message" placeholder="Describe your order (what you need done)"></textarea> <br><br>
-
-          <button class="button_1" type="submit">Send Message</button>
-
-        </form>
-
-      </div>
-    </aside>
-
-  </div>
 </section>
-<a href="https://wa.me/2347025279121" class="whatsapp-float">
-Order on WhatsApp
+
+<section class="container">
+
+<form id="contactForm">
+
+<label>Full Name</label>
+<input type="text" id="name" required>
+
+<label>Email Address</label>
+<input type="email" id="email" required>
+
+<label>Subject</label>
+<input type="text" id="subject" required>
+
+<label>Message</label>
+<textarea id="message" rows="6" required></textarea>
+
+<button type="submit" class="button_1">
+Send Message
+</button>
+
+</form>
+
+<br>
+
+<h3>Or contact us directly</h3>
+
+<p><strong>WhatsApp:</strong> +234 702 527 9121</p>
+
+<p>
+<a href="https://wa.me/2347025279121" class="button_1">
+Chat on WhatsApp
 </a>
+</p>
+
+</section>
+
 <footer>
-  <p>NEXA Digital Services | All Rights Reserved &copy; 2026</p>
+
+<div class="container">
+
+<p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
+
+</div>
+
 </footer>
 
-<!-- EmailJS Script -->
-<script>
-document.getElementById("contact-form").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  emailjs.sendForm(
-    "service_g7t1o1",
-    "template_t8sgv11",
-    this
-  ).then(() => {
-    alert("Message sent successfully!");
-    this.reset();
-  }).catch((err) => {
-    alert("Failed to send message.");
-    console.log(err);
-  });
-
-});
-</script>
+<script src="menu.js"></script>
+<script src="contact.js"></script>
 
 </body>
 </html>
