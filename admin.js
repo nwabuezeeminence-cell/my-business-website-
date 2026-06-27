@@ -1,61 +1,22 @@
-// ===== NEXA ADMIN PANEL SYSTEM =====
+// admin.js
 
-// Load all users
-function loadUsers() {
+document.addEventListener("DOMContentLoaded", refreshDashboard);
 
-    const usersList = document.getElementById("usersList");
+function refreshDashboard() {
 
-    firebase.database().ref("users").on("value", (snapshot) => {
+    const profile =
+        JSON.parse(localStorage.getItem("nexaProfile"));
 
-        usersList.innerHTML = "";
+    const groups =
+        JSON.parse(localStorage.getItem("nexaGroups")) || [];
 
-        snapshot.forEach((child) => {
+    document.getElementById("totalUsers").textContent =
+        profile ? 1 : 0;
 
-            const user = child.val();
+    document.getElementById("totalGroups").textContent =
+        groups.length;
 
-            const div = document.createElement("div");
-
-            div.className = "card";
-
-            div.innerHTML = `
-                <strong>${user.name || "No Name"}</strong><br>
-                ${user.email || ""}
-            `;
-
-            usersList.appendChild(div);
-
-        });
-
-    });
+    document.getElementById("totalMessages").textContent =
+        "Demo";
 
 }
-
-// Load messages (global view)
-function loadMessages() {
-
-    const messagesList = document.getElementById("messagesList");
-
-    firebase.database().ref("chats/global").on("child_added", (snapshot) => {
-
-        const msg = snapshot.val();
-
-        const div = document.createElement("div");
-
-        div.className = "card";
-
-        div.innerHTML = `
-            <strong>${msg.sender}</strong><br>
-            ${msg.message}
-        `;
-
-        messagesList.appendChild(div);
-
-    });
-
-}
-
-// Start admin panel
-window.onload = function () {
-    loadUsers();
-    loadMessages();
-};
