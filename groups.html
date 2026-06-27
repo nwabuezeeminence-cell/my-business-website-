@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXA Groups</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<button class="menu-btn" onclick="openMenu()">☰</button>
+
+<div class="logo">
+
+<img src="img/NEXA.png" alt="Logo">
+
+<h2>NEXA Groups</h2>
+
+</div>
+
+<div class="top-icons">
+
+<a href="notifications.html"><i class="fas fa-bell"></i></a>
+
+<a href="profile.html"><i class="fas fa-user-circle"></i></a>
+
+</div>
+
+</header>
+
+<div id="sideMenu" class="side-menu">
+
+<button class="close-btn" onclick="closeMenu()">✖</button>
+
+<a href="index.html">🏠 Home</a>
+<a href="community.html">👥 Community</a>
+<a href="chat.html">💬 Chats</a>
+<a href="profile.html">👤 My Profile</a>
+<a href="settings.html">⚙ Settings</a>
+<a href="admin.html">🛡 Admin Panel</a>
+
+</div>
+
+<section class="container">
+
+<h1>NEXA Groups</h1>
+
+<p>Create and join discussion groups.</p>
+
+<input
+type="text"
+id="groupName"
+placeholder="Enter group name">
+
+<button onclick="createGroup()">
+
+Create Group
+
+</button>
+
+<hr>
+
+<div id="groupList">
+
+<p>No groups created yet.</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 NEXA Digital Services</p>
+
+</footer>
+
+<script src="menu.js"></script>
+<script src="groups.js"></script>
+
+</body>
+</html>
