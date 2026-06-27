@@ -3,49 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create NEXA Account</title>
 
-<link rel="stylesheet" href="css/style.css">
+<title>Sign Up | NEXA</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="menu.css">
+
+<meta name="theme-color" content="#d63384">
 </head>
 
 <body>
 
-<div class="signup-container">
+<div class="auth-container">
 
-    <h1>Create Account</h1>
+    <h2>Create Account</h2>
 
-    <input
-        type="text"
-        id="fullName"
-        placeholder="Full Name"
-    >
+    <input type="email" id="signupEmail" placeholder="Email">
+    <input type="password" id="signupPassword" placeholder="Password">
 
-    <input
-        type="email"
-        id="email"
-        placeholder="Email Address"
-    >
-
-    <input
-        type="password"
-        id="password"
-        placeholder="Password"
-    >
-
-    <button onclick="signUp()">
-        Create Account
-    </button>
+    <button onclick="handleSignup()">Sign Up</button>
 
     <p>
         Already have an account?
         <a href="login.html">Login</a>
     </p>
 
-    <p id="status"></p>
-
 </div>
 
-<script type="module" src="js/auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="firebase.js"></script>
+<script src="auth.js"></script>
+
+<script>
+function handleSignup() {
+
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    signUp(email, password);
+}
+</script>
 
 </body>
 </html>
