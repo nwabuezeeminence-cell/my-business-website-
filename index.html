@@ -31,7 +31,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </head>
 <body>
-<body>
+<!-- ===== TOP HEADER ===== -->
+
 <header class="topbar">
 
     <button class="menu-btn" onclick="openMenu()">
@@ -39,25 +40,26 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </button>
 
     <div class="logo">
-
-        <img src="img/NEXA.png" alt="Logo">
-
+        <img src="img/NEXA.png" alt="NEXA Logo">
         <h2>NEXA Digital Services</h2>
-
     </div>
 
     <div class="top-icons">
 
-        <a href="notifications.html">
-            🔔
+        <a href="notifications.html" title="Notifications">
+            <i class="fas fa-bell"></i>
+            <span id="notificationBadge">0</span>
         </a>
 
-        <a href="profile.html">
-            👤
+        <a href="profile.html" title="Profile">
+            <i class="fas fa-user-circle"></i>
         </a>
 
     </div>
+
 </header>
+
+<!-- ===== SIDE MENU ===== -->
 
 <div id="sideMenu" class="side-menu">
 
@@ -65,204 +67,79 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         ✖
     </button>
 
-    <a href="index.html">🏠 Home</a>
+    <a href="index.html">
+        <i class="fas fa-home"></i> Home
+    </a>
 
-    <a href="about.html">ℹ About</a>
+    <a href="about.html">
+        <i class="fas fa-info-circle"></i> About
+    </a>
 
-    <a href="services.html">💼 Services</a>
+    <a href="services.html">
+        <i class="fas fa-briefcase"></i> Services
+    </a>
 
-    <a href="contact.html">📞 Contact</a>
-
-    <hr>
-
-    <a href="community.html">👥 Community</a>
-
-    <a href="chat.html">💬 Chats</a>
-
-    <a href="groups.html">👥 Groups</a>
-
-    <a href="notifications.html">🔔 Notifications</a>
-
-    <a href="profile.html">👤 My Profile</a>
-
-    <a href="settings.html">⚙ Settings</a>
+    <a href="contact.html">
+        <i class="fas fa-phone"></i> Contact
+    </a>
 
     <hr>
 
-    <a href="admin.html">👨‍💼 Admin Panel</a>
+    <a href="community.html">
+        <i class="fas fa-users"></i> Community
+    </a>
+
+    <a href="chat.html">
+        <i class="fas fa-comments"></i> Chats
+    </a>
+
+    <a href="groups.html">
+        <i class="fas fa-user-friends"></i> Groups
+    </a>
+
+    <a href="notifications.html">
+        <i class="fas fa-bell"></i> Notifications
+    </a>
+
+    <a href="profile.html">
+        <i class="fas fa-user"></i> My Profile
+    </a>
+
+    <a href="settings.html">
+        <i class="fas fa-cog"></i> Settings
+    </a>
+
+    <hr>
+
+    <a href="payment.html">
+        <i class="fas fa-credit-card"></i> Payments
+    </a>
+
+    <a href="admin.html">
+        <i class="fas fa-user-shield"></i> Admin Panel
+    </a>
 
     <a href="javascript:history.back()">
-        ⬅ Back
+        <i class="fas fa-arrow-left"></i> Back
     </a>
 
     <a href="login.html">
-        🚪 Logout
+        <i class="fas fa-sign-out-alt"></i> Logout
     </a>
 
 </div>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
-<button id="notificationBtn">
-  🔔 <span id="notificationCount">0</span>
-</button>
-<button id="notificationBtn" onclick="toggleNotifications()">
-  🔔
-  <span id="notificationBadge">0</span>
-</button>
-<div id="notificationList">
 
-  <div class="notification-item">
-    Welcome to NEXA Digital Services
-  </div>
+<!-- ===== FLOATING WHATSAPP BUTTON ===== -->
 
-</div>
-<button id="chatButton" onclick="openChat()">
-    💬 Support
-</button>
-<div class="chat-header">
-    NEXA Live Support
-</div>
-  <div class="container">
-   <div id="branding">
-  <img src="NEXA.png" alt="NEXA Logo" style="height:40px; vertical-align:middle;">
-  <h1 style="display:inline-block; margin-left:10px;">
-    <span class="highlight">NEXA</span> Digital Services
-  </h1>
-</div>
+<a href="https://wa.me/2347025279121"
+   class="whatsapp-float"
+   target="_blank">
 
-    <nav>
-      <ul>
-        <li class="current"><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <i class="fab fa-whatsapp"></i>
 
-<section id="hero">
-  <div class="container">
-    <h1>Smart Digital Solutions for Your Everyday Needs</h1>
-    <p>We help students, businesses, and individuals with document formatting, writing, PDF conversion, and digital support services.</p>
-<h1>Professional Document & Digital Services in Nigeria</h1>
-
-<p>
-NEXA Digital Services provides expert document formatting, PDF conversion, copywriting, and academic support for students and businesses.
-</p>
-    <a class="button_1" href="services.html">Get Started</a>
-  </div>
-</section>
-
-<section id="features">
-  <div class="container">
-
-   
-<div class="box">
-  <i class="fas fa-pen-nib" style="font-size:40px;color:#d63384;"></i>
-  <h3>Copywriting</h3>
-  <p>Professional writing and content creation for your needs.</p>
-</div>
-
-<div class="box">
-  <i class="fas fa-file-word" style="font-size:40px;color:#d63384;"></i>
-  <h3>Word Formatting</h3>
-  <p>Clean and professional document formatting services.</p>
-</div>
-
-<div class="box">
-  <i class="fas fa-file-pdf" style="font-size:40px;color:#d63384;"></i>
-  <h3>PDF Conversion</h3>
-  <p>Convert PDF to Word and Word to PDF easily and correctly.</p>
-</div>
-    <div class="box">
-      <h3>Writing & Support</h3>
-      <p>Copywriting, research help, and digital assistance.</p>
-    </div>
-<h2>Why Choose NEXA Digital Services?</h2>
-
-<ul>
-  <li>Fast Delivery</li>
-  <li>Affordable Pricing</li>
-  <li>Professional Results</li>
-  <li>Student-Friendly Services</li>
-</ul>
-  </div>
-</section>
-<h1>Get Your Documents Done Fast & Professionally</h1>
-
-<p>
-NEXA Digital Services helps students and businesses with document formatting,
-PDF conversion, and professional writing services at affordable prices.
-</p>
-
-<a href="services.html" class="button_1">View Services</a>
-<section id="cta">
-  <div class="container">
-    <h2>Need Help With a Project?</h2>
-    <p>Contact NEXA Digital Services today and get professional results fast.</p>
-    <a class="button_1" href="contact.html">Contact Us</a>
-  </div>
-</section>
-
-<footer>
-    <p>
-Serving clients in Nigeria and worldwide | Digital Services for Students & Businesses
-</p>
-  <p>NEXA Digital Services | All Rights Reserved &copy; 2026</p>
-</footer>
-
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/2347025279121" class="whatsapp-float" target="_blank">
-💬 Chat
 </a>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
 
-<div id="chatWindow">
-
-  <div class="chat-header">
-    NEXA Support
-  </div>
-
-  <div id="chatMessages">
-    Welcome! How can we help?
-  </div>
-
-  <div class="chat-input-area">
-    <input
-      id="chatInput"
-      placeholder="Type a message..."
-    >
-
-    <button onclick="sendMessage()">
-      Send
-    </button>
-  </div>
-
-</div>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "nexa-digital-services.firebaseapp.com",
-  databaseURL: "https://nexa-digital-services-default-rtdb.firebaseio.com",
-  projectId: "nexa-digital-services",
-  storageBucket: "nexa-digital-services.firebasestorage.app",
-  messagingSenderId: "552141783731",
-  appId: "1:552141783731:web:addf613eba5281388766c6"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-</script>
+        
+ 
 </body>
 </html>
