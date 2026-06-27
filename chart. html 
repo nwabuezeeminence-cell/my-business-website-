@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXA Chat</title>
+<title>NEXA Chats</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="menu.css">
+
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d63384">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -23,104 +25,96 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <button class="menu-btn" onclick="openMenu()">☰</button>
 
 <div class="logo">
+
 <img src="img/NEXA.png" alt="Logo">
-<h2>Chats</h2>
+
+<h2>NEXA Chats</h2>
+
 </div>
 
 <div class="top-icons">
+
 <a href="notifications.html"><i class="fas fa-bell"></i></a>
-<a href="profile.html"><i class="fas fa-user"></i></a>
+
+<a href="profile.html"><i class="fas fa-user-circle"></i></a>
+
 </div>
 
 </header>
 
-<!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
 
 <button class="close-btn" onclick="closeMenu()">✖</button>
 
 <a href="index.html">🏠 Home</a>
 <a href="community.html">👥 Community</a>
-<a href="groups.html">👨‍👩‍👧 Groups</a>
-<a href="chat.html">💬 Chats</a>
-<a href="services.html">💼 Services</a>
-<a href="contact.html">📞 Contact</a>
-<a href="profile.html">👤 Profile</a>
+<a href="groups.html">👥 Groups</a>
+<a href="profile.html">👤 My Profile</a>
 <a href="settings.html">⚙ Settings</a>
+<a href="admin.html">🛡 Admin Panel</a>
 
 </div>
 
-<!-- CHAT LIST -->
-<main class="container">
+<section class="container">
 
-<h2>Messages</h2>
+<h1>Chats</h1>
 
-<div class="chat-list">
+<p>Select a conversation below.</p>
 
-<div class="chat-item" onclick="openChat('Admin')">
-<img src="img/default-user.png">
-<div>
-<h4>Admin</h4>
-<p>Tap to start chatting...</p>
-</div>
-</div>
+<div id="chatList">
 
-<div class="chat-item" onclick="openChat('Support')">
-<img src="img/default-user.png">
-<div>
-<h4>Support</h4>
-<p>We are online 24/7</p>
-</div>
-</div>
+<div class="user-card">
 
-<div class="chat-item" onclick="openChat('Community')">
-<img src="img/default-user.png">
-<div>
-<h4>Community</h4>
-<p>Join discussions</p>
-</div>
+<h3>NEXA Support</h3>
+
+<p>Welcome to NEXA Messenger.</p>
+
+<button onclick="openChat('NEXA Support')">
+
+Open Chat
+
+</button>
+
 </div>
 
 </div>
 
-<!-- CHAT WINDOW -->
-<div id="chatWindow" class="chat-window hidden">
+<hr>
 
-<div class="chat-header">
-<h3 id="chatTitle">Chat</h3>
-<button onclick="closeChat()">✖</button>
+<h2 id="chatTitle">No chat selected</h2>
+
+<div id="messages" class="chat-box">
+
+<p>Select a conversation to begin.</p>
+
 </div>
-
-<div id="messages" class="messages"></div>
 
 <div class="chat-input">
 
-<input id="messageInput" placeholder="Type a message...">
+<input
+type="text"
+id="chatInput"
+placeholder="Type your message...">
 
-<button onclick="sendMessage()">Send</button>
+<button onclick="sendMessage()">
+
+Send
+
+</button>
 
 </div>
 
-</div>
+</section>
 
-</main>
+<footer>
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
+<p>© 2026 NEXA Digital Services</p>
 
-<a href="index.html">🏠</a>
-<a href="community.html">👥</a>
-<a href="chat.html">💬</a>
-<a href="groups.html">👨‍👩‍👧</a>
-<a href="profile.html">👤</a>
-
-</nav>
+</footer>
 
 <script src="menu.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-<script src="firebase.js"></script>
-<script src="firebase-chat.js"></script>
+<script src="chat.js"></script>
 
 </body>
+
 </html>
