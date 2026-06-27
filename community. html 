@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NEXA Community</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="menu.css">
-<link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#d63384">
+<link rel="manifest" href="manifest.json">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
 <header class="topbar">
 
-<button class="menu-btn" onclick="openMenu()">
-☰
-</button>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
 <div class="logo">
+
 <img src="img/NEXA.png" alt="NEXA Logo">
-<h2>NEXA Community</h2>
+
+<h2>NEXA Digital Services</h2>
+
 </div>
 
 <div class="top-icons">
-<a href="notifications.html"><i class="fas fa-bell"></i></a>
-<a href="profile.html"><i class="fas fa-user-circle"></i></a>
+
+<a href="notifications.html">
+<i class="fas fa-bell"></i>
+</a>
+
+<a href="profile.html">
+<i class="fas fa-user-circle"></i>
+</a>
+
 </div>
 
 </header>
@@ -41,107 +51,98 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <button class="close-btn" onclick="closeMenu()">✖</button>
 
 <a href="index.html">🏠 Home</a>
-<a href="community.html">👥 Community</a>
-<a href="chat.html">💬 Chats</a>
-<a href="groups.html">👨‍👩‍👧 Groups</a>
+
+<a href="about.html">ℹ About</a>
+
 <a href="services.html">💼 Services</a>
+
 <a href="contact.html">📞 Contact</a>
+
+<hr>
+
+<a href="community.html">👥 Community</a>
+
+<a href="chat.html">💬 Chats</a>
+
+<a href="groups.html">👥 Groups</a>
+
 <a href="profile.html">👤 Profile</a>
+
 <a href="settings.html">⚙ Settings</a>
-<a href="admin.html">🛠 Admin</a>
+
+<hr>
+
+<a href="admin.html">🛡 Admin Panel</a>
 
 </div>
 
-<main class="community-page">
+<section class="container">
 
-<div class="create-post">
-
-<h3>Create Post</h3>
-
-<textarea
-id="postInput"
-placeholder="What's on your mind?">
-</textarea>
-
-<input
-type="file"
-id="postImage"
-accept="image/*">
-
-<button onclick="createPost()">
-Post
-</button>
-
-</div>
-
-<div id="feed">
-
-<div class="post">
-
-<div class="post-header">
-
-<img
-src="img/default-user.png"
-class="avatar">
-
-<div>
-
-<h4>NEXA Digital Services</h4>
-
-<small>Just now</small>
-
-</div>
-
-</div>
+<h1>Welcome to the NEXA Community</h1>
 
 <p>
-🎉 Welcome to the NEXA Community.
-Share ideas, ask questions, and connect with everyone.
+
+Connect with other members, ask questions,
+share ideas and grow together.
+
 </p>
 
-<div class="post-actions">
+<input
 
-<button>👍 Like</button>
+type="text"
 
-<button>💬 Comment</button>
+id="searchUsers"
 
-<button>📤 Share</button>
+placeholder="Search users..."
+
+>
+
+<br><br>
+
+<div class="quick-links">
+
+<a class="button_1" href="chat.html">
+Open Chats
+</a>
+
+<a class="button_1" href="groups.html">
+Groups
+</a>
+
+<a class="button_1" href="profile.html">
+My Profile
+</a>
 
 </div>
 
-</div>
+<br>
+
+<h2>Community Members</h2>
+
+<div id="usersList">
+
+<p>
+Loading members...
+</p>
 
 </div>
 
-</main>
+</section>
 
-<nav class="bottom-nav">
+<footer>
 
-<a href="index.html">
-🏠
-</a>
+<p>
 
-<a href="community.html">
-👥
-</a>
+© 2026 NEXA Digital Services
 
-<a href="chat.html">
-💬
-</a>
+</p>
 
-<a href="notifications.html">
-🔔
-</a>
+</footer>
 
-<a href="profile.html">
-👤
-</a>
-
-</nav>
-
-<script src="firebase.js"></script>
 <script src="menu.js"></script>
+
 <script src="community.js"></script>
 
 </body>
+
 </html>
