@@ -1,4 +1,4 @@
-self.addEventListener("install", function(e){
+iself.addEventListener("install", function(e){
   console.log("NEXA PWA Installed");
 });
 
