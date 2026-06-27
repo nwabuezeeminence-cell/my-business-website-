@@ -16,3 +16,4 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const auth = getAuth(app);
+onclick="history.back()"
