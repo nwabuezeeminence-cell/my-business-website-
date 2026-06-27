@@ -164,3 +164,25 @@ function sendNotification(title, message) {
     read: false
   });
 }
+window.login = async function () {
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  try {
+
+    await signInWithEmailAndPassword(auth, email, password);
+
+    window.location.href = "community.html";
+
+  } catch (error) {
+
+    document.getElementById("loginStatus").textContent =
+      error.message;
+
+  }
+
+}
