@@ -1,60 +1,92 @@
-// ===== NEXA CHAT SYSTEM (Frontend version) =====
+// chat.js
 
-let currentChat = "";
+let currentChat = "NEXA Support";
 
-// Open a chat window
+const demoChats = {
+    "NEXA Support": [
+        {
+            sender: "NEXA Support",
+            text: "Welcome to NEXA Messenger!"
+        }
+    ]
+};
+
 function openChat(name) {
 
     currentChat = name;
 
-    document.getElementById("chatTitle").innerText = name;
+    document.getElementById("chatTitle").textContent = name;
 
-    document.getElementById("chatWindow").classList.remove("hidden");
-
-    document.getElementById("messages").innerHTML = "";
+    loadMessages();
 
 }
 
-// Close chat window
-function closeChat() {
+function loadMessages() {
 
-    document.getElementById("chatWindow").classList.add("hidden");
+    const messages = document.getElementById("messages");
+
+    messages.innerHTML = "";
+
+    const chat = demoChats[currentChat] || [];
+
+    if (chat.length === 0) {
+
+        messages.innerHTML = "<p>No messages yet.</p>";
+
+        return;
+
+    }
+
+    chat.forEach(msg => {
+
+        const div = document.createElement("div");
+
+        div.className = "message";
+
+        div.innerHTML =
+            "<strong>" +
+            msg.sender +
+            ":</strong> " +
+            msg.text;
+
+        messages.appendChild(div);
+
+    });
+
+    messages.scrollTop = messages.scrollHeight;
 
 }
 
-// Send message
 function sendMessage() {
 
-    const input = document.getElementById("messageInput");
+    const input = document.getElementById("chatInput");
 
     const text = input.value.trim();
 
     if (text === "") return;
 
-    const msgBox = document.createElement("div");
+    if (!demoChats[currentChat]) {
 
-    msgBox.className = "my-message";
+        demoChats[currentChat] = [];
 
-    msgBox.innerText = text;
+    }
 
-    document.getElementById("messages").appendChild(msgBox);
+    demoChats[currentChat].push({
+
+        sender: "You",
+
+        text: text
+
+    });
 
     input.value = "";
 
-    // Auto scroll
-    document.getElementById("messages").scrollTop =
-        document.getElementById("messages").scrollHeight;
+    loadMessages();
+
 }
 
-// Optional: Enter key to send
-document.addEventListener("keydown", function(e) {
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (e.key === "Enter") {
-
-        if (!document.getElementById("chatWindow").classList.contains("hidden")) {
-            sendMessage();
-        }
-
-    }
+    openChat("NEXA Support");
 
 });
