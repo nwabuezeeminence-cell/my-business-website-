@@ -34,7 +34,13 @@ function signUp(name, email, password) {
 function login(email, password) {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then(() => {
+
+        const user = firebase.auth().currentUser;
+
+        db.ref("users/" + user.uid).update({
+            online: true
+        });
 
         alert("Login successful!");
 
