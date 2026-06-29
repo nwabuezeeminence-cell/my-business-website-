@@ -1,10 +1,23 @@
 // ===== NEXA AUTH SYSTEM (Firebase Email Login) =====
 
 // Sign Up
-function signUp(email, password) {
+function signUp(name, email, password) {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
+
+        const user = userCredential.user;
+
+        db.ref("users/" + user.uid).set({
+            uid: user.uid,
+            fullName: name,
+            email: email,
+            bio: "",
+            profilePhoto: "",
+            status: "Available",
+            online: true,
+            joined: Date.now()
+        });
 
         alert("Account created successfully!");
 
