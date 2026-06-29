@@ -56,6 +56,14 @@ function login(email, password) {
 // Logout
 function logout() {
 
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+        db.ref("users/" + user.uid).update({
+            online: false
+        });
+    }
+
     firebase.auth().signOut().then(() => {
 
         alert("Logged out");
