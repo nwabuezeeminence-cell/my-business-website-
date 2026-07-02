@@ -1,54 +1,76 @@
-// community.js
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const usersList = document.getElementById("usersList");
     const searchBox = document.getElementById("searchUsers");
 
-    // Temporary demo users
-    const users = [
-        "Eminence",
-        "NEXA Support",
-        "John Doe",
-        "Jane Smith",
-        "Community Member"
-    ];
+    function loadUsers(search = "") {
 
-    function displayUsers(filter = "") {
+        usersList.innerHTML = "<p>Loading...</p>";
 
-        usersList.innerHTML = "";
+        firebase.database().ref("users").once("value")
 
-        const filteredUsers = users.filter(user =>
-            user.toLowerCase().includes(filter.toLowerCase())
-        );
+        .then(snapshot => {
 
-        if (filteredUsers.length === 0) {
-            usersList.innerHTML = "<p>No users found.</p>";
-            return;
-        }
+            usersList.innerHTML = "";
 
-        filteredUsers.forEach(user => {
+            if (!snapshot.exists()) {
 
-            const card = document.createElement("div");
-            card.className = "user-card";
+                usersList.innerHTML = "<p>No members yet.</p>";
 
-            card.innerHTML = `
-                <h3>${user}</h3>
-                <button onclick="location.href='chat.html'">
-                    Open Chat
-                </button>
-            `;
+                return;
+            }
 
-            usersList.appendChild(card);
+            snapshot.forEach(child => {
+
+                const user = child.val();
+
+                if (
+                    user.name &&
+                    user.name.toLowerCase().includes(search.toLowerCase())
+                ) {
+
+                    const card = document.createElement("div");
+
+                    card.className = "user-card";
+
+                    card.innerHTML = `
+
+                        <img src="${user.photo || 'profile.png'}" class="avatar">
+
+                        <h3>${user.name}</h3>
+
+                        <p>${user.email}</p>
+
+                        <button onclick="openChat('${child.key}')">
+                            Message
+                        </button>
+
+                    `;
+
+                    usersList.appendChild(card);
+
+                }
+
+            });
 
         });
 
     }
 
-    displayUsers();
+    loadUsers();
 
     searchBox.addEventListener("input", () => {
-        displayUsers(searchBox.value);
+
+        loadUsers(searchBox.value);
+
     });
 
 });
+
+function openChat(uid){
+
+    localStorage.setItem("chatUser", uid);
+
+    location.href="chat.html";
+
+}
