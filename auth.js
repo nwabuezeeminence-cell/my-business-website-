@@ -1,5 +1,8 @@
 // ===== NEXA AUTH SYSTEM =====
 
+const db = firebase.database();
+const auth = firebase.auth();
+
 // Sign Up
 function signUp(name, email, password) {
 
