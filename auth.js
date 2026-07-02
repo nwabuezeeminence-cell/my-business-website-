@@ -38,17 +38,6 @@ function signUp(email, password) {
 
 }
 
-        alert("Account created successfully!");
-
-        window.location.href = "profile.html";
-
-    })
-    .catch((error) => {
-        alert(error.message);
-    });
-
-}
-
 // Login
 function login(email, password) {
 
