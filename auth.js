@@ -1,23 +1,42 @@
 // ===== NEXA AUTH SYSTEM (Firebase Email Login) =====
 
-// Sign Up
-function signUp(name, email, password) {
+ {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
 
+       // Sign Up
+function signUp(email, password) {
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+
+    .then((userCredential) => {
+
         const user = userCredential.user;
 
-        db.ref("users/" + user.uid).set({
-            uid: user.uid,
-            fullName: name,
+        firebase.database().ref("users/" + user.uid).set({
+
+            name: email.split("@")[0],
             email: email,
-            bio: "",
-            profilePhoto: "",
-            status: "Available",
-            online: true,
+            photo: "",
+            bio: "Welcome to NEXA",
             joined: Date.now()
+
         });
+
+        alert("Account created successfully!");
+
+        window.location.href = "profile.html";
+
+    })
+
+    .catch((error) => {
+
+        alert(error.message);
+
+    });
+
+}
 
         alert("Account created successfully!");
 
