@@ -1,0 +1,172 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    height:100vh;
+    overflow:hidden;
+}
+
+.chat-container{
+    display:flex;
+    height:100vh;
+}
+
+/* LEFT PANEL */
+
+.chat-list{
+    width:350px;
+    background:#ffffff;
+    border-right:1px solid #ddd;
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:#5b21b6;
+    color:white;
+}
+
+.chat-header button{
+    border:none;
+    background:white;
+    color:#5b21b6;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+#searchChat{
+    margin:15px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#f3f3f3;
+    outline:none;
+}
+
+#conversationList{
+    flex:1;
+    overflow-y:auto;
+}
+
+/* RIGHT PANEL */
+
+.chat-room{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    background:#f8f9fd;
+}
+
+.room-header{
+    height:75px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.user-info img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.room-icons i{
+    font-size:20px;
+    margin-left:18px;
+    cursor:pointer;
+    color:#555;
+}
+
+#messages{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.message-box{
+    background:white;
+    display:flex;
+    align-items:center;
+    padding:15px;
+    gap:10px;
+}
+
+.message-box input{
+    flex:1;
+    border:none;
+    background:#f2f2f2;
+    border-radius:25px;
+    padding:14px 18px;
+    outline:none;
+}
+
+.message-box button{
+    border:none;
+    background:#5b21b6;
+    color:white;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.chat-menu{
+
+    position:absolute;
+    right:25px;
+    top:80px;
+
+    width:240px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    display:none;
+
+    overflow:hidden;
+
+}
+
+.chat-menu button{
+
+    width:100%;
+    border:none;
+    background:white;
+
+    padding:15px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+.chat-menu button:hover{
+
+    background:#f5f5f5;
+
+}
