@@ -1,57 +1,79 @@
-// ===== NEXA NOTIFICATION SYSTEM (Frontend version) =====
+// ===== NEXA Notifications =====
 
-let notificationCount = 0;
+firebase.auth().onAuthStateChanged((user) => {
 
-// Add notification
-function addNotification(message) {
-
-    const list = document.getElementById("notificationList");
-
-    if (!list) return;
-
-    const item = document.createElement("div");
-
-    item.className = "notification-item";
-
-    item.innerText = message;
-
-    list.prepend(item);
-
-    notificationCount++;
-
-    updateBadge();
-
-}
-
-// Update badge number
-function updateBadge() {
-
-    const badge = document.getElementById("notificationBadge");
-
-    if (badge) {
-        badge.innerText = notificationCount;
+    if (!user) {
+        window.location.href = "login.html";
+        return;
     }
 
-}
+    const notificationList = document.getElementById("notificationList");
 
-// Simulate welcome notification on load
-window.onload = function () {
+    db.ref("notifications/" + user.uid)
+    .orderByChild("time")
+    .on("value", (snapshot) => {
 
-    addNotification("Welcome to NEXA Digital Services 🔥");
+        notificationList.innerHTML = "";
 
-};
+        if (!snapshot.exists()) {
 
-// Toggle notification panel
-function toggleNotifications() {
+            notificationList.innerHTML = `
+                <p>No notifications yet.</p>
+            `;
 
-    const list = document.getElementById("notificationList");
+            return;
+        }
 
-    if (!list) return;
+        const notifications = [];
 
-    if (list.style.display === "block") {
-        list.style.display = "none";
-    } else {
-        list.style.display = "block";
-    }
+        snapshot.forEach((child) => {
 
-}
+            notifications.push({
+                id: child.key,
+                ...child.val()
+            });
+
+        });
+
+        notifications.reverse();
+
+        notifications.forEach((notification) => {
+
+            const div = document.createElement("div");
+
+            div.className = notification.read
+                ? "notification-card"
+                : "notification-card unread";
+
+            div.innerHTML = `
+                <h3>${notification.title}</h3>
+
+                <p>${notification.message}</p>
+
+                <small>
+                    ${new Date(notification.time).toLocaleString()}
+                </small>
+            `;
+
+            div.onclick = () => {
+
+                db.ref(
+                    "notifications/" +
+                    user.uid +
+                    "/" +
+                    notification.id
+                ).update({
+
+                    read: true
+
+                });
+
+            };
+
+            notificationList.appendChild(div);
+
+        });
+
+    });
+
+});
