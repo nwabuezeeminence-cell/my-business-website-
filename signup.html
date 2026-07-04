@@ -26,7 +26,15 @@
 
     <input type="email" id="SignupEmail" placeholder="Email Address">
 
-    <input type="password" id="SignupPassword" placeholder="Password">
+    <div class="password-box">
+    <input type="password" id="signupPassword" placeholder="Password">
+    <span class="toggle-password" onclick="toggleSignupPassword()">👁</span>
+</div>
+
+<div class="password-box">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <span class="toggle-password" onclick="toggleConfirmPassword()">👁</span>
+</div>
 
     <button onclick="handleSignup()">Signup</button>
 
