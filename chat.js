@@ -195,3 +195,54 @@ document.getElementById("findUser").addEventListener("input", function(){
     });
 
 });
+// ===== Send Message =====
+
+document.getElementById("sendMessage").onclick = sendMessage;
+
+document.getElementById("messageInput").addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+
+        sendMessage();
+
+    }
+
+});
+
+function sendMessage(){
+
+    if(!currentChatId) return;
+
+    const input = document.getElementById("messageInput");
+
+    const text = input.value.trim();
+
+    if(text === "") return;
+
+    const message = {
+
+        sender: currentUser.uid,
+
+        text: text,
+
+        time: Date.now(),
+
+        status: "sent"
+
+    };
+
+    const messageRef = db.ref("messages/" + currentChatId).push();
+
+    messageRef.set(message);
+
+    db.ref("chats/" + currentChatId).update({
+
+        lastMessage: text,
+
+        lastTime: Date.now()
+
+    });
+
+    input.value = "";
+
+}
