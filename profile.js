@@ -1,43 +1,49 @@
-// profile.js
+// Wait for the authentication state
+firebase.auth().onAuthStateChanged((user) => {
 
-document.addEventListener("DOMContentLoaded", loadProfile);
-
-function loadProfile() {
-
-    const profile = JSON.parse(localStorage.getItem("nexaProfile"));
-
-    if (profile) {
-
-        document.getElementById("profileName").textContent = profile.name;
-        document.getElementById("profileEmail").textContent = profile.email;
-        document.getElementById("fullName").value = profile.name;
-        document.getElementById("bio").value = profile.bio;
-
-    } else {
-
-        document.getElementById("fullName").value = "";
-        document.getElementById("bio").value = "";
-
+    if (!user) {
+        window.location.href = "login.html";
+        return;
     }
 
-}
+    // Load user information
+    db.ref("users/" + user.uid).once("value")
+    .then((snapshot) => {
 
-function saveProfile() {
+        const data = snapshot.val();
 
-    const profile = {
+        if (!data) return;
 
-        name: document.getElementById("fullName").value.trim() || "Guest User",
+        document.getElementById("fullName").textContent =
+            data.name || "NEXA User";
 
-        email: document.getElementById("profileEmail").textContent,
+        document.getElementById("username").textContent =
+            "@" + (data.name || "user")
+            .toLowerCase()
+            .replace(/\s+/g,"");
 
-        bio: document.getElementById("bio").value.trim()
+        document.getElementById("bio").value =
+            data.bio || "";
 
-    };
+    });
 
-    localStorage.setItem("nexaProfile", JSON.stringify(profile));
+});
 
-    document.getElementById("profileName").textContent = profile.name;
+// Save Profile
+document.getElementById("saveProfile").addEventListener("click", () => {
 
-    alert("Profile saved successfully!");
+    const user = firebase.auth().currentUser;
 
-}
+    if (!user) return;
+
+    db.ref("users/" + user.uid).update({
+
+        bio: document.getElementById("bio").value
+
+    }).then(() => {
+
+        alert("Profile saved successfully!");
+
+    });
+
+});
