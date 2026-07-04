@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>NEXA Chats</title>
+<title>NEXA Messenger</title>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="menu.css">
-
-<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="chat.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,99 +17,137 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <body>
 
-<header class="topbar">
+<div class="chat-container">
 
-<button class="menu-btn" onclick="openMenu()">☰</button>
+    <!-- LEFT SIDE -->
 
-<div class="logo">
+    <div class="chat-list">
 
-<img src="NEXA.png" alt="Logo">
+        <div class="chat-header">
 
-<h2>NEXA Chats</h2>
+            <h2>Chats</h2>
+
+            <button id="newChat">
+
+                <i class="fas fa-user-plus"></i>
+
+            </button>
+
+        </div>
+
+        <input
+            type="text"
+            id="searchChat"
+            placeholder="Search people...">
+
+        <div id="conversationList">
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="chat-room">
+
+        <div class="room-header">
+
+            <div class="user-info">
+
+                <img
+                    id="chatPhoto"
+                    src="avatar.png">
+
+                <div>
+
+                    <h3 id="chatName">
+
+                        Select a chat
+
+                    </h3>
+
+                    <small id="chatStatus">
+
+                        Offline
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="room-icons">
+
+                <i class="fas fa-phone"></i>
+
+                <i class="fas fa-video"></i>
+
+                <i class="fas fa-ellipsis-v"
+                   id="chatMenuBtn"></i>
+
+            </div>
+
+        </div>
+
+        <div id="messages">
+
+        </div>
+
+        <div class="message-box">
+
+            <button id="emojiBtn">😊</button>
+
+            <button id="attachBtn">
+
+                📎
+
+            </button>
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type a message...">
+
+            <button id="sendMessage">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="top-icons">
+<div id="chatMenu" class="chat-menu">
 
-<a href="notifications.html"><i class="fas fa-bell"></i></a>
+<button>🎨 Change Theme</button>
 
-<a href="profile.html"><i class="fas fa-user-circle"></i></a>
+<button>🖼 Change Wallpaper</button>
 
-</div>
+<button>🔍 Search Messages</button>
 
-</header>
+<button>📌 Pin Chat</button>
 
-<div id="sideMenu" class="side-menu">
+<button>🔕 Mute Chat</button>
 
-<button class="close-btn" onclick="closeMenu()">✖</button>
+<button>🧹 Clear Chat</button>
 
-<a href="index.html">🏠 Home</a>
-<a href="community.html">👥 Community</a>
-<a href="groups.html">👥 Groups</a>
-<a href="profile.html">👤 My Profile</a>
-<a href="settings.html">⚙ Settings</a>
-<a href="admin.html">🛡 Admin Panel</a>
+<button>🚫 Block User</button>
 
-</div>
+<button>🚩 Report User</button>
 
-<section class="container">
-
-<h1>Chats</h1>
-
-<p>Select a conversation below.</p>
-
-<div id="chatList">
-
-<div class="user-card">
-
-<h3>NEXA Support</h3>
-
-<p>Welcome to NEXA Messenger.</p>
-
-<button onclick="openChat('NEXA Support')">
-
-Open Chat
-
-</button>
+<button>ℹ Chat Info</button>
 
 </div>
 
-</div>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-<hr>
+<script src="firebase.js"></script>
 
-<h2 id="chatTitle">No chat selected</h2>
-
-<div id="messages" class="chat-box">
-
-<p>Select a conversation to begin.</p>
-
-</div>
-
-<div class="chat-input">
-
-<input
-type="text"
-id="chatInput"
-placeholder="Type your message...">
-
-<button onclick="sendMessage()">
-
-Send
-
-</button>
-
-</div>
-
-</section>
-
-<footer>
-
-<p>© 2026 NEXA Digital Services</p>
-
-</footer>
-
-<script src="menu.js"></script>
 <script src="chat.js"></script>
 
 </body>
