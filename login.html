@@ -25,9 +25,17 @@
 
     <input type="email" id="loginEmail" placeholder="Email Address">
 
-    <input type="password" id="loginPassword" placeholder="Password">
+    <div class="password-box">
+    <input type="password" id="login Password" placeholder="Password">
+    <span class="toggle-password" onclick="toggleloginPassword()">👁</span>
+</div>
 
-    <button onclick="handleLogin()">Login</button>
+<div class="password-box">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <span class="toggle-password" onclick="toggleConfirmPassword()">👁</span>
+</div>
+
+    <button onclick="handlelogin()">Login</button>
 
     <a class="forgot-link" href="#">Forgot Password?</a>
 
