@@ -299,3 +299,39 @@ opacity:1;
 transform:translateY(0);
 }
 }
+.notification-card{
+
+    background:white;
+    padding:18px;
+    margin:15px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    cursor:pointer;
+
+}
+
+.notification-card h3{
+
+    color:#5b21b6;
+    margin-bottom:8px;
+
+}
+
+.notification-card p{
+
+    color:#444;
+
+}
+
+.notification-card small{
+
+    color:gray;
+
+}
+
+.unread{
+
+    border-left:6px solid #d63384;
+    background:#fff5fb;
+
+}
