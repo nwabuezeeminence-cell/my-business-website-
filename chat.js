@@ -109,9 +109,28 @@ function startChat(user){
 
         }
 
+
         openChat(chatId,user);
 
     });
+
+}
+let currentChatId = null;
+
+function openChat(chatId,user){
+
+    currentChatId = chatId;
+
+    document.getElementById("chatName").textContent =
+        user.fullName;
+
+    document.getElementById("chatStatus").textContent =
+        user.status || "Available";
+
+    document.getElementById("chatPhoto").src =
+        user.profilePhoto || "avatar.png";
+
+    loadMessages(chatId);
 
 }
 document.getElementById("findUser").addEventListener("input", function(){
