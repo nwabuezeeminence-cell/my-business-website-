@@ -133,6 +133,49 @@ function openChat(chatId,user){
     loadMessages(chatId);
 
 }
+function loadMessages(chatId){
+
+    const messages = document.getElementById("messages");
+
+    messages.innerHTML = "";
+
+    db.ref("messages/" + chatId)
+    .on("value",(snapshot)=>{
+
+        messages.innerHTML="";
+
+        snapshot.forEach((child)=>{
+
+            const msg = child.val();
+
+            const bubble = document.createElement("div");
+
+            bubble.className =
+                msg.sender===currentUser.uid
+                ? "my-message"
+                : "their-message";
+
+            bubble.innerHTML=`
+
+                <p>${msg.text}</p>
+
+                <small>
+
+                    ${new Date(msg.time).toLocaleTimeString()}
+
+                </small>
+
+            `;
+
+            messages.appendChild(bubble);
+
+        });
+
+        messages.scrollTop = messages.scrollHeight;
+
+    });
+
+}
 document.getElementById("findUser").addEventListener("input", function(){
 
     const search = this.value.toLowerCase();
