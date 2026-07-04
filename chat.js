@@ -1,92 +1,88 @@
-// chat.js
+// ===== NEXA Messenger =====
 
-let currentChat = "NEXA Support";
+const auth = firebase.auth();
+const db = firebase.database();
 
-const demoChats = {
-    "NEXA Support": [
-        {
-            sender: "NEXA Support",
-            text: "Welcome to NEXA Messenger!"
-        }
-    ]
-};
+let currentUser = null;
 
-function openChat(name) {
+auth.onAuthStateChanged((user) => {
 
-    currentChat = name;
-
-    document.getElementById("chatTitle").textContent = name;
-
-    loadMessages();
-
-}
-
-function loadMessages() {
-
-    const messages = document.getElementById("messages");
-
-    messages.innerHTML = "";
-
-    const chat = demoChats[currentChat] || [];
-
-    if (chat.length === 0) {
-
-        messages.innerHTML = "<p>No messages yet.</p>";
-
+    if (!user) {
+        window.location.href = "login.html";
         return;
-
     }
 
-    chat.forEach(msg => {
+    currentUser = user;
 
-        const div = document.createElement("div");
-
-        div.className = "message";
-
-        div.innerHTML =
-            "<strong>" +
-            msg.sender +
-            ":</strong> " +
-            msg.text;
-
-        messages.appendChild(div);
-
-    });
-
-    messages.scrollTop = messages.scrollHeight;
-
-}
-
-function sendMessage() {
-
-    const input = document.getElementById("chatInput");
-
-    const text = input.value.trim();
-
-    if (text === "") return;
-
-    if (!demoChats[currentChat]) {
-
-        demoChats[currentChat] = [];
-
-    }
-
-    demoChats[currentChat].push({
-
-        sender: "You",
-
-        text: text
-
-    });
-
-    input.value = "";
-
-    loadMessages();
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    openChat("NEXA Support");
+    loadUsers();
 
 });
+
+const newChatBtn = document.getElementById("newChat");
+const searchPanel = document.getElementById("userSearchPanel");
+
+newChatBtn.onclick = () => {
+
+    if (searchPanel.style.display === "block") {
+
+        searchPanel.style.display = "none";
+
+    } else {
+
+        searchPanel.style.display = "block";
+
+    }
+
+};
+
+function loadUsers() {
+
+    const usersDiv = document.getElementById("allUsers");
+
+    db.ref("users").on("value", (snapshot) => {
+
+        usersDiv.innerHTML = "";
+
+        snapshot.forEach((child) => {
+
+            const user = child.val();
+
+            if (user.uid === currentUser.uid) return;
+
+            const card = document.createElement("div");
+
+            card.className = "user-card";
+
+            card.innerHTML = `
+
+                <img src="${user.profilePhoto || 'avatar.png'}">
+
+                <div>
+
+                    <b>${user.fullName}</b><br>
+
+                    <small>${user.status || "Available"}</small>
+
+                </div>
+
+            `;
+
+            card.onclick = () => {
+
+                startChat(user);
+
+            };
+
+            usersDiv.appendChild(card);
+
+        });
+
+    });
+
+}
+
+function startChat(user){
+
+    alert("Starting chat with " + user.fullName);
+
+}
