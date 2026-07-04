@@ -74,3 +74,27 @@ body{
     text-decoration:none;
     font-weight:600;
 }
+.password-box{
+    position:relative;
+    width:100%;
+    margin:12px 0;
+}
+
+.password-box input{
+    width:100%;
+    padding:15px;
+    padding-right:50px;
+    border:2px solid #ddd;
+    border-radius:14px;
+    font-size:16px;
+}
+
+.toggle-password{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:20px;
+    user-select:none;
+}
