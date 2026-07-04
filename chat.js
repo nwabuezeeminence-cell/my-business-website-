@@ -79,11 +79,39 @@ function loadUsers() {
 
     });
 
-}
-
 function startChat(user){
 
-    alert("Starting chat with " + user.fullName);
+    const chatId = currentUser.uid < user.uid
+        ? currentUser.uid + "_" + user.uid
+        : user.uid + "_" + currentUser.uid;
+
+    db.ref("chats/" + chatId).once("value").then((snapshot)=>{
+
+        if(!snapshot.exists()){
+
+            db.ref("chats/" + chatId).set({
+
+                createdAt: Date.now(),
+
+                lastMessage: "",
+
+                lastTime: Date.now(),
+
+                members:{
+
+                    [currentUser.uid]: true,
+
+                    [user.uid]: true
+
+                }
+
+            });
+
+        }
+
+        openChat(chatId,user);
+
+    });
 
 }
 document.getElementById("findUser").addEventListener("input", function(){
