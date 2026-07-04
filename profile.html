@@ -4,145 +4,82 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>My Profile | NEXA</title>
 
-<title>My Profile</title>
-
-<link rel="stylesheet" href="styles.css">
-
-<link rel="stylesheet" href="menu.css">
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="profile.css">
 
 </head>
 
 <body>
 
-<header class="topbar">
+<div class="profile-page">
 
-<button class="menu-btn"
-onclick="openMenu()">
+    <div class="cover-photo">
 
-☰
+        <img id="coverPreview" src="cover.jpg">
 
-</button>
+        <label class="edit-cover">
 
-<div class="logo">
+            📷 Change Cover
 
-<img src="NEXA.png" alt="Logo">
+            <input
+                type="file"
+                id="coverInput"
+                accept="image/*"
+                hidden>
 
-<h2>My Profile</h2>
+        </label>
+
+    </div>
+
+    <div class="profile-card">
+
+        <div class="profile-image">
+
+            <img id="profilePreview" src="avatar.png">
+
+            <label>
+
+                📷
+
+                <input
+                    type="file"
+                    id="profileInput"
+                    accept="image/*"
+                    hidden>
+
+            </label>
+
+        </div>
+
+        <h2 id="fullName">Loading...</h2>
+
+        <p id="username">@username</p>
+
+        <textarea
+            id="bio"
+            placeholder="Tell everyone about yourself..."></textarea>
+
+        <button id="saveProfile">
+
+            Save Profile
+
+        </button>
+
+    </div>
 
 </div>
 
-<div class="top-icons">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-<a href="notifications.html">
-
-<i class="fas fa-bell"></i>
-
-</a>
-
-</div>
-
-</header>
-
-<div id="sideMenu" class="side-menu">
-
-<button class="close-btn"
-onclick="closeMenu()">
-
-✖
-
-</button>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="community.html">👥 Community</a>
-
-<a href="chat.html">💬 Chats</a>
-
-<a href="groups.html">👥 Groups</a>
-
-<a href="settings.html">⚙ Settings</a>
-
-<a href="admin.html">🛡 Admin Panel</a>
-
-</div>
-
-<section class="container">
-
-<center>
-
-<img
-
-src="img/default-user.png"
-
-id="profileImage"
-
-style="width:120px;height:120px;border-radius:50%;"
-
->
-
-<h2 id="profileName">
-
-Guest User
-
-</h2>
-
-<p id="profileEmail">
-
-guest@nexa.com
-
-</p>
-
-</center>
-
-<hr>
-
-<label>Full Name</label>
-
-<input
-type="text"
-id="fullName">
-
-<label>Bio</label>
-
-<textarea
-id="bio">
-
-</textarea>
-
-<br><br>
-
-<button
-class="button_1"
-onclick="saveProfile()">
-
-Save Profile
-
-</button>
-
-</section>
-
-<footer>
-
-<p>
-
-© 2026 NEXA Digital Services
-
-</p>
-
-</footer>
-
-<script src="menu.js"></script>
-
+<script src="firebase.js"></script>
 <script src="profile.js"></script>
 
 </body>
+
 </html>
