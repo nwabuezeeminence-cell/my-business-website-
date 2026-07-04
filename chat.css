@@ -246,3 +246,48 @@ body{
     border-radius:50%;
 
 }
+.my-message{
+
+    background:#5b21b6;
+    color:white;
+
+    padding:12px;
+
+    border-radius:15px;
+
+    width:fit-content;
+
+    max-width:70%;
+
+    margin:10px 0 10px auto;
+
+}
+
+.their-message{
+
+    background:white;
+
+    padding:12px;
+
+    border-radius:15px;
+
+    width:fit-content;
+
+    max-width:70%;
+
+    margin:10px 0;
+
+}
+
+.my-message small,
+.their-message small{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:11px;
+
+    opacity:.7;
+
+}
