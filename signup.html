@@ -15,19 +15,24 @@
 <body>
 
 <div class="auth-container">
-<div style="text-align:center;margin-bottom:20px;">
-    <img src="NEXA.png" alt="NEXA Logo" style="width:90px;">
-</div>
-    <h2>Create Account</h2>
-<input type="text" id="signupName" placeholder="Full Name">
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-<input type="password" id="confirmPassword" placeholder="Confirm Password">
-    <button onclick="handleSignup()">Sign Up</button>
 
-    <p>
-        Already have an account?
-        <a href="login.html">Login</a>
+    <div class="logo-area">
+        <img src="NEXA.png" class="logo">
+        <h1>NEXA</h1>
+        <p>Digital Services</p>
+    </div>
+
+    <h2>Create Your Account</h2>
+
+    <input type="email" id="SignupEmail" placeholder="Email Address">
+
+    <input type="password" id="SignupPassword" placeholder="Password">
+
+    <button onclick="handleSignup()">Signup</button>
+
+    <p class="bottom-text">
+        Already Have An Account?
+        <a href="Login.html">Login</a>
     </p>
 
 </div>
