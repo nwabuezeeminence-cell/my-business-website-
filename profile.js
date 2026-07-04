@@ -10,22 +10,31 @@ firebase.auth().onAuthStateChanged((user) => {
     db.ref("users/" + user.uid).once("value")
     .then((snapshot) => {
 
-        const data = snapshot.val();
+    const data = snapshot.val();
 
-        if (!data) return;
+    if (!data) return;
 
-       document.getElementById("fullName").textContent =
-    data.fullName || "NEXA User";
+    document.getElementById("fullName").textContent =
+        data.fullName || "NEXA User";
 
-document.getElementById("username").textContent =
-    data.username || "@user";
+    document.getElementById("username").textContent =
+        data.username || "@user";
 
-        document.getElementById("bio").value =
-            data.bio || "";
+    document.getElementById("bio").value =
+        data.bio || "";
 
-    });
+    if (data.profilePhoto) {
+        document.getElementById("profilePreview").src =
+            data.profilePhoto;
+    }
+
+    if (data.coverPhoto) {
+        document.getElementById("coverPreview").src =
+            data.coverPhoto;
+    }
 
 });
+
 
 // Save Profile
 document.getElementById("saveProfile").addEventListener("click", () => {
