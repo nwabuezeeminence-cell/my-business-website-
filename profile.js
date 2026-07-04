@@ -14,11 +14,13 @@ firebase.auth().onAuthStateChanged((user) => {
 
     if (!data) return;
 
-    document.getElementById("fullName").textContent =
-        data.fullName || "NEXA User";
+    const fullName = data.fullName || data.name || "NEXA User";
 
-    document.getElementById("username").textContent =
-        data.username || "@user";
+document.getElementById("fullName").textContent = fullName;
+
+document.getElementById("username").textContent =
+    data.username ||
+    ("@" + fullName.toLowerCase().replace(/\s+/g, ""));
 
     document.getElementById("bio").value =
         data.bio || "";
