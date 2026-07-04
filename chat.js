@@ -170,6 +170,9 @@ function loadMessages(chatId){
             messages.appendChild(bubble);
 
         });
+bubble.scrollIntoView({
+    behavior:"smooth"
+});
 
         messages.scrollTop = messages.scrollHeight;
 
