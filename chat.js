@@ -86,3 +86,22 @@ function startChat(user){
     alert("Starting chat with " + user.fullName);
 
 }
+document.getElementById("findUser").addEventListener("input", function(){
+
+    const search = this.value.toLowerCase();
+
+    document.querySelectorAll(".user-card").forEach(card=>{
+
+        if(card.innerText.toLowerCase().includes(search)){
+
+            card.style.display="flex";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+});
