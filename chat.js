@@ -222,17 +222,20 @@ function sendMessage(){
 
     if(text === "") return;
 
-    const message = {
-
-        sender: currentUser.uid,
-
-        text: text,
-
-        time: Date.now(),
-
-        status: "sent"
-
-    };
+const message = {
+    id: Date.now().toString(),
+    sender: currentUser.uid,
+    type: "text",      // text, image, video, audio, document
+    text: text,
+    fileUrl: "",
+    fileName: "",
+    replyTo: "",
+    reactions: {},
+    edited: false,
+    deleted: false,
+    status: "sending",
+    time: Date.now()
+};
 
     const messageRef = db.ref("messages/" + currentChatId).push();
 
