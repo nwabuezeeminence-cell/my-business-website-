@@ -288,3 +288,18 @@ document.querySelectorAll(".emoji-panel span").forEach(emoji=>{
     };
 
 });
+const recordBtn = document.getElementById("recordBtn");
+const recordingBar = document.getElementById("recordingBar");
+const cancelRecord = document.getElementById("cancelRecord");
+
+recordBtn.onclick = () => {
+
+    recordingBar.classList.add("active");
+
+};
+
+cancelRecord.onclick = () => {
+
+    recordingBar.classList.remove("active");
+
+};
