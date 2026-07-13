@@ -258,3 +258,12 @@ function openChat(){
 function closeChat(){
     chatRoom.classList.remove("active");
 }
+document
+.getElementById("backBtn")
+.onclick = function(){
+
+    document
+    .querySelector(".chat-room")
+    .classList.remove("active");
+
+};
