@@ -437,3 +437,28 @@ body{
     background-size:cover;
     background-position:center;
 }
+#sendMessage{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#D63384,#7C3AED);
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+#sendMessage:hover{
+
+    transform:rotate(-15deg) scale(1.08);
+
+}
