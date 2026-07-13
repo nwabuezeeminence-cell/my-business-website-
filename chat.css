@@ -637,3 +637,15 @@ body{
     }
 
 }
+.chat-image{
+    max-width:220px;
+    border-radius:14px;
+    display:block;
+    margin-bottom:8px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.chat-image:hover{
+    transform:scale(1.02);
+}
