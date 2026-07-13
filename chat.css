@@ -410,3 +410,11 @@ body{
     }
 
 }
+.messages::-webkit-scrollbar{
+    width:5px;
+}
+
+.messages::-webkit-scrollbar-thumb{
+    background:#bbb;
+    border-radius:20px;
+}
