@@ -546,3 +546,46 @@ body{
 
     color:#38bdf8;
 }
+.emoji-panel{
+
+    display:none;
+
+    grid-template-columns:repeat(6,1fr);
+
+    gap:10px;
+
+    padding:15px;
+
+    background:white;
+
+    border-top:1px solid #ddd;
+
+    max-height:220px;
+
+    overflow-y:auto;
+
+}
+
+.emoji-panel.active{
+
+    display:grid;
+
+}
+
+.emoji-panel span{
+
+    font-size:28px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.emoji-panel span:hover{
+
+    transform:scale(1.25);
+
+}
