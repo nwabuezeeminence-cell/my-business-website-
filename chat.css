@@ -462,3 +462,18 @@ body{
     transform:rotate(-15deg) scale(1.08);
 
 }
+.date-divider{
+
+    margin:20px auto;
+
+    background:#dbeafe;
+
+    color:#555;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+}
