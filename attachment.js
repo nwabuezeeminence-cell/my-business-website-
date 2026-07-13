@@ -21,3 +21,12 @@ imagePicker.onchange = (e) => {
     reader.readAsDataURL(file);
 
 };
+function showImagePreview(file, imageUrl){
+
+    const preview = document.getElementById("imagePreview");
+
+    document.getElementById("previewImage").src = imageUrl;
+
+    preview.classList.add("active");
+
+}
