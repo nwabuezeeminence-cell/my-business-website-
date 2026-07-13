@@ -249,3 +249,12 @@ function sendMessage(){
     input.value = "";
 
 }
+const chatRoom = document.querySelector(".chat-room");
+
+function openChat(){
+    chatRoom.classList.add("active");
+}
+
+function closeChat(){
+    chatRoom.classList.remove("active");
+}
