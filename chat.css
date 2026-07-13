@@ -589,3 +589,51 @@ body{
     transform:scale(1.25);
 
 }
+.chat-actions{
+    display:flex;
+    gap:8px;
+}
+
+.recording-bar{
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:12px 18px;
+
+    background:#D63384;
+
+    color:white;
+
+    animation:slideUp .25s ease;
+
+}
+
+.recording-bar.active{
+
+    display:flex;
+
+}
+
+@keyframes slideUp{
+
+    from{
+
+        transform:translateY(100%);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(0);
+
+        opacity:1;
+
+    }
+
+}
