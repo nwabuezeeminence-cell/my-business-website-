@@ -112,13 +112,25 @@ body{
 }
 
 .room-header{
-    height:75px;
-    background:white;
+
+    height:72px;
+
+    background:linear-gradient(135deg,#D63384,#7C3AED);
+
+    color:white;
+
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
-    padding:15px 20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+
+    justify-content:space-between;
+
+    padding:12px 18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+    z-index:5;
+
 }
 
 .user-info{
