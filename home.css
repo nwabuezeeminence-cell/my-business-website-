@@ -1,0 +1,101 @@
+body{
+    margin:0;
+    background:#f5f6fb;
+    font-family:Poppins,sans-serif;
+}
+
+.home-header{
+
+    background:linear-gradient(135deg,#D63384,#7C3AED);
+
+    color:white;
+
+    padding:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.dashboard{
+
+    padding:20px;
+
+}
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.action-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.action-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    background:white;
+
+    padding:10px 0;
+
+    box-shadow:0 -4px 15px rgba(0,0,0,.08);
+
+}
+
+.bottom-nav a{
+
+    text-align:center;
+
+    color:#777;
+
+    text-decoration:none;
+
+}
+
+.bottom-nav .active{
+
+    color:#D63384;
+
+    font-weight:bold;
+
+}
