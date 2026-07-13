@@ -510,3 +510,39 @@ body{
     }
 
 }
+.message-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:6px;
+
+    font-size:11px;
+
+}
+
+.status{
+
+    font-weight:bold;
+
+}
+
+.status.sent{
+
+    color:#bbb;
+}
+
+.status.delivered{
+
+    color:#666;
+}
+
+.status.read{
+
+    color:#38bdf8;
+}
