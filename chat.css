@@ -418,4 +418,10 @@ body{
     50%{
         opacity:.4;
     }
+}..messages{
+    background:
+        linear-gradient(rgba(255,255,255,.9),rgba(255,255,255,.9)),
+        url("images/chat-wallpaper.png");
+    background-size:cover;
+    background-position:center;
 }
