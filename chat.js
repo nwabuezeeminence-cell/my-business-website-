@@ -155,11 +155,50 @@ function loadMessages(chatId){
                 ? "my-message"
                 : "their-message";
 
-            bubble.innerHTML=`
+            let content = "";
 
-                <p>${msg.text}</p>
+switch(msg.type){
 
-                <small>
+    case "text":
+        content = `<p>${msg.text}</p>`;
+        break;
+
+    case "image":
+        content = `
+            <img src="${msg.fileUrl}" class="chat-image">
+            <p>${msg.text || ""}</p>
+        `;
+        break;
+
+    case "audio":
+        content = `
+            <audio controls src="${msg.fileUrl}"></audio>
+        `;
+        break;
+
+    case "document":
+        content = `
+            <a href="${msg.fileUrl}" target="_blank">
+                📄 ${msg.fileName}
+            </a>
+        `;
+        break;
+}
+
+bubble.innerHTML = `
+    ${content}
+
+    <div class="message-footer">
+
+        <small>
+            ${new Date(msg.time).toLocaleTimeString([],{
+                hour:"2-digit",
+                minute:"2-digit"
+            })}
+        </small>
+
+    </div>
+`;
 
                     ${new Date(msg.time).toLocaleTimeString()}
 
