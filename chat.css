@@ -649,3 +649,64 @@ body{
 .chat-image:hover{
     transform:scale(1.02);
 }
+.image-preview{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.9);
+
+    display:none;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.image-preview.active{
+
+    display:flex;
+
+}
+
+#previewImage{
+
+    max-width:90%;
+
+    max-height:60%;
+
+    border-radius:15px;
+
+}
+
+#imageCaption{
+
+    width:90%;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    resize:none;
+
+}
+
+.preview-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
