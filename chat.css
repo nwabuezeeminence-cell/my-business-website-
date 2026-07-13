@@ -383,3 +383,12 @@ body{
 .fab:hover{
     transform:scale(1.1);
 }
+.chat-room{
+    transform:translateX(100%);
+    transition:transform .3s ease;
+}
+
+.chat-room.active{
+    transform:translateX(0);
+    display:flex;
+}
