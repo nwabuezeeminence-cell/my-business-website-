@@ -36,7 +36,7 @@ function signUp(name, email, password) {
 }
 
 // Login
-function login(email, password) {
+function login(email,password) {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
