@@ -1,7 +1,16 @@
-// ===== NEXA Messenger =====
+// ===== NEXA Messenger V2 =====
+
+// auth and db already come from firebase.js
 
 let currentUser = null;
 
+// Page Elements
+const newChatBtn = document.getElementById("newChatBtn");
+const userPanel = document.getElementById("userSearchPanel");
+const closePanel = document.getElementById("closePanel");
+const usersContainer = document.getElementById("allUsers");
+
+// Check Login
 auth.onAuthStateChanged((user) => {
 
     if (!user) {
@@ -12,33 +21,32 @@ auth.onAuthStateChanged((user) => {
     currentUser = user;
 
     loadUsers();
+    loadChats();
 
 });
 
-const newChatBtn = document.getElementById("newChat");
-const searchPanel = document.getElementById("userSearchPanel");
-
+// Open User List
 newChatBtn.onclick = () => {
 
-    if (searchPanel.style.display === "block") {
-
-        searchPanel.style.display = "none";
-
-    } else {
-
-        searchPanel.style.display = "block";
-
-    }
+    userPanel.classList.add("active");
 
 };
 
+// Close User List
+closePanel.onclick = () => {
+
+    userPanel.classList.remove("active");
+
+};
+
+// Load All Users
 function loadUsers() {
 
-    const usersDiv = document.getElementById("allUsers");
+    usersContainer.innerHTML = "";
 
     db.ref("users").on("value", (snapshot) => {
 
-        usersDiv.innerHTML = "";
+        usersContainer.innerHTML = "";
 
         snapshot.forEach((child) => {
 
@@ -51,189 +59,124 @@ function loadUsers() {
             card.className = "user-card";
 
             card.innerHTML = `
-
                 <img src="${user.profilePhoto || 'avatar.png'}">
 
                 <div>
-
                     <b>${user.fullName}</b><br>
-
                     <small>${user.status || "Available"}</small>
+                </div>
+            `;
+
+            card.onclick = () => {
+
+                sessionStorage.setItem("chatUser", JSON.stringify(user));
+
+                window.location.href = "conversation.html";
+
+            };
+
+            usersContainer.appendChild(card);
+
+        });
+
+    });
+
+}
+
+// Load Existing Chats
+function loadChats(){
+
+    const list = document.getElementById("conversationList");
+
+    db.ref("chats").on("value",(snapshot)=>{
+
+        list.innerHTML = "";
+
+        let hasChats = false;
+
+        snapshot.forEach((child)=>{
+
+            const chat = child.val();
+            const chatId = child.key;
+
+            if(!chat.members || !chat.members[currentUser.uid]) return;
+
+            hasChats = true;
+
+            const otherUid = Object.keys(chat.members).find(
+                uid => uid !== currentUser.uid
+            );
+
+            db.ref("users/" + otherUid).once("value").then((userSnap)=>{
+
+                const user = userSnap.val();
+
+                const card = document.createElement("div");
+
+                card.className = "chat-card";
+
+                card.innerHTML = `
+
+                    <img src="${user.profilePhoto || 'avatar.png'}">
+
+                    <div class="chat-info">
+
+                        <h3>${user.fullName}</h3>
+
+                        <p>${chat.lastMessage || ""}</p>
+
+                    </div>
+
+                    <small>
+
+                        ${new Date(chat.lastTime).toLocaleTimeString([],{
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        })}
+
+                    </small>
+
+                `;
+
+                card.onclick = ()=>{
+
+                    sessionStorage.setItem(
+                        "chatUser",
+                        JSON.stringify(user)
+                    );
+
+                    window.location.href = "conversation.html";
+
+                };
+
+                list.appendChild(card);
+
+            });
+
+        });
+
+        if(!hasChats){
+
+            list.innerHTML = `
+
+                <div class="empty-chat">
+
+                    <img src="NEXA.png" width="120">
+
+                    <h2>No conversations yet</h2>
+
+                    <p>
+
+                        Tap the + button below to start chatting.
+
+                    </p>
 
                 </div>
 
             `;
 
-            card.onclick = () => {
-
-                startChat(user);
-
-            };
-
-            usersDiv.appendChild(card);
-
-        });
-
-    });
-
-}
-
-function startChat(user){
-
-    const chatId = currentUser.uid < user.uid
-        ? currentUser.uid + "_" + user.uid
-        : user.uid + "_" + currentUser.uid;
-
-    db.ref("chats/" + chatId).once("value").then((snapshot)=>{
-
-        if(!snapshot.exists()){
-
-            db.ref("chats/" + chatId).set({
-
-                createdAt: Date.now(),
-
-                lastMessage: "",
-
-                lastTime: Date.now(),
-
-                members:{
-
-                    [currentUser.uid]: true,
-
-                    [user.uid]: true
-
-                }
-
-            });
-
-        }
-
-        openChat(chatId,user);
-        function loadMessages(chatId){
-
-    const messages = document.querySelector(".messages");
-
-    messages.innerHTML = "";
-
-    db.ref("messages/" + chatId).on("value",(snapshot)=>{
-
-        messages.innerHTML = "";
-
-        snapshot.forEach((child)=>{
-
-            const msg = child.val();
-
-            const bubble = document.createElement("div");
-
-            bubble.className =
-                msg.sender === currentUser.uid
-                ? "my-message"
-                : "their-message";
-
-            bubble.innerHTML = `
-                <p>${msg.text}</p>
-                <small>${new Date(msg.time).toLocaleTimeString()}</small>
-            `;
-
-            messages.appendChild(bubble);
-
-        });
-
-        messages.scrollTop = messages.scrollHeight;
-
-    });
-
-}
-
-    });
-
-}
-let currentChatId = null;
-
-function openChat(chatId,user){
-
-    currentChatId = chatId;
-
-    document.getElementById("chatName").textContent =
-        user.fullName;
-
-    document.getElementById("chatStatus").textContent =
-        user.status || "Available";
-
-    document.getElementById("chatPhoto").src =
-        user.profilePhoto || "avatar.png";
-
-    loadMessages(chatId);
-
-}
-
-document.getElementById("findUser").addEventListener("input", function(){
-
-    const search = this.value.toLowerCase();
-
-    document.querySelectorAll(".user-card").forEach(card=>{
-
-        if(card.innerText.toLowerCase().includes(search)){
-
-            card.style.display="flex";
-
-        }else{
-
-            card.style.display="none";
-
         }
 
     });
-
-});
-// ===== Send Message =====
-
-document.getElementById("sendMessage").onclick = sendMessage;
-
-document.getElementById("messageInput").addEventListener("keypress", function(e){
-
-    if(e.key === "Enter"){
-
-        sendMessage();
-
-    }
-
-});
-
-function sendMessage(){
-
-    if(!currentChatId) return;
-
-    const input = document.getElementById("messageInput");
-
-    const text = input.value.trim();
-
-    if(text === "") return;
-
-    const message = {
-
-        sender: currentUser.uid,
-
-        text: text,
-
-        time: Date.now(),
-
-        status: "sent"
-
-    };
-
-    const messageRef = db.ref("messages/" + currentChatId).push();
-
-    messageRef.set(message);
-
-    db.ref("chats/" + currentChatId).update({
-
-        lastMessage: text,
-
-        lastTime: Date.now()
-
-    });
-
-    input.value = "";
 
 }
