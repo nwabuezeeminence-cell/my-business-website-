@@ -67,6 +67,22 @@ function toggleLoginPassword() {
 
 <script src="firebase.js"></script>
 <script src="auth.js"></script>
+<div id="popupContainer"></div>
 
+<script>
+fetch("popup.html")
+.then(r=>r.text())
+.then(html=>{
+
+    document
+    .getElementById("popupContainer")
+    .innerHTML=html;
+
+});
+</script>
+
+<link rel="stylesheet" href="popup.css">
+
+<script src="popup.js"></script>
 </body>
 </html>
