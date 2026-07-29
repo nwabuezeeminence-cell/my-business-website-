@@ -20,27 +20,35 @@ function signUp(name, email, password) {
             online: true,
             role: "user",
             status: "Available"
+        }).then(() => {
+
+            return db.ref("notifications/" + user.uid).push({
+                title: "Welcome to NEXA",
+                message: "Your account has been created successfully.",
+                type: "system",
+                time: Date.now(),
+                read: false
+            });
+
+        }).then(() => {
+
+            showPopup(
+                "Account Created",
+                "Welcome to NEXA!"
+            );
+
+            setTimeout(() => {
+                window.location.href = "profile.html";
+            }, 1500);
+
         });
-        db.ref(
-"notifications/" + user.uid
-).push({
 
-title:"Welcome to NEXA",
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
 
-message:
-"Your account has been created successfully.",
-
-type:"system",
-
-time:Date.now(),
-
-read:false
-
-});
-
-});
-
-});
+}
 
         showPopup(
     "Account Created",
