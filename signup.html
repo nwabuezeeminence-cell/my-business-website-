@@ -48,8 +48,6 @@
 
 <script>
 function handleSignup() {
-
-    const name = document.getElementById("signupName").value.trim();
     const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
@@ -91,12 +89,7 @@ function toggleConfirmPassword() {
     input.type = input.type === "password" ? "text" : "password";
 
 }
-db.ref("notifications/" + user.uid).push({
-    title: "Welcome to NEXA",
-    message: "Your account has been created successfully. Enjoy using NEXA!",
-    time: Date.now(),
-    read: false
-});
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
@@ -104,5 +97,22 @@ db.ref("notifications/" + user.uid).push({
 
 <script src="firebase.js"></script>
 <script src="auth.js"></script>
+<div id="popupContainer"></div>
+
+<script>
+fetch("popup.html")
+.then(r=>r.text())
+.then(html=>{
+
+    document
+    .getElementById("popupContainer")
+    .innerHTML=html;
+
+});
+</script>
+
+<link rel="stylesheet" href="popup.css">
+
+<script src="popup.js"></script>
 </body>
 </html>
