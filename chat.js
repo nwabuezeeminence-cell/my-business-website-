@@ -40,6 +40,8 @@ function loadUsers() {
     const usersDiv = document.getElementById("allUsers");
 
     db.ref("users").on("value", (snapshot) => {
+})
+}
 
         usersDiv.innerHTML = "";
 
