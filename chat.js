@@ -1,8 +1,5 @@
 // ===== NEXA Messenger =====
 
-const auth = firebase.auth();
-const db = firebase.database();
-
 let currentUser = null;
 
 auth.onAuthStateChanged((user) => {
@@ -40,8 +37,6 @@ function loadUsers() {
     const usersDiv = document.getElementById("allUsers");
 
     db.ref("users").on("value", (snapshot) => {
-})
-}
 
         usersDiv.innerHTML = "";
 
@@ -81,6 +76,8 @@ function loadUsers() {
 
     });
 
+}
+
 function startChat(user){
 
     const chatId = currentUser.uid < user.uid
@@ -111,8 +108,42 @@ function startChat(user){
 
         }
 
-
         openChat(chatId,user);
+        function loadMessages(chatId){
+
+    const messages = document.querySelector(".messages");
+
+    messages.innerHTML = "";
+
+    db.ref("messages/" + chatId).on("value",(snapshot)=>{
+
+        messages.innerHTML = "";
+
+        snapshot.forEach((child)=>{
+
+            const msg = child.val();
+
+            const bubble = document.createElement("div");
+
+            bubble.className =
+                msg.sender === currentUser.uid
+                ? "my-message"
+                : "their-message";
+
+            bubble.innerHTML = `
+                <p>${msg.text}</p>
+                <small>${new Date(msg.time).toLocaleTimeString()}</small>
+            `;
+
+            messages.appendChild(bubble);
+
+        });
+
+        messages.scrollTop = messages.scrollHeight;
+
+    });
+
+}
 
     });
 
@@ -135,91 +166,7 @@ function openChat(chatId,user){
     loadMessages(chatId);
 
 }
-function loadMessages(chatId){
 
-    const messages = document.getElementById("messages");
-
-    messages.innerHTML = "";
-
-    db.ref("messages/" + chatId)
-    .on("value",(snapshot)=>{
-
-        messages.innerHTML="";
-
-        snapshot.forEach((child)=>{
-
-            const msg = child.val();
-
-            const bubble = document.createElement("div");
-
-            bubble.className =
-                msg.sender===currentUser.uid
-                ? "my-message"
-                : "their-message";
-
-            let content = "";
-
-switch(msg.type){
-
-    case "text":
-        content = `<p>${msg.text}</p>`;
-        break;
-
-    case "image":
-        content = `
-            <img src="${msg.fileUrl}" class="chat-image">
-            <p>${msg.text || ""}</p>
-        `;
-        break;
-
-    case "audio":
-        content = `
-            <audio controls src="${msg.fileUrl}"></audio>
-        `;
-        break;
-
-    case "document":
-        content = `
-            <a href="${msg.fileUrl}" target="_blank">
-                📄 ${msg.fileName}
-            </a>
-        `;
-        break;
-}
-
-bubble.innerHTML = `
-    ${content}
-
-    <div class="message-footer">
-
-        <small>
-            ${new Date(msg.time).toLocaleTimeString([],{
-                hour:"2-digit",
-                minute:"2-digit"
-            })}
-        </small>
-
-    </div>
-`;
-
-                    ${new Date(msg.time).toLocaleTimeString()}
-
-                </small>
-
-            `;
-
-            messages.appendChild(bubble);
-
-        });
-bubble.scrollIntoView({
-    behavior:"smooth"
-});
-
-        messages.scrollTop = messages.scrollHeight;
-
-    });
-
-}
 document.getElementById("findUser").addEventListener("input", function(){
 
     const search = this.value.toLowerCase();
@@ -263,20 +210,17 @@ function sendMessage(){
 
     if(text === "") return;
 
-const message = {
-    id: Date.now().toString(),
-    sender: currentUser.uid,
-    type: "text",      // text, image, video, audio, document
-    text: text,
-    fileUrl: "",
-    fileName: "",
-    replyTo: "",
-    reactions: {},
-    edited: false,
-    deleted: false,
-    status: "sending",
-    time: Date.now()
-};
+    const message = {
+
+        sender: currentUser.uid,
+
+        text: text,
+
+        time: Date.now(),
+
+        status: "sent"
+
+    };
 
     const messageRef = db.ref("messages/" + currentChatId).push();
 
@@ -293,57 +237,3 @@ const message = {
     input.value = "";
 
 }
-const chatRoom = document.querySelector(".chat-room");
-
-function openChat(){
-    chatRoom.classList.add("active");
-}
-
-function closeChat(){
-    chatRoom.classList.remove("active");
-}
-document
-.getElementById("backBtn")
-.onclick = function(){
-
-    document
-    .querySelector(".chat-room")
-    .classList.remove("active");
-
-};
-const emojiBtn = document.getElementById("emojiBtn");
-const emojiPanel = document.getElementById("emojiPanel");
-const input = document.getElementById("messageInput");
-
-emojiBtn.onclick = () => {
-
-    emojiPanel.classList.toggle("active");
-
-};
-
-document.querySelectorAll(".emoji-panel span").forEach(emoji=>{
-
-    emoji.onclick=()=>{
-
-        input.value+=emoji.textContent;
-
-        input.focus();
-
-    };
-
-});
-const recordBtn = document.getElementById("recordBtn");
-const recordingBar = document.getElementById("recordingBar");
-const cancelRecord = document.getElementById("cancelRecord");
-
-recordBtn.onclick = () => {
-
-    recordingBar.classList.add("active");
-
-};
-
-cancelRecord.onclick = () => {
-
-    recordingBar.classList.remove("active");
-
-};
