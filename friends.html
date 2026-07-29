@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Friends | NEXA</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="friends.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="friends-page">
+
+    <!-- Header -->
+
+    <header class="friends-header">
+
+        <h2>Friends</h2>
+
+        <button id="refreshFriends">
+            <i class="fas fa-rotate"></i>
+        </button>
+
+    </header>
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchUser"
+            placeholder="Search people...">
+
+    </div>
+
+    <!-- Friend Requests -->
+
+    <section>
+
+        <h3 class="section-title">
+
+            Friend Requests
+
+        </h3>
+
+        <div id="requestList">
+
+            <div class="empty-card">
+
+                No pending requests.
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Friends -->
+
+    <section>
+
+        <h3 class="section-title">
+
+            Your Friends
+
+        </h3>
+
+        <div id="friendsList">
+
+            <div class="empty-card">
+
+                You don't have any friends yet.
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Suggested Users -->
+
+    <section>
+
+        <h3 class="section-title">
+
+            Discover People
+
+        </h3>
+
+        <div id="peopleList">
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Floating Button -->
+
+<button id="addFriendBtn" class="fab">
+
+    <i class="fas fa-user-plus"></i>
+
+</button>
+
+<!-- Bottom Navigation -->
+
+<nav class="bottom-nav">
+
+    <a href="index.html">
+
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+
+    </a>
+
+    <a href="friends.html" class="active">
+
+        <i class="fas fa-user-friends"></i>
+        <span>Friends</span>
+
+    </a>
+
+    <a href="chat.html">
+
+        <i class="fas fa-comments"></i>
+        <span>Chats</span>
+
+    </a>
+
+    <a href="notifications.html">
+
+        <i class="fas fa-bell"></i>
+        <span>Alerts</span>
+
+    </a>
+
+    <a href="profile.html">
+
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+
+    </a>
+
+</nav>
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script src="friends.js"></script>
+<div id="popupContainer"></div>
+
+<script>
+fetch("popup.html")
+.then(r=>r.text())
+.then(html=>{
+
+    document
+    .getElementById("popupContainer")
+    .innerHTML=html;
+
+});
+</script>
+
+<link rel="stylesheet" href="popup.css">
+
+<script src="popup.js"></script>
+<script src="app-settings.js"></script>
+
+</body>
+
+</html>
