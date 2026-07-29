@@ -48,8 +48,7 @@ onclick="toggleLoginPassword()">👁</span>
 
 <script>
 function handleLogin() {
-
-    const email = document.getElementById("loginEmail").value;
+    const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
 
     login(email, password);
