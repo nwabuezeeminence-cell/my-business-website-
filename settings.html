@@ -4,91 +4,238 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NEXA Settings</title>
 
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="style.css">
 
-<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="settings.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
+
 <body>
 
-<header class="topbar">
 
-<button class="menu-btn" onclick="openMenu()">☰</button>
+<div class="settings-page">
 
-<div class="logo">
 
-<img src="NEXA.png" alt="Logo">
+<header class="settings-header">
 
-<h2>Settings</h2>
-
-</div>
+<h2>
+⚙️ Settings
+</h2>
 
 </header>
 
-<div id="sideMenu" class="side-menu">
 
-<button class="close-btn" onclick="closeMenu()">✖</button>
 
-<a href="index.html">🏠 Home</a>
-<a href="community.html">👥 Community</a>
-<a href="chat.html">💬 Chats</a>
-<a href="groups.html">👥 Groups</a>
-<a href="profile.html">👤 My Profile</a>
-<a href="admin.html">🛡 Admin Panel</a>
+<div class="settings-card">
 
-</div>
 
-<section class="container">
+<h3>
+<i class="fas fa-user"></i>
+Account
+</h3>
 
-<h1>Settings</h1>
 
-<label>
+<button onclick="goProfile()">
 
-<input type="checkbox" id="darkMode">
-
-Enable Dark Mode
-
-</label>
-
-<br><br>
-
-<label>
-
-<input type="checkbox" id="notifications">
-
-Enable Notifications
-
-</label>
-
-<br><br>
-
-<button class="button_1"
-onclick="saveSettings()">
-
-Save Settings
+Edit Profile
 
 </button>
 
-</section>
 
-<footer>
+<button onclick="changePassword()">
 
-<p>© 2026 NEXA Digital Services</p>
+Change Password
 
-</footer>
+</button>
 
-<script src="menu.js"></script>
+
+</div>
+
+
+
+
+<div class="settings-card">
+
+
+<h3>
+<i class="fas fa-palette"></i>
+Appearance
+</h3>
+
+
+<div class="setting-row">
+
+<span>
+Dark Mode
+</span>
+
+
+<input 
+type="checkbox"
+id="darkModeToggle">
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="settings-card">
+
+
+<h3>
+<i class="fas fa-bell"></i>
+Notifications
+</h3>
+
+
+<div class="setting-row">
+
+
+<span>
+Allow Notifications
+</span>
+
+
+<input 
+type="checkbox"
+id="notificationToggle"
+checked>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="settings-card">
+
+
+<h3>
+<i class="fas fa-lock"></i>
+Privacy
+</h3>
+
+
+<div class="setting-row">
+
+
+<span>
+Show Online Status
+</span>
+
+
+<input 
+type="checkbox"
+id="onlineToggle"
+checked>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<button id="logoutBtn"
+class="logout-btn">
+
+<i class="fas fa-sign-out-alt"></i>
+
+Logout
+
+</button>
+
+
+
+</div>
+
+
+
+<nav class="bottom-nav">
+
+
+<a href="index.html">
+
+<i class="fas fa-home"></i>
+
+Home
+
+</a>
+
+
+<a href="friends.html">
+
+<i class="fas fa-user-friends"></i>
+
+Friends
+
+</a>
+
+
+<a href="chat.html">
+
+<i class="fas fa-comments"></i>
+
+Chats
+
+</a>
+
+
+<a href="notifications.html">
+
+<i class="fas fa-bell"></i>
+
+Alerts
+
+</a>
+
+
+<a href="profile.html">
+
+<i class="fas fa-user"></i>
+
+Profile
+
+</a>
+
+
+</nav>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+
+<script src="firebase.js"></script>
 
 <script src="settings.js"></script>
 
+
 </body>
+<script src="app-settings.js"></script>
+
 </html>
