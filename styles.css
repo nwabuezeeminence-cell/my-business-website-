@@ -366,3 +366,66 @@ transform:translateY(0);
     padding:2px 6px;
 
 }
+/* ===== Global Dark Mode ===== */
+
+
+.dark-mode{
+
+    background:#121212;
+
+    color:white;
+
+}
+
+
+
+.dark-mode .card,
+.dark-mode .container,
+.dark-mode .settings-card,
+.dark-mode .notification-card,
+.dark-mode .chat-box,
+.dark-mode .profile-card{
+
+    background:#1f1f1f;
+
+    color:white;
+
+}
+
+
+
+.dark-mode input,
+.dark-mode textarea{
+
+    background:#252525;
+
+    color:white;
+
+    border-color:#444;
+
+}
+
+
+
+.dark-mode p,
+.dark-mode small{
+
+    color:#ccc;
+
+}
+
+
+
+.dark-mode .bottom-nav{
+
+    background:#1f1f1f;
+
+}
+
+
+
+.dark-mode .bottom-nav a{
+
+    color:#ddd;
+
+}
