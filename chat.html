@@ -16,37 +16,68 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
-
 <body>
-<div class="chat-container">
 
-    <!-- LEFT SIDE -->
+<div class="chat-page">
 
-    <div class="chat-list">
+    <!-- Header -->
+    <header class="chat-header">
 
-        <div class="chat-header">
+        <h2>💬 Chats</h2>
 
-            <h2>Chats</h2>
+        <button id="searchBtn">
+            <i class="fas fa-search"></i>
+        </button>
 
-            <button id="newChat">
+    </header>
 
-                <i class="fas fa-user-plus"></i>
-
-            </button>
-
-        </div>
+    <!-- Search -->
+    <div class="search-area">
 
         <input
             type="text"
             id="searchChat"
-            placeholder="Search people...">
+            placeholder="Search conversations...">
 
-        <div id="conversationList">
+    </div>
 
-        </div>
-<div id="userSearchPanel" class="user-search-panel" style="display:none;">
+    <!-- Chat List -->
+    <div id="conversationList" class="conversation-list">
 
-    <h3>Start New Chat</h3>
+        <div class="empty-chat">
+
+    <img src="NEXA.png" width="120">
+
+    <h2>No conversations yet</h2>
+
+    <p>
+
+        Tap the + button below to start your first conversation.
+
+    </p>
+
+</div>
+
+    </div>
+
+    <!-- Floating Button -->
+    <button id="newChatBtn" class="fab">
+    <i class="fas fa-plus"></i>
+</button>
+
+</div>
+
+<!-- Start Chat Panel -->
+
+<div id="userSearchPanel" class="user-search-panel">
+
+    <div class="panel-header">
+
+        <button id="closePanel">←</button>
+
+        <h3>Start New Chat</h3>
+
+    </div>
 
     <input
         type="text"
@@ -56,271 +87,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <div id="allUsers"></div>
 
 </div>
-    </div>
-
-    <!-- RIGHT SIDE -->
-
-    <div class="chat-room">
-
-        <div class="room-header">
-
-           <button id="backBtn" class="back-btn">
-    <i class="fas fa-arrow-left"></i>
-</button>
-
-
-                <img
-                    id="chatPhoto"
-                    src="avatar.png">
-
-                <div>
-
-                    <div>
-
-    <h3 id="chatName">
-        Select a chat
-    </h3>
-
-    <div class="status">
-
-        <span class="online-dot"></span>
-
-        Online
-
-    </div>
-
-    <small id="chatStatus">
-        Offline
-    </small>
-
-</div>
-    <span class="online-dot"></span>
-    Online
-</div>
-<div id="imagePreview" class="image-preview">
-
-    <img id="previewImage">
-
-    <textarea
-        id="imageCaption"
-        placeholder="Add a caption..."></textarea>
-
-    <div class="preview-buttons">
-
-        <button id="cancelImage">
-            Cancel
-        </button>
-
-        <button id="sendImage">
-            Send
-        </button>
-
-    </div>
-
-</div>
-                        Select a chat
-
-                    </h3>
-
-                    <small id="chatStatus">
-
-                        Offline
-
-                    </small>
-
-                </div>
-
-            </div>
-
-            <div class="room-icons">
-
-                <i class="fas fa-phone"></i>
-
-                <i class="fas fa-video"></i>
-
-                <i class="fas fa-ellipsis-v"
-                   id="chatMenuBtn"></i>
-
-            </div>
-
-
-        </div>
-
-        <div class="messages"></div>
-<div class="their-message">
-
-    <div class="message-text">
-        Hello 👋
-    </div>
-
-    <div class="message-footer">
-
-        <small class="time">
-            10:25 PM
-        </small>
-
-    </div>
-
-</div>
-<small>
-
-10:45 PM
-
-<span class="read">
-
-✓✓
-
-</span>
-
-</small>
-<div class="my-message">
-
-    <div class="message-text">
-        Hello
-    </div>
-
-    <div class="message-footer">
-
-        <small class="time">
-            10:25 PM
-        </small>
-
-        <span class="status sent">
-            ✓
-        </span>
-
-    </div>
-
-</div>
-<div id="emojiPanel" class="emoji-panel">
-
-    <span>😀</span>
-    <span>😁</span>
-    <span>😂</span>
-    <span>🤣</span>
-    <span>😊</span>
-    <span>😍</span>
-    <span>😎</span>
-    <span>🥳</span>
-    <span>❤️</span>
-    <span>👍</span>
-    <span>🔥</span>
-    <span>🎉</span>
-
-</div>
-<div id="recordingBar" class="recording-bar">
-
-    <i class="fas fa-microphone"></i>
-
-    <span id="recordTime">
-        00:00
-    </span>
-
-    <button id="cancelRecord">
-        Cancel
-    </button>
-
-</div>
-<div class="message-box">
-
-    <button id="emojiBtn">😊</button>
-
-    <button id="attachBtn">📎</button>
-
-    <input
-        type="text"
-        id="messageInput"
-        placeholder="Type a message...">
-
-    <div class="chat-actions">
-
-    <button id="recordBtn">
-        <i class="fas fa-microphone"></i>
-    </button>
-
-    <button id="sendMessage">
-        <i class="fas fa-paper-plane"></i>
-    </button>
-
-</div>
-
-    <div class="typing">
-        John is typing...
-    </div>
-
-</div>
-
-</div>
-
-            <button id="emojiBtn">😊</button>
-
-            <button id="attachBtn">
-
-                📎
-
-            </button>
-
-            <input
-                type="text"
-                id="messageInput"
-                placeholder="Type a message...">
-
-            <button id="sendMessage">
-
-                ➤
-
-            </button>
-<div class="typing">
-    John is typing...
-</div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div id="chatMenu" class="chat-menu">
-
-<button>🎨 Change Theme</button>
-
-<button>🖼 Change Wallpaper</button>
-
-<button>🔍 Search Messages</button>
-
-<button>📌 Pin Chat</button>
-
-<button>🔕 Mute Chat</button>
-
-<button>🧹 Clear Chat</button>
-
-<button>🚫 Block User</button>
-
-<button>🚩 Report User</button>
-
-<button>ℹ Chat Info</button>
-<button id="cameraBtn">📷 Camera</button>
-<button id="galleryBtn">🖼 Gallery</button>
-<button>📄 Document</button>
-<button>🎵 Audio</button>
-<button>📍 Location</button>
-</div>
-<input
-    type="file"
-    id="imagePicker"
-    accept="image/*"
-    hidden>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script src="firebase.js"></script>
-
 <script src="chat.js"></script>
-<script src="chat-menu.js"></script>
-<button class="fab" id="newChatBtn">
-    +
-</button>
+
 </body>
 </html>
