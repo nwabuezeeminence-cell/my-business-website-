@@ -94,6 +94,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <script src="firebase.js"></script>
 <script src="chat.js"></script>
+<div id="popupContainer"></div>
 
+<script>
+fetch("popup.html")
+.then(r=>r.text())
+.then(html=>{
+
+    document
+    .getElementById("popupContainer")
+    .innerHTML=html;
+
+});
+</script>
+
+<link rel="stylesheet" href="popup.css">
+
+<script src="popup.js"></script>
+</a>
+<a href="notifications.html">
+
+    <i class="fas fa-bell"></i>
+    <span>Alerts</span>
+
+</a>
+<script src="app-settings.js"></script>
 </body>
 </html>
