@@ -1,5 +1,8 @@
 /* ===== NEXA Messenger V2 ===== */
-
+:root {
+  --nexa-color: #000; /* CHANGE THIS TO YOUR BRAND COLOR */
+  --nexa-accent: #FFD700; /* CHANGE THIS TO YOUR ACCENT */
+}
 *{
     margin:0;
     padding:0;
