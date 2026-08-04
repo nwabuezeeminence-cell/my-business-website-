@@ -1,3 +1,4 @@
+
 // ===== NEXA AUTH SYSTEM =====
 
 // Sign Up
@@ -24,9 +25,10 @@ function signup(){
         // SAVE FULL USER DATA
         db.ref("users/" + user.uid).set({
           uid: user.uid,
-          name: name,
-          email: email,
-          photo: photoURL,
+
+name: "Account 1 Name"
+photo: "https://i.imgur.com/8Km9tLL.png"
+email: "account1@gmail.com"
           bio: "",
           online: true,
           lastSeen: Date.now()
