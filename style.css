@@ -6,110 +6,93 @@
 }
 
 body {
-  background: #f0f2f5;
+  background: #ECE5DD; /* WhatsApp chat bg */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .form-box {
   background: white;
   padding: 30px 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
-  width: 90%;
-  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 420px; /* Bigger on desktop */
 }
 
 .form-box h2 {
   text-align: center;
-  color: #008069; /* WhatsApp green */
-  margin-bottom: 20px;
-  font-size: 24px;
+  color: #075E54; /* WhatsApp dark green - change to your blue if you want */
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .form-box input, 
 .form-box textarea {
   width: 100%;
-  padding: 12px 14px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 15px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  font-size: 16px;
   outline: none;
-  transition: 0.2s;
 }
 
-.form-box input:focus, 
-.form-box textarea:focus {
-  border-color: #008069;
-  box-shadow: 0 0 0 2px rgba(0,128,105,0.2);
-}
-
-.form-box textarea {
-  resize: none;
-  height: 80px;
+.form-box input:focus {
+  border-color: #25D366; /* WhatsApp light green */
+  box-shadow: 0 0 0 3px rgba(37,211,102,0.2);
 }
 
 .button_1 {
   width: 100%;
-  padding: 12px;
-  background: #008069;
+  padding: 14px;
+  background: #25D366; /* WhatsApp button green */
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
-  transition: 0.2s;
+  margin-top: 15px;
 }
-
 .button_1:hover {
-  background: #006d5b;
+  background: #20ba5a;
 }
 
 .form-box p {
   text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
+  margin-top: 18px;
+  font-size: 15px;
   color: #555;
 }
 
 .form-box a {
-  color: #008069;
+  color: #25D366;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.form-box a:hover {
-  text-decoration: underline;
-}
-
-/* For the eye icon */
-[onclick*="togglePass"] {
+/* Eye icon */
+div[style*="position:relative"] span {
+  position:absolute; 
+  right:14px; 
+  top:50%; 
+  transform:translateY(-50%); 
+  cursor:pointer;
   font-size: 18px;
-  user-select: none;
 }
 
-.avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
-
-.user-item h4 {
-  font-size: 16px;
-  color: #111;
-}
-
-.user-item p {
-  font-size: 13px;
-  color: #667781;
+/* MOBILE FIX */
+@media (max-width: 480px) {
+  .form-box {
+    padding: 25px 20px;
+    max-width: 100%;
+  }
+  .form-box h2 {
+    font-size: 24px;
+  }
 }
