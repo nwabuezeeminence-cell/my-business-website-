@@ -1,71 +1,43 @@
 // ===== NEXA AUTH SYSTEM =====
 
 // Sign Up
-function signUp(name, email, password) {
+function signup(){
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const photo = document.getElementById("photo").files[0];
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-
-        const user = userCredential.user;
-
-        db.ref("users/" + user.uid).set({
-            uid: user.uid,
-            fullName: name,
-            username: "@" + name.toLowerCase().replace(/\s+/g, ""),
-            email: email,
-            bio: "Welcome to NEXA!",
-            profilePhoto: "",
-            coverPhoto: "",
-            joined: Date.now(),
-            online: true,
-            role: "user",
-            status: "Available"
-        }).then(() => {
-
-            return db.ref("notifications/" + user.uid).push({
-                title: "Welcome to NEXA",
-                message: "Your account has been created successfully.",
-                type: "system",
-                time: Date.now(),
-                read: false
-            });
-
-        }).then(() => {
-
-            showPopup(
-                "Account Created",
-                "Welcome to NEXA!"
-            );
-
-            setTimeout(() => {
-                window.location.href = "profile.html";
-            }, 1500);
-
+  auth.createUserWithEmailAndPassword(email, password)
+ .then(userCredential => {
+    const user = userCredential.user;
+    
+    // Upload photo first
+    const storageRef = storage.ref("profilePics/" + user.uid);
+    storageRef.put(photo).then(snapshot => {
+      snapshot.ref.getDownloadURL().then(url => {
+        
+        // 1. Update auth profile
+        user.updateProfile({
+          displayName: name,
+          photoURL: url
         });
-
-    })
-    .catch((error) => {
-        alert(error.message);
+        
+        // 2. IMPORTANT: Save user to Realtime Database
+        db.ref("users/" + user.uid).set({
+          uid: user.uid,
+          name: name,
+          email: email,
+          photo: url,
+          online: true,
+          lastSeen: Date.now()
+        });
+        
+        alert("Signup successful!");
+        window.location.href = "chat.html";
+      });
     });
-
-}
-
-        showPopup(
-    "Account Created",
-    "Welcome to NEXA!"
-);
-
-setTimeout(() => {
-
-    window.location.href = "profile.html";
-
-}, 1500);
-
-    })
-    .catch((error) => {
-        alert(error.message);
-    });
-
+  })
+ .catch(error => alert(error.message));
 }
 
 // Login
