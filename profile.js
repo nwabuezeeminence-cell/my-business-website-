@@ -1,58 +1,30 @@
-// Wait for the authentication state
-firebase.auth().onAuthStateChanged((user) => {
-
-    if (!user) {
-        window.location.href = "profile.html";
-        return;
-    }
-
-    // Load user information
-    db.ref("users/" + user.uid).once("value")
-    .then((snapshot) => {
-
-    const data = snapshot.val();
-
-    if (!data) return;
-
-    const fullName = data.fullName || data.name || "NEXA User";
-
-document.getElementById("fullName").textContent = fullName;
-
-document.getElementById("username").textContent =
-    data.username ||
-    ("@" + fullName.toLowerCase().replace(/\s+/g, ""));
-
-    document.getElementById("bio").value =
-        data.bio || "";
-
-    if (data.profilePhoto) {
-        document.getElementById("profilePreview").src =
-            data.profilePhoto;
-    }
-
-    if (data.coverPhoto) {
-        document.getElementById("coverPreview").src =
-            data.coverPhoto;
-    }
-
+auth.onAuthStateChanged(user => {
+  if(!user) window.location.href = "signup.html";
 });
 
+function saveProfile(){
+  const user = auth.currentUser;
+  const name = document.getElementById("name").value;
+  const bio = document.getElementById("bio").value;
+  const photoFile = document.getElementById("photo").files[0];
+  
+  if(!name ||!photoFile) return alert("Name and Photo required");
 
-// Save Profile
-document.getElementById("saveProfile").addEventListener("click", () => {
-
-    const user = firebase.auth().currentUser;
-
-    if (!user) return;
-
-    db.ref("users/" + user.uid).update({
-
-        bio: document.getElementById("bio").value
-
-    }).then(() => {
-
-        alert("Profile saved successfully!");
-
+  const storageRef = storage.ref("profilePics/" + user.uid);
+  storageRef.put(photoFile).then(snapshot => {
+    snapshot.ref.getDownloadURL().then(url => {
+      // Update auth profile
+      user.updateProfile({displayName: name, photoURL: url});
+      
+      // Update database with full info
+      db.ref("users/" + user.uid).update({
+        name: name,
+        photo: url,
+        bio: bio
+      });
+      
+      alert("Profile saved!");
+      window.location.href = "chat.html"; // NOW GO TO HOME
     });
-
-});
+  });
+}
