@@ -297,4 +297,15 @@ body{
     color:#999;
 
 }
+.chatroom { height: 100vh; display: flex; flex-direction: column; background: #ece5dd; }
+.chat-header { background: #667eea; color: white; padding: 10px; display: flex; align-items: center; gap: 10px; }
+.chat-header button { background: none; border: none; color: white; font-size: 20px; }
+.messages { flex: 1; padding: 10px; overflow-y: auto; }
+.msg { max-width: 70%; padding: 8px 12px; margin: 5px 0; border-radius: 8px; position: relative; }
+.msg.me { background: #d9fdd3; margin-left: auto; }
+.msg.them { background: white; margin-right: auto; }
+.msg span { font-size: 11px; color: #667; display: block; text-align: right; }
+.chat-input { display: flex; padding: 10px; background: white; }
+.chat-input input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid #ddd; }
+.chat-input button { margin-left: 10px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 20px; }
 
