@@ -33,7 +33,7 @@
         <span class="toggle-password" onclick="toggleLoginPassword()">👁</span>
     </div>
 
-    <button onclick="handleLogin()">Login</button>
+    <button onclick="handlelogin()">login</button>
     <p id="errorMsg" style="color:red;text-align:center;margin-top:10px"></p>
 
     <a class="forgot-link" href="#" onclick="resetPassword()">Forgot Password?</a>
@@ -45,7 +45,7 @@
 </div>
 
 <script>
-function handleLogin() {
+function handlelogin() {
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
     const errorMsg = document.getElementById("errorMsg");
