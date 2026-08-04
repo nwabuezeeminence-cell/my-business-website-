@@ -1,86 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>My Profile | NEXA</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="profile.css">
-
+  <title>Setup Profile</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body style="background:#f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh">
+  <div class="form-box">
+    <h2>Complete Your Profile</h2>
+    <input type="text" id="name" placeholder="Enter your name" required>
+    <input type="file" id="photo" accept="image/*" required>
+    <textarea id="bio" placeholder="Bio about you"></textarea>
+    <button class="button_1" onclick="saveProfile()">Continue</button>
+  </div>
 
-<body>
-
-<div class="profile-page">
-
-    <div class="cover-photo">
-
-        <img id="coverPreview" src="cover.jpg">
-
-        <label class="edit-cover">
-
-            📷 Change Cover
-
-            <input
-                type="file"
-                id="coverInput"
-                accept="image/*"
-                hidden>
-
-        </label>
-
-    </div>
-
-    <div class="profile-card">
-
-        <div class="profile-image">
-
-            <img id="profilePreview" src="avatar.png">
-
-            <label>
-
-                📷
-
-                <input
-                    type="file"
-                    id="profileInput"
-                    accept="image/*"
-                    hidden>
-
-            </label>
-
-        </div>
-
-        <h2 id="fullName">Loading...</h2>
-
-        <p id="username">@username</p>
-
-        <textarea
-            id="bio"
-            placeholder="Tell everyone about yourself..."></textarea>
-
-        <button id="saveProfile">
-
-            Save Profile
-
-        </button>
-
-    </div>
-
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<script src="firebase.js"></script>
-<script src="profile.js"></script>
-<script src="app-settings.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <script src="firebase.js"></script>
+  <script src="profile.js"></script>
 </body>
-
 </html>
