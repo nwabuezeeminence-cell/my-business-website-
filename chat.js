@@ -1,43 +1,46 @@
 let currentUser = null;
 let allUsers = [];
+let myFriends = []; // store my friend list
 
 auth.onAuthStateChanged(user => {
   if(!user) return window.location.href = "login.html";
   currentUser = user;
-  loadConversations();
+  loadFriends(); // load my friends first
   loadAllUsers();
 });
 
-function goHome(){
-  window.location.href = "index.html"; // or wherever your home is
+function goHome(){ window.location.href = "index.html"; }
+
+// LOAD MY FRIENDS
+function loadFriends(){
+  db.ref("friends/" + currentUser.uid).on("value", snap => {
+    myFriends = [];
+    snap.forEach(child => {
+      myFriends.push(child.key); // key = friend uid
+    });
+  });
 }
 
-// 2. SHOW USERS WHEN + IS CLICKED
-function showUserList(){
-  document.getElementById("userListPanel").style.display = "block";
-  displayUsers(allUsers);
-}
-function closeUserList(){
-  document.getElementById("userListPanel").style.display = "none";
-}
-
-// Load all users from database
+// LOAD ALL USERS
 function loadAllUsers(){
   db.ref("users").on("value", snap => {
     allUsers = [];
     snap.forEach(child => {
-      if(child.key !== currentUser.uid){ // don't show yourself
+      if(child.key !== currentUser.uid){ // don't show myself
         allUsers.push(child.val());
       }
     });
-    // 3. SHOW "NO USERS" MESSAGE
     if(allUsers.length === 0){
       document.getElementById("noUsersMsg").style.display = "block";
-    } else {
-      document.getElementById("noUsersMsg").style.display = "none";
     }
   });
 }
+
+function showUserList(){
+  document.getElementById("userListPanel").style.display = "block";
+  displayUsers(allUsers);
+}
+function closeUserList(){ document.getElementById("userListPanel").style.display = "none"; }
 
 function displayUsers(users){
   const userList = document.getElementById("userList");
@@ -49,13 +52,18 @@ function displayUsers(users){
   document.getElementById("noUsersMsg").style.display = "none";
   
   users.forEach(user => {
+    const isFriend = myFriends.includes(user.uid);
+    const btnText = isFriend ? "Message" : "Add Friend";
+    const btnAction = isFriend ? `startChat('${user.uid}')` : `sendFriendRequest('${user.uid}')`;
+    
     userList.innerHTML += `
-      <div class="user-item" onclick="startChat('${user.uid}')">
+      <div class="user-item">
         <img src="${user.photo}" class="avatar">
-        <div>
+        <div style="flex:1">
           <h4>${user.name}</h4>
           <p>${user.online ? 'Online' : 'Offline'}</p>
         </div>
+        <button class="button_1" style="padding:8px 15px; font-size:14px" onclick="${btnAction}">${btnText}</button>
       </div>
     `;
   });
@@ -67,18 +75,19 @@ function filterUsers(){
   displayUsers(filtered);
 }
 
+// SEND FRIEND REQUEST
+function sendFriendRequest(toUid){
+  db.ref("friendRequests/" + toUid + "/" + currentUser.uid).set({
+    from: currentUser.uid,
+    name: currentUser.displayName,
+    photo: currentUser.photoURL,
+    timestamp: Date.now()
+  });
+  alert("Friend request sent!");
+}
+
+// START CHAT - only for friends
 function startChat(uid){
   closeUserList();
   window.location.href = `chatroom.html?uid=${uid}`;
 }
-
-function loadConversations(){
-  // For now just hide empty state if we have chats
-  // We'll build this properly later
-}
-auth.onAuthStateChanged(user => {
-  if(!user) return window.location.href = "login.html";
-  currentUser = user;
-  loadConversations();
-  loadAllUsers(); // MAKE SURE THIS LINE IS HERE
-});
