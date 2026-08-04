@@ -33,14 +33,14 @@
 
   <!-- 4. USER LIST POPUP - shows when + is clicked -->
   <div id="userListPanel" class="user-search-panel">
-    <div class="panel-header">
-      <button onclick="closeUserList()">←</button>
-      <h3>Start New Chat</h3>
-    </div>
-    <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
-    <div id="userList"></div>
-    <p id="noUsersMsg" style="display:none; text-align:center; padding:20px; color:#999;">No users found</p>
+  <div class="panel-header">
+    <button onclick="closeUserList()">←</button>
+    <h3>Find Users</h3>
   </div>
+  <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
+  <div id="userList"></div>
+  <p id="noUsersMsg" style="display:none; text-align:center; padding:20px; color:#999;">No users found</p>
+</div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
