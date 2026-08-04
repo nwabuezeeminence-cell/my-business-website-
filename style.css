@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: #f0f2f5;
+}
+
+.form-box {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 400px;
+}
+
+.form-box h2 {
+  text-align: center;
+  color: #008069; /* WhatsApp green */
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form-box input, 
+.form-box textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-box input:focus, 
+.form-box textarea:focus {
+  border-color: #008069;
+  box-shadow: 0 0 0 2px rgba(0,128,105,0.2);
+}
+
+.form-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+.button_1 {
+  width: 100%;
+  padding: 12px;
+  background: #008069;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.button_1:hover {
+  background: #006d5b;
+}
+
+.form-box p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-box a {
+  color: #008069;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-box a:hover {
+  text-decoration: underline;
+}
+
+/* For the eye icon */
+[onclick*="togglePass"] {
+  font-size: 18px;
+  user-select: none;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.user-item h4 {
+  font-size: 16px;
+  color: #111;
+}
+
+.user-item p {
+  font-size: 13px;
+  color: #667781;
+}
