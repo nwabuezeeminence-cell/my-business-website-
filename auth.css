@@ -1,100 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+/* NEXA Auth Pages CSS */
+.auth-body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#5b21b6,#d63384);
-    padding:20px;
+.auth-container {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
 }
 
-.auth-container{
-    width:100%;
-    max-width:420px;
-    background:rgba(255,255,255,.95);
-    border-radius:25px;
-    padding:35px;
-    box-shadow:0 20px 45px rgba(0,0,0,.25);
+.auth-logo {
+  margin-bottom: 10px;
 }
 
-.auth-container h2{
-    text-align:center;
-    color:#5b21b6;
-    margin-bottom:25px;
-    font-size:30px;
+.auth-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 700;
 }
 
-.auth-container input{
-    width:100%;
-    padding:15px;
-    margin:12px 0;
-    border:2px solid #ddd;
-    border-radius:14px;
-    font-size:16px;
+.auth-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
 }
 
-.auth-container input:focus{
-    outline:none;
-    border-color:#d63384;
+.auth-input:focus {
+  border-color: #667eea;
 }
 
-.auth-container button{
-    width:100%;
-    padding:15px;
-    margin-top:20px;
-    border:none;
-    border-radius:14px;
-    background:linear-gradient(to right,#5b21b6,#d63384);
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.auth-container button:hover{
-    transform:translateY(-2px);
-    transition:.3s;
+.auth-btn:hover {
+  background: #5563d4;
+  transform: translateY(-2px);
 }
 
-.auth-container p{
-    margin-top:20px;
-    text-align:center;
+.auth-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
 }
 
-.auth-container a{
-    color:#d63384;
-    text-decoration:none;
-    font-weight:600;
-}
-.password-box{
-    position:relative;
-    width:100%;
-    margin:12px 0;
+.auth-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.password-box input{
-    width:100%;
-    padding:15px;
-    padding-right:50px;
-    border:2px solid #ddd;
-    border-radius:14px;
-    font-size:16px;
-}
-
-.toggle-password{
-    position:absolute;
-    right:18px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
-    font-size:20px;
-    user-select:none;
+.auth-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
 }
