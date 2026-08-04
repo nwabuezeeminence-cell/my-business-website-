@@ -6,39 +6,37 @@ function signup(){
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const photo = document.getElementById("photo").files[0];
+  const photoFile = document.getElementById("photo").files[0];
 
   auth.createUserWithEmailAndPassword(email, password)
-.then(userCredential => {
-    const user = userCredential.user;
-    const storageRef = storage.ref("profilePics/" + user.uid);
-    let url = "https://i.imgur.com/8Km9tLL.png"; // default avatar
-    
-    const upload = photo? storageRef.put(photo) : Promise.resolve();
-    
-    upload.then(snapshot => {
-      if(snapshot) return snapshot.ref.getDownloadURL();
-      return url;
-    }).then(photoURL => {
-        user.updateProfile({ displayName: name, photoURL: photoURL });
-        
-        // SAVE FULL USER DATA
-        db.ref("users/" + user.uid).set({
-          uid: user.uid,
+ .then(cred => {
+    const user = cred.user;
+    let photoURL = "https://i.imgur.com/8Km9tLL.png"; // default
 
-name: "Account 1 Name"
-photo: "https://i.imgur.com/8Km9tLL.png"
-email: "account1@gmail.com"
-          bio: "",
-          online: true,
-          lastSeen: Date.now()
-        });
-        
-        alert("Signup successful!");
-        window.location.href = "chat.html";
-    });
+    const saveUser = (url) => {
+      user.updateProfile({displayName: name, photoURL: url});
+      db.ref("users/" + user.uid).set({
+        uid: user.uid,
+        name: name, // THIS WAS MISSING BEFORE
+        email: email,
+        photo: url, // THIS WAS MISSING BEFORE
+        bio: "",
+        online: true
+      });
+    }
+
+    if(photoFile){
+      storage.ref("profilePics/" + user.uid).put(photoFile)
+     .then(snap => snap.ref.getDownloadURL())
+     .then(url => saveUser(url));
+    } else {
+      saveUser(photoURL);
+    }
+
+    alert("Signup successful!");
+    window.location.href = "chat.html";
   })
-.catch(error => alert(error.message));
+ .catch(err => alert(err.message));
 }
 // Login
 function login(email, password) {
