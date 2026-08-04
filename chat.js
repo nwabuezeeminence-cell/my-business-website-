@@ -76,3 +76,9 @@ function loadConversations(){
   // For now just hide empty state if we have chats
   // We'll build this properly later
 }
+auth.onAuthStateChanged(user => {
+  if(!user) return window.location.href = "login.html";
+  currentUser = user;
+  loadConversations();
+  loadAllUsers(); // MAKE SURE THIS LINE IS HERE
+});
