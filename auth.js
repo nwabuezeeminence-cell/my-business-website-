@@ -70,51 +70,44 @@ setTimeout(() => {
 
 // Login
 function login(email, password) {
-
     firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((userCredential) => { // better to get user from here
+        const user = userCredential.user;
 
-        const user = firebase.auth().currentUser;
-        db.ref(
-"settings/" + user.uid + "/showOnline"
-)
-.once("value")
-.then((snapshot)=>{
+        db.ref("users/" + user.uid).update({
+            online: true,
+            lastLogin: Date.now() // added this to track
+        });
 
+        showPopup(
+            "Welcome Back 👋",
+            "Login successful."
+        );
 
-const showOnline =
-snapshot.exists()
-? snapshot.val()
-: true;
-
-
-
-db.ref("users/" + user.uid)
-.update({
-
-online: showOnline
-
-});
-
-
-});
-
-       showPopup(
-    "Welcome Back",
-    "Login successful!"
-);
-
-setTimeout(() => {
-
-    window.location.href = "index.html";
-
-}, 1500);        
+        setTimeout(()=>{
+            window.location.href="index.html";
+        },1500);
 
     })
     .catch((error) => {
-        alert(error.message);
+        showPopup("Login Failed", error.message); // use popup instead of alert
     });
+}
 
+// Logout - add this too
+function logout(){
+    const user = firebase.auth().currentUser;
+    if(user){
+        db.ref("users/" + user.uid).update({
+            online: false
+        });
+    }
+    firebase.auth().signOut().then(() => {
+        showPopup("Logged Out", "See you next time!");
+        setTimeout(()=>{
+            window.location.href="login.html";
+        },1000);
+    });
 }
 
 // Logout
