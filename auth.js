@@ -3,40 +3,27 @@
 
 // Sign Up
 function signup(){
-  const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const photoFile = document.getElementById("photo").files[0];
 
   auth.createUserWithEmailAndPassword(email, password)
- .then(cred => {
-    const user = cred.user;
-    let photoURL = "https://i.imgur.com/8Km9tLL.png"; // default
-
-    const saveUser = (url) => {
-      user.updateProfile({displayName: name, photoURL: url});
-      db.ref("users/" + user.uid).set({
-        uid: user.uid,
-        name: name, // THIS WAS MISSING BEFORE
-        email: email,
-        photo: url, // THIS WAS MISSING BEFORE
-        bio: "",
-        online: true
-      });
-    }
-
-    if(photoFile){
-      storage.ref("profilePics/" + user.uid).put(photoFile)
-     .then(snap => snap.ref.getDownloadURL())
-     .then(url => saveUser(url));
-    } else {
-      saveUser(photoURL);
-    }
-
-    alert("Signup successful!");
-    window.location.href = "chat.html";
+.then(userCredential => {
+    const user = userCredential.user;
+    
+    // Only save email + uid for now
+    db.ref("users/" + user.uid).set({
+      uid: user.uid,
+      email: email,
+      name: "", // empty for now
+      photo: "",
+      bio: "",
+      online: true
+    });
+    
+    alert("Account created! Let's set up your profile");
+    window.location.href = "profile.html"; // REDIRECT HERE
   })
- .catch(err => alert(err.message));
+.catch(error => alert(error.message));
 }
 // Login
 function login(email, password) {
