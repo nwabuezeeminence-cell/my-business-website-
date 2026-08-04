@@ -5,50 +5,42 @@
 function signup(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if(password !== confirmPassword){
+    return alert("Passwords do not match");
+  }
+  if(password.length < 6){
+    return alert("Password must be at least 6 characters");
+  }
 
   auth.createUserWithEmailAndPassword(email, password)
 .then(userCredential => {
     const user = userCredential.user;
     
-    // Only save email + uid for now
+    // Create empty user profile. Will be filled in profile.html
     db.ref("users/" + user.uid).set({
       uid: user.uid,
       email: email,
-      name: "", // empty for now
+      name: "",
       photo: "",
       bio: "",
-      online: true
+      online: true,
+      createdAt: Date.now()
     });
     
     alert("Account created! Let's set up your profile");
-    window.location.href = "profile.html"; // REDIRECT HERE
+    window.location.href = "profile.html"; // THIS IS THE KEY REDIRECT
   })
 .catch(error => alert(error.message));
 }
-// Login
-function login(email, password) {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => { // better to get user from here
-        const user = userCredential.user;
 
-        db.ref("users/" + user.uid).update({
-            online: true,
-            lastLogin: Date.now() // added this to track
-        });
-
-        showPopup(
-            "Welcome Back 👋",
-            "Login successful."
-        );
-
-        setTimeout(()=>{
-            window.location.href="index.html";
-        },1500);
-
-    })
-    .catch((error) => {
-        showPopup("Login Failed", error.message); // use popup instead of alert
-    });
+function login(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  auth.signInWithEmailAndPassword(email, password)
+.then(() => window.location.href = "chat.html")
+.catch(error => alert(error.message));
 }
 
 // Logout - add this too
