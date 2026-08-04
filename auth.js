@@ -8,38 +8,36 @@ function signup(){
   const photo = document.getElementById("photo").files[0];
 
   auth.createUserWithEmailAndPassword(email, password)
- .then(userCredential => {
+.then(userCredential => {
     const user = userCredential.user;
-    
-    // Upload photo first
     const storageRef = storage.ref("profilePics/" + user.uid);
-    storageRef.put(photo).then(snapshot => {
-      snapshot.ref.getDownloadURL().then(url => {
+    let url = "https://i.imgur.com/8Km9tLL.png"; // default avatar
+    
+    const upload = photo? storageRef.put(photo) : Promise.resolve();
+    
+    upload.then(snapshot => {
+      if(snapshot) return snapshot.ref.getDownloadURL();
+      return url;
+    }).then(photoURL => {
+        user.updateProfile({ displayName: name, photoURL: photoURL });
         
-        // 1. Update auth profile
-        user.updateProfile({
-          displayName: name,
-          photoURL: url
-        });
-        
-        // 2. IMPORTANT: Save user to Realtime Database
+        // SAVE FULL USER DATA
         db.ref("users/" + user.uid).set({
           uid: user.uid,
           name: name,
           email: email,
-          photo: url,
+          photo: photoURL,
+          bio: "",
           online: true,
           lastSeen: Date.now()
         });
         
         alert("Signup successful!");
         window.location.href = "chat.html";
-      });
     });
   })
- .catch(error => alert(error.message));
+.catch(error => alert(error.message));
 }
-
 // Login
 function login(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
