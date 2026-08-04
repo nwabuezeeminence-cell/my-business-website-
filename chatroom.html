@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXA Chat</title>
+<link rel="stylesheet" href="chat.css">
+</head>
+<body>
+<div class="chatroom">
+  <div class="chat-header">
+    <button onclick="goBack()">←</button>
+    <img id="otherPhoto" src="NEXA.png" width="40">
+    <h2 id="otherName">Loading...</h2>
+  </div>
+
+  <div id="messages" class="messages"></div>
+
+  <div class="chat-input">
+    <input type="text" id="msgInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMsg()">
+    <button onclick="sendMsg()">Send</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+<script src="chatroom.js"></script>
+</body>
+</html>
