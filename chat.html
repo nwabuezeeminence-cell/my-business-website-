@@ -1,123 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>NEXA Messenger</title>
-
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXA Chats</title>
 <link rel="stylesheet" href="chat.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 <body>
-
 <div class="chat-page">
+  <!-- 1. HEADER WITH BACK/HOME BUTTON -->
+  <div class="chat-header">
+    <button onclick="goHome()" class="back-btn">←</button>
+    <div class="header-title">💬 Chats</div>
+    <button onclick="searchUsers()" class="search-btn">🔍</button>
+  </div>
 
-    <!-- Header -->
-    <header class="chat-header">
+  <input type="text" id="searchInput" placeholder="Search conversations..." class="search-bar">
 
-        <h2>💬 Chats</h2>
-
-        <button id="searchBtn">
-            <i class="fas fa-search"></i>
-        </button>
-
-    </header>
-
-    <!-- Search -->
-    <div class="search-area">
-
-        <input
-            type="text"
-            id="searchChat"
-            placeholder="Search conversations...">
-
+  <!-- 2. CONVERSATION LIST -->
+  <div id="conversationList" class="conversation-list">
+    <!-- If no chats, show this -->
+    <div id="emptyState" class="empty-chat">
+      <img src="NEXA.png" width="120">
+      <h2>No conversations yet</h2>
+      <p>Tap the + button below to start your first conversation.</p>
     </div>
+  </div>
 
-    <!-- Chat List -->
-    <div id="conversationList" class="conversation-list">
+  <!-- 3. FAB BUTTON -->
+  <button class="fab" onclick="showUserList()">+</button>
 
-        <div class="empty-chat">
-
-    <img src="NEXA.png" width="120">
-
-    <h2>No conversations yet</h2>
-
-    <p>
-
-        Tap the + button below to start your first conversation.
-
-    </p>
-
-</div>
-
-    </div>
-
-    <!-- Floating Button -->
-    <button id="newChatBtn" class="fab">
-    <i class="fas fa-plus"></i>
-</button>
-
-</div>
-
-<!-- Start Chat Panel -->
-
-<div id="userSearchPanel" class="user-search-panel">
-
+  <!-- 4. USER LIST POPUP - shows when + is clicked -->
+  <div id="userListPanel" class="user-search-panel">
     <div class="panel-header">
-
-        <button id="closePanel">←</button>
-
-        <h3>Start New Chat</h3>
-
+      <button onclick="closeUserList()">←</button>
+      <h3>Start New Chat</h3>
     </div>
-
-    <input
-        type="text"
-        id="findUser"
-        placeholder="Search users...">
-
-    <div id="allUsers"></div>
-
+    <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
+    <div id="userList"></div>
+    <p id="noUsersMsg" style="display:none; text-align:center; padding:20px; color:#999;">No users found</p>
+  </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
 <script src="firebase.js"></script>
 <script src="chat.js"></script>
-<div id="popupContainer"></div>
-
-<script>
-fetch("popup.html")
-.then(r=>r.text())
-.then(html=>{
-
-    document
-    .getElementById("popupContainer")
-    .innerHTML=html;
-
-});
-</script>
-
-<link rel="stylesheet" href="popup.css">
-
-<script src="popup.js"></script>
-</a>
-<a href="notifications.html">
-
-    <i class="fas fa-bell"></i>
-    <span>Alerts</span>
-
-</a>
-<script src="app-settings.js"></script>
 </body>
 </html>
