@@ -244,3 +244,6 @@ document.getElementById("findUser").addEventListener("input", function () {
     });
 
 });
+function startChat(uid){
+  window.location.href = `chatroom.html?uid=${uid}`;
+}
