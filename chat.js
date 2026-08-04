@@ -45,25 +45,24 @@ function closeUserList(){ document.getElementById("userListPanel").style.display
 function displayUsers(users){
   const userList = document.getElementById("userList");
   userList.innerHTML = "";
-  if(users.length === 0){
-    document.getElementById("noUsersMsg").style.display = "block";
-    return;
-  }
-  document.getElementById("noUsersMsg").style.display = "none";
   
   users.forEach(user => {
+    const name = user.name || "Unknown User"; // FALLBACK
+    const photo = user.photo || "https://i.imgur.com/8Km9tLL.png"; // FALLBACK
+    const email = user.email || "";
+    
     const isFriend = myFriends.includes(user.uid);
     const btnText = isFriend ? "Message" : "Add Friend";
     const btnAction = isFriend ? `startChat('${user.uid}')` : `sendFriendRequest('${user.uid}')`;
     
     userList.innerHTML += `
       <div class="user-item">
-        <img src="${user.photo}" class="avatar">
+        <img src="${photo}" class="avatar">
         <div style="flex:1">
-          <h4>${user.name}</h4>
-          <p>${user.online ? 'Online' : 'Offline'}</p>
+          <h4>${name}</h4>
+          <p>${email}</p>
         </div>
-        <button class="button_1" style="padding:8px 15px; font-size:14px" onclick="${btnAction}">${btnText}</button>
+        <button class="button_1" style="padding:8px 15px" onclick="${btnAction}">${btnText}</button>
       </div>
     `;
   });
