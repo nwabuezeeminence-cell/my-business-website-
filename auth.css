@@ -1,4 +1,8 @@
 /* NEXA Auth Pages CSS */
+:root {
+  --nexa-color: #000; /* CHANGE THIS TO YOUR BRAND COLOR */
+  --nexa-accent: #FFD700; /* CHANGE THIS TO YOUR ACCENT */
+}
 .auth-body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
