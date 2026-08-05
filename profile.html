@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete Profile - NEXA</title>
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
   <div class="form-box">
-    <img src="logo.png" alt="NEXA">
+    <img src="logo.png" alt="NEXA" style="width:100px; margin-bottom:10px;">
     <h2>Complete Your Profile</h2>
     
+    <!-- PHOTO UPLOAD AT TOP -->
+    <div class="avatar-upload">
+      <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
+      <input type="file" id="profilePic" accept="image/*">
+      <label for="profilePic">Tap to add photo</label>
+    </div>
+
     <input type="text" id="surname" placeholder="Surname *">
     <input type="text" id="firstname" placeholder="First Name *">
     <input type="text" id="middlename" placeholder="Middle Name (Optional)">
@@ -19,16 +26,12 @@
     <input type="number" id="age" placeholder="Age *" min="10" max="100">
     
     <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Date of Birth *</label>
-    <input type="date" id="dob"> <!-- This gives calendar picker automatically -->
+    <input type="date" id="dob">
     
     <input type="text" id="country" placeholder="Country *" value="Nigeria">
     <input type="text" id="state" placeholder="State of Origin *">
     
     <textarea id="bio" placeholder="More about you..." rows="3"></textarea>
-    
-    <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Profile Picture</label>
-    <input type="file" id="profilePic" accept="image/*">
-    <img id="preview" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin:10px auto; display:none;">
 
     <button class="button_1" onclick="saveProfile()">Continue</button>
   </div>
@@ -54,7 +57,6 @@
     const file = e.target.files[0];
     if(file){
       document.getElementById('preview').src = URL.createObjectURL(file);
-      document.getElementById('preview').style.display = 'block';
     }
   }
 
@@ -75,7 +77,7 @@
       return;
     }
 
-    let photoURL = "";
+    let photoURL = "https://i.imgur.com/6VBx3io.png"; // default avatar
     if(file){
       const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
       await uploadBytes(storageRef, file);
@@ -83,18 +85,9 @@
     }
 
     await set(ref(db, 'users/' + currentUser.uid), {
-      surname,
-      firstname,
-      middlename,
-      lastname,
-      displayName: `${surname} ${firstname}`, // This is what shows in chat list
-      age,
-      dob,
-      country,
-      state,
-      bio,
-      photoURL,
-      email: currentUser.email
+      surname, firstname, middlename, lastname,
+      displayName: `${surname} ${firstname}`,
+      age, dob, country, state, bio, photoURL, email: currentUser.email
     });
 
     alert("Profile saved!");
