@@ -1,30 +1,61 @@
-auth.onAuthStateChanged(user => {
-  if(!user) window.location.href = "signup.html";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+import { app } from './firebase.js';
+
+const auth = getAuth(app);
+const db = getDatabase(app);
+const storage = getStorage(app);
+let currentUser = null;
+let selectedFile = null;
+
+onAuthStateChanged(auth, (user) => {
+  if(user) currentUser = user;
+  else window.location.href = 'login.html';
 });
 
-function saveProfile(){
-  const user = auth.currentUser;
-  const name = document.getElementById("name").value;
-  const bio = document.getElementById("bio").value;
-  const photoFile = document.getElementById("photo").files[0];
-  
-  if(!name ||!photoFile) return alert("Name and Photo required");
+const fileInput = document.getElementById('profilePic');
+const previewImg = document.getElementById('preview');
+const continueBtn = document.getElementById('continueBtn');
 
-  const storageRef = storage.ref("profilePics/" + user.uid);
-  storageRef.put(photoFile).then(snapshot => {
-    snapshot.ref.getDownloadURL().then(url => {
-      // Update auth profile
-      user.updateProfile({displayName: name, photoURL: url});
-      
-      // Update database with full info
-      db.ref("users/" + user.uid).update({
-        name: name,
-        photo: url,
-        bio: bio
-      });
-      
-      alert("Profile saved!");
-      window.location.href = "chat.html"; // NOW GO TO HOME
-    });
+fileInput.addEventListener('change', function() {
+  selectedFile = this.files[0];
+  if (!selectedFile) return;
+  const reader = new FileReader();
+  reader.onload = function(e) { 
+    previewImg.src = e.target.result; // SHOW IMAGE
+  }
+  reader.readAsDataURL(selectedFile);
+});
+
+continueBtn.addEventListener('click', async () => {
+  const surname = document.getElementById('surname').value;
+  const firstname = document.getElementById('firstname').value;
+  const middlename = document.getElementById('middlename').value;
+  const lastname = document.getElementById('lastname').value;
+  const age = document.getElementById('age').value;
+  const dob = document.getElementById('dob').value;
+  const country = document.getElementById('country').value;
+  const state = document.getElementById('state').value;
+  const bio = document.getElementById('bio').value;
+
+  if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||!state) {
+    alert("Please fill all required fields *"); return;
+  }
+
+  let photoURL = previewImg.src;
+  if(selectedFile){
+    const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
+    await uploadBytes(storageRef, selectedFile);
+    photoURL = await getDownloadURL(storageRef);
+  }
+
+  await set(ref(db, 'users/' + currentUser.uid), {
+    surname, firstname, middlename, lastname,
+    displayName: `${surname} ${firstname}`,
+    age, dob, country, state, bio, photoURL, email: currentUser.email
   });
-}
+
+  alert("Profile saved!");
+  window.location.href = 'chat.html';
+});
