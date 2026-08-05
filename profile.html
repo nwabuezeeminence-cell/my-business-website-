@@ -4,17 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete Profile - NEXA</title>
-  <link rel="stylesheet" href="profile.css?v=1">
+  <link rel="stylesheet" href="profile.css?v=2">
+  <!-- Camera Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="form-box">
-    <img class="logo" src="logo.png" alt="NEXA">
+    <img class="logo" src="NEXA.png" alt="NEXA">
     <h2>Complete Your Profile</h2>
     
     <div class="avatar-upload">
-      <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
+      <label for="profilePic" class="avatar-label">
+        <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
+        <div class="camera-icon"><i class="fa-solid fa-camera"></i></div>
+      </label>
       <input type="file" id="profilePic" accept="image/*">
-      <label for="profilePic">Tap to add photo</label>
     </div>
 
     <input type="text" id="surname" placeholder="Surname *">
@@ -30,6 +34,6 @@
     <button class="button_1" id="continueBtn">Continue</button>
   </div>
 
-<script type="module" src="profile.js?v=1"></script>
+<script type="module" src="profile.js?v=2"></script>
 </body>
 </html>
