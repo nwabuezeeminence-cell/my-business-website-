@@ -4,14 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete Profile - NEXA</title>
-  <link rel="stylesheet" href="style.css?v=12">
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; width: 100%;
+      background: #1A1A2E; display: flex; justify-content: center; align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+   .form-box {
+      background: white; padding: 30px 25px; width: 100%; max-width: 100%; height: 100%;
+      border-radius: 0; box-shadow: none; display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    @media (min-width: 600px) {
+     .form-box { max-width: 500px; height: auto; border-radius: 20px; margin: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      }
+    }
+   .form-box img.logo { width: 100px; margin: 0 auto 10px; display:block; }
+   .form-box h2 { font-size: 26px; text-align:center; color:#1A1A2E; margin-bottom:20px; }
+   .form-box input,.form-box textarea {
+      width: 100%; padding: 16px 18px; margin: 10px 0; border: 2px solid #EEE;
+      border-radius: 12px; font-size: 17px; box-sizing: border-box;
+    }
+   .form-box textarea { resize: vertical; }
+   .form-box label { text-align:left; font-size:14px; color:#555; margin-top:10px; }
+   .button_1 {
+      padding: 18px; font-size: 20px; background: #E94560; color:white; border:none;
+      border-radius:12px; font-weight:800; margin-top:20px; cursor:pointer;
+    }
+    
+    /* AVATAR STYLES */
+   .avatar-upload { text-align: center; margin: 10px 0 25px 0; }
+   .avatar-upload img {
+      width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+      border: 4px solid #E94560; background: #eee;
+    }
+   .avatar-upload input[type="file"] { display: none; }
+   .avatar-upload label {
+      display: block; color: #E94560; font-weight: 700; font-size: 15px;
+      cursor: pointer; margin-top: 8px; padding: 8px;
+    }
+  </style>
 </head>
 <body>
   <div class="form-box">
-    <img src="logo.png" alt="NEXA" style="width:100px; margin-bottom:10px;">
+    <img class="logo" src="logo.png" alt="NEXA">
     <h2>Complete Your Profile</h2>
     
-    <!-- PHOTO UPLOAD AT TOP - BIGGER -->
     <div class="avatar-upload">
       <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
       <input type="file" id="profilePic" accept="image/*">
@@ -23,7 +62,7 @@
     <input type="text" id="middlename" placeholder="Middle Name (Optional)">
     <input type="text" id="lastname" placeholder="Last Name *">
     <input type="number" id="age" placeholder="Age *" min="10" max="100">
-    <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Date of Birth *</label>
+    <label>Date of Birth *</label>
     <input type="date" id="dob">
     <input type="text" id="country" placeholder="Country *" value="Nigeria">
     <input type="text" id="state" placeholder="State of Origin *">
@@ -47,18 +86,18 @@
     else window.location.href = 'login.html';
   });
 
-  // THIS IS THE FIX FOR PREVIEW
   const fileInput = document.getElementById('profilePic');
   const previewImg = document.getElementById('preview');
 
-  fileInput.onchange = function(e) {
-    const file = e.target.files[0];
-    if(file){
-      previewImg.src = URL.createObjectURL(file); // Instant preview
-    }
-  }
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) { previewImg.src = e.target.result; }
+    reader.readAsDataURL(file);
+  });
 
-  window.saveProfile = async function() {
+  async function saveProfile() {
     const surname = document.getElementById('surname').value;
     const firstname = document.getElementById('firstname').value;
     const middlename = document.getElementById('middlename').value;
@@ -71,12 +110,11 @@
     const file = document.getElementById('profilePic').files[0];
 
     if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||!state) {
-      alert("Please fill all required fields *");
-      return;
+      alert("Please fill all required fields *"); return;
     }
 
     let photoURL = previewImg.src;
-    if(file){
+    if(file && file.size > 0){
       const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
       await uploadBytes(storageRef, file);
       photoURL = await getDownloadURL(storageRef);
@@ -91,6 +129,7 @@
     alert("Profile saved!");
     window.location.href = 'chat.html';
   }
+  window.saveProfile = saveProfile;
 </script>
 </body>
 </html>
