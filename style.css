@@ -1,97 +1,39 @@
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-
-body {
-  background: #1A1A2E; /* DARK PURPLE */
+  height: 100%;
+  width: 100%;
+  background: #1A1A2E !important; /* FORCE DARK BG */
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 0; /* REMOVE PADDING ON MOBILE */
 }
 
 .form-box {
-  background: white;
-  padding: 45px 35px;
-  border-radius: 0; /* NO ROUNDED CORNERS ON MOBILE */
-  box-shadow: none;
-  width: 100%;
-  max-width: 100%; /* FULL WIDTH ON MOBILE */
-  height: 100vh; /* FULL HEIGHT ON MOBILE */
+  background: white !important;
+  padding: 40px 30px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* ON DESKTOP/TABLET MAKE IT A CARD AGAIN */
-@media (min-width: 500px) {
-  body {
-    padding: 20px;
-  }
+/* Only make it a card on big screens */
+@media (min-width: 600px) {
   .form-box {
-    max-width: 480px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    max-width: 480px !important;
+    height: auto !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
   }
 }
 
-.form-box img {
-  width: 140px; /* BIGGER LOGO */
-  margin: 0 auto 20px auto;
-  display: block;
-}
-
-.form-box h2 {
-  color: #1A1A2E;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 34px; /* BIGGER */
-  font-weight: 800;
-}
-
-.form-box h3 {
-  color: #E94560;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 22px;
-}
-
-.form-box input {
-  width: 100%;
-  padding: 18px 20px; /* TALLER INPUTS */
-  margin: 14px 0;
-  border: 2px solid #EEE;
-  border-radius: 12px;
-  font-size: 18px; /* BIGGER TEXT */
-  outline: none;
-}
-
-.button_1 {
-  width: 100%;
-  padding: 18px; /* TALLER BUTTON */
-  background: #E94560; /* NEXA PINK */
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 20px; /* BIG BUTTON TEXT */
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 25px;
-}
-
-.form-box p {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 17px;
-}
-
-.form-box a {
-  color: #E94560;
-  font-weight: 800;
-  text-decoration: none;
-}
+.form-box img { width: 130px; margin: 0 auto 15px; display:block; }
+.form-box h2 { font-size: 32px; text-align:center; color:#1A1A2E; margin-bottom:5px; }
+.form-box h3 { font-size: 20px; text-align:center; color:#E94560; margin-bottom:25px; }
+.form-box input { padding: 18px; font-size: 18px; margin: 12px 0; border-radius: 12px; border: 2px solid #EEE; }
+.button_1 { padding: 18px; font-size: 20px; background: #E94560; color:white; border:none; border-radius:12px; font-weight:800; margin-top:20px; }
