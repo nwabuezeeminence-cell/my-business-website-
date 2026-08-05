@@ -8,9 +8,7 @@ html, body {
   border-radius: 0; display: flex; flex-direction: column; overflow-y: auto;
 }
 @media (min-width: 600px) {
- .form-box { max-width: 500px; height: auto; border-radius: 20px; margin: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  }
+.form-box { max-width: 500px; height: auto; border-radius: 20px; margin: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
 }
 .form-box img.logo { width: 100px; margin: 0 auto 10px; display:block; }
 .form-box h2 { font-size: 26px; text-align:center; color:#1A1A2E; margin-bottom:20px; }
@@ -25,14 +23,26 @@ html, body {
   border-radius:12px; font-weight:800; margin-top:20px; cursor:pointer;
 }
 
-/* AVATAR */
-.avatar-upload { text-align: center; margin: 10px 0 25px 0; }
-.avatar-upload img {
+/* CAMERA AVATAR */
+.avatar-upload { text-align: center; margin: 10px 0 25px 0; position: relative; }
+.avatar-label { cursor: pointer; display: inline-block; position: relative; }
+.avatar-label img {
   width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
   border: 4px solid #E94560; background: #eee;
 }
-.avatar-upload input[type="file"] { display: none; } /* HIDE THE UGLY ONE */
-.avatar-upload label {
-  display: block; color: #E94560; font-weight: 700; font-size: 15px;
-  cursor: pointer; margin-top: 8px; padding: 8px;
+.camera-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #E94560;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  border: 3px solid white;
 }
+#profilePic { display: none; } /* COMPLETELY HIDDEN */
