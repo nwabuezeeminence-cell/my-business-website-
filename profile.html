@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Complete Profile - NEXA</title>
-  <link rel="stylesheet" href="profile.css?v=2">
-  <!-- Camera Icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | NEXA</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="profile.css?v=3">
 </head>
 <body>
-  <div class="form-box">
-    <img class="logo" src="NEXA.png" alt="NEXA">
-    <h2>Complete Your Profile</h2>
-    
-    <div class="avatar-upload">
-      <label for="profilePic" class="avatar-label">
-        <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
-        <div class="camera-icon"><i class="fa-solid fa-camera"></i></div>
-      </label>
-      <input type="file" id="profilePic" accept="image/*">
+<div class="profile-page">
+    <div class="cover-photo">
+        <img id="coverPreview" src="cover.jpg">
+        <label class="edit-cover">
+            📷 Change Cover
+            <input type="file" id="coverInput" accept="image/*" hidden>
+        </label>
     </div>
 
-    <input type="text" id="surname" placeholder="Surname *">
-    <input type="text" id="firstname" placeholder="First Name *">
-    <input type="text" id="middlename" placeholder="Middle Name (Optional)">
-    <input type="text" id="lastname" placeholder="Last Name *">
-    <input type="number" id="age" placeholder="Age *" min="10" max="100">
-    <label>Date of Birth *</label>
-    <input type="date" id="dob">
-    <input type="text" id="country" placeholder="Country *" value="Nigeria">
-    <input type="text" id="state" placeholder="State of Origin *">
-    <textarea id="bio" placeholder="More about you..." rows="3"></textarea>
-    <button class="button_1" id="continueBtn">Continue</button>
-  </div>
+    <div class="profile-card">
+        <div class="profile-image">
+            <img id="profilePreview" src="avatar.png">
+            <label>
+                📷
+                <input type="file" id="profileInput" accept="image/*" hidden>
+            </label>
+        </div>
 
-<script type="module" src="profile.js?v=2"></script>
+        <h2 id="fullName">Loading...</h2>
+        <p id="username">@username</p>
+
+        <input type="text" id="surname" placeholder="Surname *">
+        <input type="text" id="firstname" placeholder="First Name *">
+        <input type="text" id="lastname" placeholder="Last Name *">
+        <input type="number" id="age" placeholder="Age *" min="10" max="100">
+        <label>Date of Birth *</label>
+        <input type="date" id="dob">
+        <input type="text" id="country" placeholder="Country *" value="Nigeria">
+        <input type="text" id="state" placeholder="State of Origin *">
+        <textarea id="bio" placeholder="Tell everyone about yourself..."></textarea>
+
+        <button id="saveProfile">Save Profile</button>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+<script src="profile.js?v=3"></script>
+<script src="app-settings.js"></script>
 </body>
 </html>
