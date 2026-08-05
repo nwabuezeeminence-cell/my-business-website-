@@ -14,21 +14,15 @@ onAuthStateChanged(auth, (user) => {
   else window.location.href = 'login.html';
 });
 
-const fileInput = document.getElementById('profilePic');
-const previewImg = document.getElementById('preview');
-const continueBtn = document.getElementById('continueBtn');
-
-fileInput.addEventListener('change', function() {
+document.getElementById('profilePic').addEventListener('change', function() {
   selectedFile = this.files[0];
   if (!selectedFile) return;
   const reader = new FileReader();
-  reader.onload = function(e) { 
-    previewImg.src = e.target.result; // SHOW IMAGE
-  }
+  reader.onload = (e) => { document.getElementById('preview').src = e.target.result; }
   reader.readAsDataURL(selectedFile);
 });
 
-continueBtn.addEventListener('click', async () => {
+document.getElementById('continueBtn').addEventListener('click', async () => {
   const surname = document.getElementById('surname').value;
   const firstname = document.getElementById('firstname').value;
   const middlename = document.getElementById('middlename').value;
@@ -43,7 +37,7 @@ continueBtn.addEventListener('click', async () => {
     alert("Please fill all required fields *"); return;
   }
 
-  let photoURL = previewImg.src;
+  let photoURL = document.getElementById('preview').src;
   if(selectedFile){
     const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
     await uploadBytes(storageRef, selectedFile);
