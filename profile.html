@@ -1,23 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Setup Profile</title>
-  <link rel="stylesheet" href="style.css?v=8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Profile - NEXA</title>
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
-<body style="background:#f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh">
+<body>
   <div class="form-box">
+    <img src="logo.png" alt="NEXA">
     <h2>Complete Your Profile</h2>
-    <input type="text" id="name" placeholder="Enter your name" required>
-    <input type="file" id="photo" accept="image/*" required>
-    <textarea id="bio" placeholder="Bio about you"></textarea>
+    
+    <input type="text" id="surname" placeholder="Surname *">
+    <input type="text" id="firstname" placeholder="First Name *">
+    <input type="text" id="middlename" placeholder="Middle Name (Optional)">
+    <input type="text" id="lastname" placeholder="Last Name *">
+    
+    <input type="number" id="age" placeholder="Age *" min="10" max="100">
+    
+    <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Date of Birth *</label>
+    <input type="date" id="dob"> <!-- This gives calendar picker automatically -->
+    
+    <input type="text" id="country" placeholder="Country *" value="Nigeria">
+    <input type="text" id="state" placeholder="State of Origin *">
+    
+    <textarea id="bio" placeholder="More about you..." rows="3"></textarea>
+    
+    <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Profile Picture</label>
+    <input type="file" id="profilePic" accept="image/*">
+    <img id="preview" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin:10px auto; display:none;">
+
     <button class="button_1" onclick="saveProfile()">Continue</button>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-  <script src="firebase.js"></script>
-  <script src="profile.js"></script>
+<script type="module">
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+  import { app } from './firebase.js';
+  
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+  const storage = getStorage(app);
+  let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if(user) currentUser = user;
+    else window.location.href = 'login.html';
+  });
+
+  // Preview image
+  document.getElementById('profilePic').onchange = e => {
+    const file = e.target.files[0];
+    if(file){
+      document.getElementById('preview').src = URL.createObjectURL(file);
+      document.getElementById('preview').style.display = 'block';
+    }
+  }
+
+  async function saveProfile() {
+    const surname = document.getElementById('surname').value;
+    const firstname = document.getElementById('firstname').value;
+    const middlename = document.getElementById('middlename').value;
+    const lastname = document.getElementById('lastname').value;
+    const age = document.getElementById('age').value;
+    const dob = document.getElementById('dob').value;
+    const country = document.getElementById('country').value;
+    const state = document.getElementById('state').value;
+    const bio = document.getElementById('bio').value;
+    const file = document.getElementById('profilePic').files[0];
+
+    if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||!state) {
+      alert("Please fill all required fields *");
+      return;
+    }
+
+    let photoURL = "";
+    if(file){
+      const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
+      await uploadBytes(storageRef, file);
+      photoURL = await getDownloadURL(storageRef);
+    }
+
+    await set(ref(db, 'users/' + currentUser.uid), {
+      surname,
+      firstname,
+      middlename,
+      lastname,
+      displayName: `${surname} ${firstname}`, // This is what shows in chat list
+      age,
+      dob,
+      country,
+      state,
+      bio,
+      photoURL,
+      email: currentUser.email
+    });
+
+    alert("Profile saved!");
+    window.location.href = 'chat.html';
+  }
+  window.saveProfile = saveProfile;
+</script>
 </body>
 </html>
