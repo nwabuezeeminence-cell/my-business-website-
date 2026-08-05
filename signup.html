@@ -6,22 +6,25 @@
 </head>
 <body style="background:#f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh">
   <div class="form-box">
-    <h2>Create Account</h2>
-    <input type="email" id="email" placeholder="Email" required>
-    
-    <div style="position:relative">
-      <input type="password" id="password" placeholder="Password" required>
-      <span onclick="togglePass('password')" style="position:absolute; right:10px; top:15px; cursor:pointer">👁️</span>
-    </div>
-
-    <div style="position:relative">
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-      <span onclick="togglePass('confirmPassword')" style="position:absolute; right:10px; top:15px; cursor:pointer">👁️</span>
-    </div>
-
-    <button class="button_1" onclick="signup()">Signup</button>
-    <p>Already have account? <a href="login.html">Login</a></p>
+  <img src="logo.png" alt="NEXA"> <!-- ADD YOUR LOGO HERE -->
+  <h2>NEXA Messenger</h2>
+  <h3 style="color:#E94560; margin-bottom:20px; font-size:20px">Create Account</h3>
+  
+  <input type="email" id="email" placeholder="Email" required>
+  
+  <div style="position:relative">
+    <input type="password" id="password" placeholder="Password" required>
+    <span onclick="togglePass('password')">👁️</span>
   </div>
+
+  <div style="position:relative">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+    <span onclick="togglePass('confirmPassword')">👁️</span>
+  </div>
+
+  <button class="button_1" onclick="signup()">Signup</button>
+  <p>Already have account? <a href="login.html">Login</a></p>
+</div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
