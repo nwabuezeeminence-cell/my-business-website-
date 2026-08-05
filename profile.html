@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete Profile - NEXA</title>
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
   <div class="form-box">
     <img src="logo.png" alt="NEXA" style="width:100px; margin-bottom:10px;">
     <h2>Complete Your Profile</h2>
     
-    <!-- PHOTO UPLOAD AT TOP -->
+    <!-- PHOTO UPLOAD AT TOP - BIGGER -->
     <div class="avatar-upload">
       <img id="preview" src="https://i.imgur.com/6VBx3io.png" alt="Profile">
       <input type="file" id="profilePic" accept="image/*">
@@ -22,17 +22,12 @@
     <input type="text" id="firstname" placeholder="First Name *">
     <input type="text" id="middlename" placeholder="Middle Name (Optional)">
     <input type="text" id="lastname" placeholder="Last Name *">
-    
     <input type="number" id="age" placeholder="Age *" min="10" max="100">
-    
     <label style="text-align:left; font-size:14px; color:#555; margin-top:10px;">Date of Birth *</label>
     <input type="date" id="dob">
-    
     <input type="text" id="country" placeholder="Country *" value="Nigeria">
     <input type="text" id="state" placeholder="State of Origin *">
-    
     <textarea id="bio" placeholder="More about you..." rows="3"></textarea>
-
     <button class="button_1" onclick="saveProfile()">Continue</button>
   </div>
 
@@ -52,25 +47,18 @@
     else window.location.href = 'login.html';
   });
 
-  // WAIT FOR PAGE TO LOAD FIRST
-  document.addEventListener('DOMContentLoaded', () => {
-    const fileInput = document.getElementById('profilePic');
-    const previewImg = document.getElementById('preview');
+  // THIS IS THE FIX FOR PREVIEW
+  const fileInput = document.getElementById('profilePic');
+  const previewImg = document.getElementById('preview');
 
-    // Preview image immediately after selection
-    fileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if(file){
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          previewImg.src = event.target.result; // THIS SHOWS THE IMAGE
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  });
+  fileInput.onchange = function(e) {
+    const file = e.target.files[0];
+    if(file){
+      previewImg.src = URL.createObjectURL(file); // Instant preview
+    }
+  }
 
-  async function saveProfile() {
+  window.saveProfile = async function() {
     const surname = document.getElementById('surname').value;
     const firstname = document.getElementById('firstname').value;
     const middlename = document.getElementById('middlename').value;
@@ -87,7 +75,7 @@
       return;
     }
 
-    let photoURL = document.getElementById('preview').src; // use preview as default
+    let photoURL = previewImg.src;
     if(file){
       const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
       await uploadBytes(storageRef, file);
@@ -103,7 +91,6 @@
     alert("Profile saved!");
     window.location.href = 'chat.html';
   }
-  window.saveProfile = saveProfile;
 </script>
 </body>
 </html>
