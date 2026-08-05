@@ -6,86 +6,92 @@
 }
 
 body {
-  background: #1A1A2E; /* DARK PURPLE like your login */
+  background: #1A1A2E; /* DARK PURPLE */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 0; /* REMOVE PADDING ON MOBILE */
 }
 
 .form-box {
   background: white;
-  padding: 40px 35px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  padding: 45px 35px;
+  border-radius: 0; /* NO ROUNDED CORNERS ON MOBILE */
+  box-shadow: none;
   width: 100%;
-  max-width: 450px;
-  text-align: center;
+  max-width: 100%; /* FULL WIDTH ON MOBILE */
+  height: 100vh; /* FULL HEIGHT ON MOBILE */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ON DESKTOP/TABLET MAKE IT A CARD AGAIN */
+@media (min-width: 500px) {
+  body {
+    padding: 20px;
+  }
+  .form-box {
+    max-width: 480px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  }
 }
 
 .form-box img {
-  width: 120px;
-  margin-bottom: 15px;
+  width: 140px; /* BIGGER LOGO */
+  margin: 0 auto 20px auto;
+  display: block;
 }
 
 .form-box h2 {
-  color: #1A1A2E; /* DARK TEXT */
-  margin-bottom: 25px;
-  font-size: 30px;
+  color: #1A1A2E;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 34px; /* BIGGER */
   font-weight: 800;
+}
+
+.form-box h3 {
+  color: #E94560;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 22px;
 }
 
 .form-box input {
   width: 100%;
-  padding: 16px 18px;
-  margin: 12px 0;
-  border: 1.5px solid #DDD;
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 18px 20px; /* TALLER INPUTS */
+  margin: 14px 0;
+  border: 2px solid #EEE;
+  border-radius: 12px;
+  font-size: 18px; /* BIGGER TEXT */
   outline: none;
-  text-align: left;
-}
-
-.form-box input:focus {
-  border-color: #E94560; /* PINK BORDER ON FOCUS */
 }
 
 .button_1 {
   width: 100%;
-  padding: 16px;
-  background: #E94560; /* NEXA PINK BUTTON */
+  padding: 18px; /* TALLER BUTTON */
+  background: #E94560; /* NEXA PINK */
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 700;
+  border-radius: 12px;
+  font-size: 20px; /* BIG BUTTON TEXT */
+  font-weight: 800;
   cursor: pointer;
-  margin-top: 20px;
-}
-.button_1:hover {
-  background: #d13a54;
+  margin-top: 25px;
 }
 
 .form-box p {
   text-align: center;
-  margin-top: 20px;
-  font-size: 15px;
-  color: #555;
+  margin-top: 25px;
+  font-size: 17px;
 }
 
 .form-box a {
-  color: #E94560; /* PINK LINK */
+  color: #E94560;
+  font-weight: 800;
   text-decoration: none;
-  font-weight: 700;
-}
-
-/* Eye icon */
-div[style*="position:relative"] span {
-  position:absolute; 
-  right:16px; 
-  top:50%; 
-  transform:translateY(-50%); 
-  cursor:pointer;
-  font-size: 20px;
 }
