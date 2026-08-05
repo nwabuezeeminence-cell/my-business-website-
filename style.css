@@ -6,62 +6,79 @@
 }
 
 body {
-  background: #f0f2f5;
+  background: #1A1A2E; /* DARK PURPLE like your login */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 16px;
+  padding: 20px;
 }
 
 .form-box {
   background: white;
-  padding: 40px 30px; /* MORE PADDING */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 40px 35px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   width: 100%;
-  max-width: 480px; /* MUCH BIGGER */
+  max-width: 450px;
+  text-align: center;
+}
+
+.form-box img {
+  width: 120px;
+  margin-bottom: 15px;
 }
 
 .form-box h2 {
-  text-align: center;
-  color: #1877F2;
-  margin-bottom: 30px;
-  font-size: 32px; /* BIGGER TITLE */
+  color: #1A1A2E; /* DARK TEXT */
+  margin-bottom: 25px;
+  font-size: 30px;
   font-weight: 800;
 }
 
 .form-box input {
   width: 100%;
-  padding: 16px 18px; /* TALLER */
-  margin: 14px 0;
-  border: 1.5px solid #CCD0D5;
-  border-radius: 8px;
-  font-size: 17px;
+  padding: 16px 18px;
+  margin: 12px 0;
+  border: 1.5px solid #DDD;
+  border-radius: 10px;
+  font-size: 16px;
   outline: none;
+  text-align: left;
+}
+
+.form-box input:focus {
+  border-color: #E94560; /* PINK BORDER ON FOCUS */
 }
 
 .button_1 {
   width: 100%;
-  padding: 16px; /* TALLER BUTTON */
-  background: #1877F2;
+  padding: 16px;
+  background: #E94560; /* NEXA PINK BUTTON */
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 20px; /* BIG BUTTON TEXT */
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 20px;
 }
-.button_1:hover { background: #166FE5; }
+.button_1:hover {
+  background: #d13a54;
+}
 
 .form-box p {
   text-align: center;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 15px;
+  color: #555;
 }
 
-.form-box a { color: #1877F2; font-weight: 700; text-decoration: none; }
+.form-box a {
+  color: #E94560; /* PINK LINK */
+  text-decoration: none;
+  font-weight: 700;
+}
 
 /* Eye icon */
 div[style*="position:relative"] span {
