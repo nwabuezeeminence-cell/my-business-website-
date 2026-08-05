@@ -1,48 +1,9 @@
-html, body { 
-  margin: 0; padding: 0; height: 100%; width: 100%;
-  background: #1A1A2E; display: flex; justify-content: center; align-items: center;
-  font-family: 'Segoe UI', sans-serif;
+.profile-image { position: relative; width: 120px; height: 120px; margin: -60px auto 10px; }
+.profile-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid white; }
+.profile-image label {
+  position: absolute; bottom: 0; right: 0; background: #E94560; color: white;
+  width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; border: 2px solid white;
 }
-.form-box {
-  background: white; padding: 30px 25px; width: 100%; max-width: 100%; height: 100%;
-  border-radius: 0; display: flex; flex-direction: column; overflow-y: auto;
-}
-@media (min-width: 600px) {
-.form-box { max-width: 500px; height: auto; border-radius: 20px; margin: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-}
-.form-box img.logo { width: 100px; margin: 0 auto 10px; display:block; }
-.form-box h2 { font-size: 26px; text-align:center; color:#1A1A2E; margin-bottom:20px; }
-.form-box input,.form-box textarea {
-  width: 100%; padding: 16px 18px; margin: 10px 0; border: 2px solid #EEE;
-  border-radius: 12px; font-size: 17px; box-sizing: border-box;
-}
-.form-box textarea { resize: vertical; }
-.form-box label { text-align:left; font-size:14px; color:#555; margin-top:10px; }
-.button_1 {
-  padding: 18px; font-size: 20px; background: #E94560; color:white; border:none;
-  border-radius:12px; font-weight:800; margin-top:20px; cursor:pointer;
-}
-
-/* CAMERA AVATAR */
-.avatar-upload { text-align: center; margin: 10px 0 25px 0; position: relative; }
-.avatar-label { cursor: pointer; display: inline-block; position: relative; }
-.avatar-label img {
-  width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-  border: 4px solid #E94560; background: #eee;
-}
-.camera-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: #E94560;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  border: 3px solid white;
-}
-#profilePic { display: none; } /* COMPLETELY HIDDEN */
+.profile-card input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #EEE; border-radius: 10px; }
+#saveProfile { width: 100%; padding: 15px; background: #E94560; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 18px; }
