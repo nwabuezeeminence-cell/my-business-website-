@@ -1,31 +1,48 @@
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-import { app } from './firebase.js';
-
-const auth = getAuth(app);
-const db = getDatabase(app);
-const storage = getStorage(app);
+const auth = firebase.auth();
+const db = firebase.database();
+const storage = firebase.storage();
 let currentUser = null;
-let selectedFile = null;
+let selectedProfileFile = null;
+let selectedCoverFile = null;
 
-onAuthStateChanged(auth, (user) => {
-  if(user) currentUser = user;
-  else window.location.href = 'login.html';
+auth.onAuthStateChanged(user => {
+  if(user){
+    currentUser = user;
+    document.getElementById('username').innerText = '@' + user.email.split('@')[0];
+    document.getElementById('fullName').innerText = user.displayName || 'User';
+  } else {
+    window.location.href = 'login.html';
+  }
 });
 
-document.getElementById('profilePic').addEventListener('change', function() {
-  selectedFile = this.files[0];
-  if (!selectedFile) return;
-  const reader = new FileReader();
-  reader.onload = (e) => { document.getElementById('preview').src = e.target.result; }
-  reader.readAsDataURL(selectedFile);
+// 1. PROFILE PHOTO PREVIEW
+document.getElementById('profileInput').addEventListener('change', function(e){
+  selectedProfileFile = e.target.files[0];
+  if(selectedProfileFile){
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      document.getElementById('profilePreview').src = event.target.result;
+    }
+    reader.readAsDataURL(selectedProfileFile);
+  }
 });
 
-document.getElementById('continueBtn').addEventListener('click', async () => {
+// 2. COVER PHOTO PREVIEW
+document.getElementById('coverInput').addEventListener('change', function(e){
+  selectedCoverFile = e.target.files[0];
+  if(selectedCoverFile){
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      document.getElementById('coverPreview').src = event.target.result;
+    }
+    reader.readAsDataURL(selectedCoverFile);
+  }
+});
+
+// 3. SAVE BUTTON
+document.getElementById('saveProfile').addEventListener('click', async () => {
   const surname = document.getElementById('surname').value;
   const firstname = document.getElementById('firstname').value;
-  const middlename = document.getElementById('middlename').value;
   const lastname = document.getElementById('lastname').value;
   const age = document.getElementById('age').value;
   const dob = document.getElementById('dob').value;
@@ -33,21 +50,33 @@ document.getElementById('continueBtn').addEventListener('click', async () => {
   const state = document.getElementById('state').value;
   const bio = document.getElementById('bio').value;
 
-  if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||!state) {
-    alert("Please fill all required fields *"); return;
+  if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||!state){
+    alert("Please fill all required fields *");
+    return;
   }
 
-  let photoURL = document.getElementById('preview').src;
-  if(selectedFile){
-    const storageRef = sRef(storage, 'profiles/' + currentUser.uid + '.jpg');
-    await uploadBytes(storageRef, selectedFile);
-    photoURL = await getDownloadURL(storageRef);
+  let profileURL = document.getElementById('profilePreview').src;
+  let coverURL = document.getElementById('coverPreview').src;
+
+  if(selectedProfileFile){
+    const profileRef = storage.ref('profiles/' + currentUser.uid + '_profile.jpg');
+    await profileRef.put(selectedProfileFile);
+    profileURL = await profileRef.getDownloadURL();
+  }
+  
+  if(selectedCoverFile){
+    const coverRef = storage.ref('profiles/' + currentUser.uid + '_cover.jpg');
+    await coverRef.put(selectedCoverFile);
+    coverURL = await coverRef.getDownloadURL();
   }
 
-  await set(ref(db, 'users/' + currentUser.uid), {
-    surname, firstname, middlename, lastname,
+  await db.ref('users/' + currentUser.uid).set({
+    surname, firstname, lastname,
     displayName: `${surname} ${firstname}`,
-    age, dob, country, state, bio, photoURL, email: currentUser.email
+    age, dob, country, state, bio, 
+    photoURL: profileURL,
+    coverURL: coverURL,
+    email: currentUser.email
   });
 
   alert("Profile saved!");
