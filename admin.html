@@ -1,101 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NEXA Admin Panel</title>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="menu.css">
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<title>Admin Panel | NEXA</title>
+<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+<body style="background:#0A0A0A; color:var(--text);">
 
-<body>
+<section class="section">
+    <div class="container" style="max-width:1000px; margin:auto;">
+        <h2 style="color:var(--nexa); text-align:center;"><i class="fas fa-user-shield"></i> NEXA Admin</h2>
 
-<header class="topbar">
+        <!-- STATS CARDS -->
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:25px 0;">
+            <div class="card" style="text-align:center;">
+                <h4>Total Users</h4>
+                <h2 id="totalUsers">0</h2>
+            </div>
+            <div class="card" style="text-align:center;">
+                <h4>Total Orders</h4>
+                <h2 id="totalOrders">0</h2>
+            </div>
+            <div class="card" style="text-align:center;">
+                <h4>Total Notifications</h4>
+                <h2 id="totalNotifs">0</h2>
+            </div>
+        </div>
 
-<button class="menu-btn" onclick="openMenu()">☰</button>
+        <!-- ADMIN TABS -->
+        <div style="display:flex; gap:10px; margin-bottom:20px; justify-content:center;">
+            <button onclick="showTab('users')" id="btnUsers" class="btn-primary">USERS</button>
+            <button onclick="showTab('orders')" id="btnOrders" class="btn-primary" style="opacity:0.6;">ORDERS</button>
+            <button onclick="showTab('notifs')" id="btnNotifs" class="btn-primary" style="opacity:0.6;">NOTIFICATIONS</button>
+        </div>
 
-<div class="logo">
+        <!-- CONTENT AREAS -->
+        <div id="usersTab" class="admin-tab"></div>
+        <div id="ordersTab" class="admin-tab" style="display:none;"></div>
+        <div id="notifsTab" class="admin-tab" style="display:none;"></div>
 
-<img src="NEXA.png" alt="Logo">
-
-<h2>Admin Panel</h2>
-
-</div>
-
-</header>
-
-<div id="sideMenu" class="side-menu">
-
-<button class="close-btn" onclick="closeMenu()">✖</button>
-
-<a href="index.html">🏠 Home</a>
-<a href="community.html">👥 Community</a>
-<a href="chat.html">💬 Chats</a>
-<a href="groups.html">👥 Groups</a>
-<a href="profile.html">👤 My Profile</a>
-<a href="settings.html">⚙ Settings</a>
-
-</div>
-
-<section class="container">
-
-<h1>Administrator Dashboard</h1>
-
-<div class="user-card">
-
-<h3>Total Users</h3>
-
-<p id="totalUsers">0</p>
-
-</div>
-
-<div class="user-card">
-
-<h3>Total Groups</h3>
-
-<p id="totalGroups">0</p>
-
-</div>
-
-<div class="user-card">
-
-<h3>Total Messages</h3>
-
-<p id="totalMessages">0</p>
-
-</div>
-
-<br>
-
-<button class="button_1"
-onclick="refreshDashboard()">
-
-Refresh Dashboard
-
-</button>
-
+    </div>
 </section>
 
-<footer>
+<!-- 1. FIREBASE LIBRARIES FIRST -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-<p>© 2026 NEXA Digital Services</p>
+<!-- 2. YOUR CONFIG SECOND -->
+<script src="firebase.js"></script>
 
-</footer>
+<!-- 3. ADMIN PROTECT THIRD -->
+<script src="admin-protect.js"></script>
 
-<script src="menu.js"></script>
+<!-- 4. ADMIN DASHBOARD LAST -->
 <script src="admin.js"></script>
-<script src="app-settings.js"></script>
-
 </body>
-
 </html>
