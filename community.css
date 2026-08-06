@@ -1,0 +1,244 @@
+/* ===== NEXA COMMUNITY THEME ===== */
+:root{ 
+    --nexa:#E94560; 
+    --bg:#0F0F1A; 
+    --card:#1A1A2E; 
+    --text:#E9EDEF; 
+    --gray:#8696A0; 
+    --border:#2A2A3E;
+}
+
+body{background:var(--bg); color:var(--text); font-family:Arial; margin:0; padding-bottom:60px;}
+header{padding:15px; display:flex; align-items:center; gap:12px; background:var(--card); font-size:20px; font-weight:bold;}
+h2, h3{margin:0;}
+a{color:var(--nexa); text-decoration:none;}
+
+/* BUTTONS */
+.btn-nexa{background:var(--nexa); border:none; color:white; padding:10px 14px; border-radius:8px; font-weight:bold; cursor:pointer;}
+.btn-card{flex:1; background:var(--card); border:1px solid var(--border); color:var(--text); padding:14px; border-radius:12px; font-weight:600; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;}
+.btn-card:hover{background:#2A2A3E; border-color:var(--nexa);}
+.btn-card i{color:var(--nexa); font-size:16px;}
+
+/* CARDS / ITEMS */
+.item{display:flex; align-items:center; gap:15px; padding:15px 20px; cursor:pointer; border-bottom:1px solid var(--border);}
+.item:hover{background:#2A2A3E;}
+.icon-box{width:50px; height:50px; border-radius:12px; background:var(--card); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;}
+.plus-badge{position:absolute; bottom:-2px; right:-2px; background:var(--nexa); border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center;}
+.card{background:var(--card); padding:15px; border-radius:12px; margin:10px 15px;}
+.add-btns{display:flex; gap:10px; padding:15px;}
+.add-btn{flex:1; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; text-align:center; cursor:pointer;}
+.add-btn i{color:var(--nexa); font-size:20px; display:block; margin-bottom:5px;}
+
+/* LIST */
+.link-item{display:flex; align-items:center; gap:20px; padding:14px 15px; cursor:pointer;}
+.link-item:hover{background:#2A2A3E;}
+.link-item i{font-size:20px; color:var(--gray); width:24px;}
+.link-item.text{flex:1;}
+.link-item.text p{margin:0; font-size:15px;}
+.link-item.text small{color:var(--gray); font-size:12px;}
+.report{color:var(--nexa); font-weight:500;}
+
+/* CHAT */
+.chat-area{flex:1; overflow-y:auto; padding:15px;}
+.msg{background:var(--card); padding:10px 12px; border-radius:10px; margin-bottom:10px; max-width:80%;}
+.msg b{color:var(--nexa); font-size:13px;}
+.post-box{display:flex; gap:10px; background:var(--card); padding:10px; position:sticky; bottom:0;}
+.post-box input{flex:1; background:transparent; border:none; color:white; outline:none;}
+
+/* UTILS */
+.gray{color:var(--gray);}
+.small{font-size:13px;}
+.tiny{font-size:12px;}
+hr{border:none; border-top:1px solid var(--border); margin:0;}
+.locked{opacity:0.4; pointer-events:none;}
+.footer-text{color:var(--gray); font-size:12px; text-align:center; padding:20px 30px 40px 30px;}
+/* ===== FORM STYLES FOR CREATE COMMUNITY ===== */
+.wrap{
+    padding: 0 20px;
+}
+.input-group{
+    margin-bottom: 20px;
+}
+.input-group input,
+.input-group textarea{
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    padding: 14px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+.input-group input:focus,
+.input-group textarea:focus{
+    border: 1px solid var(--nexa);
+}
+.input-group textarea{
+    resize: vertical;
+    min-height: 120px;
+}
+.counter{
+    text-align: right;
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 5px;
+}
+.btn-float{
+    background: var(--nexa);
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px
+    
+    /* PHOTO URL INPUT + TIP */
+.url-input{
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    padding: 12px 14px;
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+}
+.url-input:focus{
+    border: 1px solid var(--nexa);
+}
+.url-tip{
+    color: var(--gray);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+    padding: 0 20px;
+}
+.photo-box{
+    width: 100px;
+    height: 100px;
+    background: var(--card);
+    border-radius: 20px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px dashed var(--border);
+}
+.photo-box{
+    width: 100px;
+    height: 100px;
+    background: var(--card);
+    border-radius: 20px;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px dashed var(--border);
+    cursor: pointer;
+}
+.photo-box:active{
+    border-color: var(--nexa);
+}
+.url-tip{
+    color: var(--gray);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+}
+.btn-float{
+    background: var(--nexa);
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* THIS makes it go right */
+    left: auto; /* make sure it's not on left */
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(233,69,96,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.btn-float:active{
+    transform: scale(0.95);
+}
+/* RED: Make header clickable area bigger */
+.header-fix{
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.header-fix i{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* PINK: Examples text with spacing */
+.examples-link{
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 30px; /* space under it */
+}
+.examples-link span:first-child{
+    color: var(--nexa);
+    font-weight: bold;
+}
+
+/* BLUE: Circle photo with camera */
+.photo-circle{
+    width: 120px;
+    height: 120px;
+    background: var(--card);
+    border-radius: 50%; /* Circle */
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    cursor: pointer;
+}
+.photo-circle #peopleIcon{
+    font-size: 45px;
+    color: var(--gray);
+}
+.photo-circle #cameraIcon{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: var(--nexa);
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid var(--bg);
+}
+.photo-circle img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* GREEN: Button right */
+.btn-float{
+    position: fixed!important;
+    bottom: 20px!important;
+    right: 20px!important;
+    left: auto!important;
+}
