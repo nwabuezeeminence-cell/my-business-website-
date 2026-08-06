@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Members | NEXA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root{ --bg:#0b0b0f; --card:#151821; --border:#232838; --text:#e9eef5; --gray:#8a92a6; --nexa:#E94560;}
+body{background:var(--bg); color:var(--text); font-family:sans-serif; margin:0;}
+.header{padding:15px 20px; display:flex; align-items:center; gap:15px; background:var(--card); margin:10px; border-radius:12px;}
+.wrap{padding:20px;}
+.search{padding:12px; background:var(--card); border-radius:12px; border:1px solid var(--border); display:flex; gap:10px;}
+.search input{flex:1; background:none; border:none; color:var(--text); outline:none; font-size:15px;}
+.search button{background:var(--nexa); border:none; color:white; padding:8px 12px; border-radius:8px; cursor:pointer;}
+.user-result{display:flex; align-items:center; gap:12px; background:var(--card); padding:12px; border-radius:12px; margin-top:15px;}
+.user-result img{width:45px; height:45px; border-radius:50%; object-fit:cover; background:#333;}
+.user-info{flex:1;} .user-info b{display:block;} .user-info span{color:var(--gray); font-size:13px;}
+.add-btn{background:var(--nexa); border:none; color:white; width:35px; height:35px; border-radius:50%; cursor:pointer;}
+.member-list{margin-top:20px;}
+.btn-finish{background:var(--nexa); color:white; border:none; width:56px; height:56px; border-radius:50%; position:fixed; bottom:20px; right:20px; font-size:22px; cursor:pointer; box-shadow:0 4px 12px rgba(233,69,96,0.4);}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <i class="fas fa-arrow-left" onclick="history.back()"></i>
+    <h3>Add community members</h3>
+</header>
+
+<div class="wrap">
+    <div class="search">
+        <input id="memberEmail" placeholder="Enter NEXA email">
+        <button onclick="searchUser()"><i class="fas fa-search"></i></button>
+    </div>
+    <div id="searchResult"></div>
+    <div id="memberList" class="member-list"><h4>Added: 0</h4></div>
+</div>
+
+<button class="btn-finish" onclick="finish()"><i class="fas fa-check"></i></button>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+<script>
+const dbRef = firebase.database();
+const urlParams = new URLSearchParams(window.location.search);
+const communityId = urlParams.get('id');
+let membersToAdd = {};
+
+async function searchUser(){
+    const email = document.getElementById("memberEmail").value.trim().toLowerCase();
+    if(!email){ alert("Enter email"); return; }
+
+    // Search users by email
+    const snap = await dbRef.ref("users").orderByChild("email").equalTo(email).once("value");
+    const resultDiv = document.getElementById("searchResult");
+    
+    if(snap.exists()){
+        snap.forEach(child => {
+            const user = child.val();
+            const uid = child.key;
+            resultDiv.innerHTML = `
+            <div class="user-result">
+                <img src="${user.photo || 'https://via.placeholder.com/45'}">
+                <div class="user-info">
+                    <b>${user.name || email.split('@')[0]}</b>
+                    <span>${user.email}</span>
+                </div>
+                <button class="add-btn" onclick="addMember('${uid}', '${user.email}')"><i class="fas fa-plus"></i></button>
+            </div>`;
+        });
+    } else {
+        resultDiv.innerHTML = `<p style="color:var(--gray);">User not found on NEXA</p>`;
+    }
+}
+
+function addMember(uid, email){
+    membersToAdd[uid] = { email: email, role: "member", joinedAt: Date.now() };
+    document.getElementById("memberList").innerHTML += `<p>${email}</p>`;
+    document.getElementById("searchResult").innerHTML = "";
+    document.getElementById("memberEmail").value = "";
+    document.querySelector("#memberList h4").innerText = `Added: ${Object.keys(membersToAdd).length}`;
+}
+
+function finish(){
+    if(Object.keys(membersToAdd).length === 0){ alert("Add at least 1 member"); return; }
+    
+    // Save to Firebase
+    dbRef.ref(`communities/${communityId}/members`).update(membersToAdd)
+    .then(() => {
+        alert("Members Added!");
+        location.href = "community-chat.html?id=" + communityId;
+    });
+}
+</script>
+</body>
+</html>
