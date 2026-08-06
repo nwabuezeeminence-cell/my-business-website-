@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Community</title>
+<link rel="stylesheet" href="community.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body style="background:#0F0F1A; color:white;">
+
+<header id="communityHeader" style="padding:15px; display:flex; align-items:center; gap:10px;">
+    <i class="fas fa-arrow-left" onclick="history.back()"></i>
+    <h2 id="communityName">Loading...</h2>
+</header>
+
+<!-- ANNOUNCEMENTS CHANNEL -->
+<div style="padding:10px 20px;">
+    <div style="background:#1A1A2E; padding:12px; border-radius:12px; display:flex; align-items:center; gap:12px;">
+        <div style="background:#2A2A3E; padding:10px; border-radius:10px;"><i class="fas fa-bullhorn"></i></div>
+        <div>
+            <h4>Announcements</h4>
+            <p style="font-size:12px; color:#aaa;">Admin only</p>
+        </div>
+    </div>
+</div>
+
+<!-- POST BOX -->
+<div style="padding:10px 20px;">
+    <div style="display:flex; gap:10px; background:#1A1A2E; padding:12px; border-radius:12px;">
+        <img id="myPhoto" src="https://i.imgur.com/6VBx3io.png" style="width:40px; height:40px; border-radius:50%;">
+        <input id="postText" placeholder="Write something..." style="flex:1; background:transparent; border:none; color:white;">
+        <button id="postBtn" style="background:#E94560; border:none; color:white; padding:8px 15px; border-radius:8px;">Send</button>
+    </div>
+</div>
+
+<!-- POSTS -->
+<div id="postsContainer" style="padding:0 20px 80px;"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script> 
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const communityId = urlParams.get('id');
+const db = firebase.database();
+
+firebase.auth().onAuthStateChanged(user => {
+    if(user){
+        loadCommunity();
+        loadPosts();
+        setupPosting(user);
+    } else location.href = "login.html";
+});
+
+function loadCommunity(){
+    db.ref("communities/" + communityId).once("value").then(snap => {
+        document.getElementById("communityName").textContent = snap.val().name;
+    });
+}
+
+function loadPosts(){
+    db.ref("communityPosts/" + communityId).orderByChild("time").on("value", snap => {
+        const container = document.getElementById("postsContainer");
+        container.innerHTML =!snap.exists()? "<p style='text-align:center; color:#aaa; padding:20px;'>No posts yet</p>" : "";
+        snap.forEach(child => {
+            const p = child.val();
+            container.innerHTML += `<div style="background:#1A1A2E; padding:15px; border-radius:12px; margin:10px 0;"><b>${p.name}</b><p>${p.text}</p></div>`;
+        });
+    });
+}
+
+function setupPosting(user){
+    document.getElementById("postBtn").onclick = () => {
+        const text = document.getElementById("postText").value.trim();
+        if(!text) return;
+        db.ref("communityPosts/" + communityId).push({
+            uid: user.uid,
+            name: user.email.split('@')[0],
+            text: text,
+            time: Date.now()
+        });
+        document.getElementById("postText").value = "";
+    }
+}
+</script>
+</body>
+</html>
