@@ -3,132 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXA Digital Services | Professional Digital Solutions</title>
-<meta name="description" content="NEXA Digital Services provides document formatting, PDF conversion, copywriting and digital support for students and businesses.">
-<meta name="theme-color" content="#E94560">
-<link rel="manifest" href="manifest.json">
+<title>NEXA - Welcome</title>
+<link rel="stylesheet" href="chat-dark.css">
+<style>
+  body { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#0a0a0a; color:white; text-align:center; font-family:sans-serif; }
+  .logo { width:120px; margin-bottom:20px; border-radius:20px; }
+  h1 { color:#8b5cf6; font-size:32px; margin:0; }
+  p { color:#aaa; margin-bottom:30px; }
+  .btn { width:250px; padding:14px; background:#8b5cf6; color:white; border:none; border-radius:12px; font-size:16px; margin:10px; cursor:pointer; font-weight:600; }
+  .btn-outline { background:transparent; border:2px solid #8b5cf6; }
+</style>
+</head>
+<body>
+  <img src="img/NEXA.png" class="logo">
+  <h1>NEXA</h1>
+  <p>Digital Services</p>
 
-<!-- CSS -->
-<link rel="stylesheet" href="style.css?v=5">
-<link rel="stylesheet" href="menu.css?v=5">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <button class="btn" onclick="location='login.html'">Login</button>
+  <button class="btn btn-outline" onclick="location='signup.html'">Create Account</button>
 
-<!-- FIREBASE - REMOVE THESE 4 IF YOU DON'T WANT DARK MODE TO SYNC -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <script src="firebase.js"></script>
-</head>
-
-<body>
-
-<!-- ===== HEADER ===== -->
-<header class="topbar">
-    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
-    <div class="logo">
-        <img src="NEXA.png" alt="NEXA Logo">
-        <h2>NEXA Digital Services</h2>
-    </div>
-    <div class="top-icons">
-        <a href="notifications.html"><i class="fas fa-bell"></i><span id="notifCount">0</span></a>
-        <a href="profile.html"><i class="fas fa-user-circle"></i></a>
-    </div>
-</header>
-
-<!-- ===== SIDE MENU ===== -->
-<div id="sideMenu" class="side-menu">
-    <button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button>
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
-    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
-    <hr>
-    <a href="community.html"><i class="fas fa-users"></i> Community</a>
-    <a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
-    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
-    <a href="settings.html"><i class="fas fa-cog"></i> settings</a>
-    <hr>
-    <a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
-</div>
-
-<!-- ===== HERO SECTION ===== -->
-<section class="section">
-    <div class="container" style="text-align:center; padding:60px 20px;">
-        <h1 style="font-size:36px; color:var(--text); margin-bottom:15px;">Digital Services</h1>
-        <p class="subtext" style="font-size:16px;">
-            Professional Digital Solutions for Students, Businesses and Organizations.
-        </p>
-        <a href="services.html" class="btn-primary" style="margin-top:20px; display:inline-block;">
-            Get Started
-        </a>
-    </div>
-</section>
-
-<!-- ===== WHY CHOOSE NEXA ===== -->
-<section class="section alt">
-    <div class="container" style="text-align:center;">
-        <h2 style="color:var(--nexa); font-size:28px; margin-bottom:15px;">Why Choose NEXA?</h2>
-        <p class="subtext">
-            We provide professional document formatting, PDF conversion, copywriting, 
-            graphic design, digital support and many more services with fast delivery and quality.
-        </p>
-        <div class="card-grid" style="margin-top:30px;">
-            <div class="card">
-                <i class="fas fa-bolt"></i>
-                <h3>Fast Delivery</h3>
-                <p>Get your documents back within 24 hours</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Trusted & Secure</h3>
-                <p>Your files and data are 100% safe with us</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-wallet"></i>
-                <h3>Affordable Rates</h3>
-                <p>Quality services starting from just ₦1,000</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FEATURED SERVICES ===== -->
-<section class="section">
-    <div class="container" style="text-align:center;">
-        <h2 style="color:var(--text); font-size:28px; margin-bottom:15px;">Our Services</h2>
-        <p class="subtext">Everything you need in one place</p>
-        <div class="card-grid" style="margin-top:30px;">
-            <div class="card">
-                <i class="fas fa-file-word"></i>
-                <h3>Word Formatting</h3>
-                <p>Professional formatting for assignments and reports</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-file-pdf"></i>
-                <h3>PDF Conversion</h3>
-                <p>Convert PDF to Word and vice versa instantly</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-pen-nib"></i>
-                <h3>Copywriting</h3>
-                <p>Professional writing for businesses and students</p>
-            </div>
-        </div>
-        <a href="services.html" class="btn-primary" style="margin-top:30px; display:inline-block;">
-            View All Services
-        </a>
-    </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="container">
-        <p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<!-- JS -->
-<script src="menu.js"></script>
-<script src="app-settings.js"></script>
+<script>
+// If user is already logged in, skip this page and go to chat
+auth.onAuthStateChanged(user => {
+    if(user) window.location.href = 'chat.html';
+})
+</script>
 </body>
 </html>
