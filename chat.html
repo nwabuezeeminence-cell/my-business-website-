@@ -3,50 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXA Chats</title>
-<link rel="stylesheet" href="auth.css?v=3">
-<link rel="stylesheet" href="chat.css?v=3">
+<title>NEXA Messenger</title>
+<!-- ONLY THESE 3 -->
+<link rel="stylesheet" href="chat-dark.css?v=5">
+<link rel="stylesheet" href="popup.css?v=5">
 </head>
-<body>
+<body class="dark">
+
 <div class="chat-page">
-  <!-- 1. HEADER WITH BACK/HOME BUTTON -->
-  <div class="chat-header">
-    <button onclick="goHome()" class="back-btn">←</button>
-    <div class="header-title">💬 Chats</div>
-    <button onclick="searchUsers()" class="search-btn">🔍</button>
-  </div>
-
-  <input type="text" id="searchInput" placeholder="Search conversations..." class="search-bar">
-
-  <!-- 2. CONVERSATION LIST -->
-  <div id="conversationList" class="conversation-list">
-    <!-- If no chats, show this -->
-    <div id="emptyState" class="empty-chat">
-      <img src="NEXA.png" width="120">
-      <h2>No conversations yet</h2>
-      <p>Tap the + button below to start your first conversation.</p>
+    <div class="chat-header">
+        <h2>💬 Chats</h2>
+        <button onclick="logout()">⎋</button>
     </div>
-  </div>
 
-  <!-- 3. FAB BUTTON -->
-  <button class="fab" onclick="showUserList()">+</button>
+    <div class="search-area">
+        <input type="text" id="searchChat" placeholder="Search conversations...">
+    </div>
 
-  <!-- 4. USER LIST POPUP - shows when + is clicked -->
-  <div id="userListPanel" class="user-search-panel">
-  <div class="panel-header">
-    <button onclick="closeUserList()">←</button>
-    <h3>Find Users</h3>
-  </div>
-  <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
-  <div id="userList"></div>
-  <p id="noUsersMsg" style="display:none; text-align:center; padding:20px; color:#999;">No users found</p>
+    <div class="conversation-list" id="conversationList">
+        <div class="empty-chat">
+            <img src="NEXA.png" width="120">
+            <h2>No conversations yet</h2>
+            <p>Tap the + button below to start your first conversation.</p>
+        </div>
+    </div>
+
+    <button class="fab" id="newChatBtn">+</button>
 </div>
+
+<!-- Friend/User Search Panel -->
+<div class="user-search-panel" id="userPanel">
+    <div class="panel-header">
+        <button id="closePanel">←</button>
+        <h2 id="panelTitle">Friends</h2>
+    </div>
+    
+    <div class="panel-tabs">
+        <button class="tab-btn active" data-tab="friends">My Friends</button>
+        <button class="tab-btn" data-tab="all">Add Friend</button>
+    </div>
+
+    <input type="text" id="findUser" placeholder="Search...">
+    
+    <div id="friendsList" class="tab-content active"></div>
+    <div id="allUsers" class="tab-content"></div>
 </div>
 
+
+<!-- FIREBASE LIBS -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<!-- YOUR CONFIG -->
 <script src="firebase.js"></script>
+
+<!-- YOUR APP -->
 <script src="chat.js"></script>
+<script src="popup.js"></script>
 </body>
 </html>
