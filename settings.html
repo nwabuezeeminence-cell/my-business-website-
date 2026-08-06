@@ -1,241 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXA Settings</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="settings.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="chat-dark.css?v=6">
+<link rel="stylesheet" href="popup.css?v=6">
+<style>
+    .settings-container { padding: 20px; padding-bottom: 100px; }
+    .settings-card {
+        background: #1f1f1f;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .settings-title { 
+        font-size: 28px; 
+        font-weight: 700; 
+        color: #8b5cf6; 
+        margin-bottom: 20px;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .card-title { 
+        font-size: 18px; 
+        font-weight: 600; 
+        color: #8b5cf6; 
+        margin-bottom: 15px;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .btn-purple {
+        width: 100%; padding: 14px; margin: 8px 0;
+        background: #ede9fe; color: #7c3aed;
+        border: none; border-radius: 12px;
+        font-weight: 600; font-size: 15px;
+        cursor: pointer;
+    }
+    .setting-row {
+        display: flex; justify-content: space-between; align-items: center;
+        color: #aaa; padding: 12px 0;
+    }
+    .setting-row input[type="checkbox"] {
+        width: 20px; height: 20px; accent-color: #8b5cf6;
+    }
+    .btn-logout {
+        width: 100%; padding: 16px;
+        background: #ec4899; color: white;
+        border: none; border-radius: 14px;
+        font-weight: 700; font-size: 16px;
+        cursor: pointer; margin-top: 10px;
+    }
+    .bottom-nav {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        background: #000; display: flex; justify-content: space-around;
+        padding: 10px 0; border-top: 1px solid #222;
+    }
+    .nav-item { color: #888; text-align: center; font-size: 12px; cursor: pointer; }
+    .nav-item.active { color: #8b5cf6; }
+</style>
 </head>
+<body class="dark">
 
+<div class="settings-container">
+    <h1 class="settings-title">⚙️ Settings</h1>
 
-<body>
+    <!-- ACCOUNT -->
+    <div class="settings-card">
+        <h2 class="card-title">👤 Account</h2>
+        <button class="btn-purple" id="editProfileBtn">Edit Profile</button>
+        <button class="btn-purple" id="changePasswordBtn">Change Password</button>
+    </div>
 
+    <!-- APPEARANCE -->
+    <div class="settings-card">
+        <h2 class="card-title">🎨 Appearance</h2>
+        <div class="setting-row">
+            <span>Dark Mode</span>
+            <input type="checkbox" id="darkMode">
+        </div>
+    </div>
 
-<div class="settings-page">
+    <!-- NOTIFICATIONS -->
+    <div class="settings-card">
+        <h2 class="card-title">🔔 Notifications</h2>
+        <div class="setting-row">
+            <span>Allow Notifications</span>
+            <input type="checkbox" id="notifications" checked>
+        </div>
+    </div>
 
+    <!-- PRIVACY -->
+    <div class="settings-card">
+        <h2 class="card-title">🔒 Privacy</h2>
+        <div class="setting-row">
+            <span>Show Online Status</span>
+            <input type="checkbox" id="onlineStatus" checked>
+        </div>
+    </div>
 
-<header class="settings-header">
+    <!-- LOGOUT -->
+    <button class="btn-logout" onclick="logout()">⮌ Logout</button>
+</div>
 
-<h2>
-⚙️ Settings
-</h2>
-
-</header>
-
-
-
-<div class="settings-card">
-
-
-<h3>
-<i class="fas fa-user"></i>
-Account
-</h3>
-
-
-<button onclick="goProfile()">
-
-Edit Profile
-
-</button>
-
-
-<button onclick="changePassword()">
-
-Change Password
-
-</button>
-
-
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+    <div class="nav-item" onclick="location='home.html'">🏠<br>Home</div>
+    <div class="nav-item" onclick="location='friends.html'">👥<br>Friends</div>
+    <div class="nav-item" onclick="location='chat.html'">💬<br>Chats</div>
+    <div class="nav-item" onclick="location='alerts.html'">🔔<br>Alerts</div>
+    <div class="nav-item active">👤<br>Profile</div>
 </div>
 
 
-
-
-<div class="settings-card">
-
-
-<h3>
-<i class="fas fa-palette"></i>
-Appearance
-</h3>
-
-
-<div class="setting-row">
-
-<span>
-Dark Mode
-</span>
-
-
-<input 
-type="checkbox"
-id="darkModeToggle">
-
-
-</div>
-
-
-</div>
-
-
-
-
-<div class="settings-card">
-
-
-<h3>
-<i class="fas fa-bell"></i>
-Notifications
-</h3>
-
-
-<div class="setting-row">
-
-
-<span>
-Allow Notifications
-</span>
-
-
-<input 
-type="checkbox"
-id="notificationToggle"
-checked>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="settings-card">
-
-
-<h3>
-<i class="fas fa-lock"></i>
-Privacy
-</h3>
-
-
-<div class="setting-row">
-
-
-<span>
-Show Online Status
-</span>
-
-
-<input 
-type="checkbox"
-id="onlineToggle"
-checked>
-
-
-</div>
-
-
-</div>
-
-
-
-
-<button id="logoutBtn"
-class="logout-btn">
-
-<i class="fas fa-sign-out-alt"></i>
-
-Logout
-
-</button>
-
-
-
-</div>
-
-
-
-<nav class="bottom-nav">
-
-
-<a href="index.html">
-
-<i class="fas fa-home"></i>
-
-Home
-
-</a>
-
-
-<a href="friends.html">
-
-<i class="fas fa-user-friends"></i>
-
-Friends
-
-</a>
-
-
-<a href="chat.html">
-
-<i class="fas fa-comments"></i>
-
-Chats
-
-</a>
-
-
-<a href="notifications.html">
-
-<i class="fas fa-bell"></i>
-
-Alerts
-
-</a>
-
-
-<a href="profile.html">
-
-<i class="fas fa-user"></i>
-
-Profile
-
-</a>
-
-
-</nav>
-
-
-
-
+<!-- FIREBASE LIBS -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-
+<!-- YOUR CONFIG -->
 <script src="firebase.js"></script>
 
+<!-- YOUR APP -->
 <script src="settings.js"></script>
-
-
 </body>
-<script src="app-settings.js"></script>
-
 </html>
