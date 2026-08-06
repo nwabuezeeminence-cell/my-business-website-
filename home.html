@@ -1,64 +1,83 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | NEXA</title>
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="menu.css?v=3">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="theme-color" content="#E94560">
+</head>
+<body style="background:#0b0b0f; color:#e9eef5; padding-bottom:80px;">
 
-<header class="home-header">
-
+<header class="home-header" style="display:flex; justify-content:space-between; align-items:center; padding:20px; background:#151821; border-bottom:1px solid #232838;">
     <div class="welcome">
-        <h2>Good Morning, <span id="userName">User</span> 👋</h2>
-        <p>Welcome back to NEXA</p>
+        <h2 style="margin:0; font-size:20px;">Good Morning, <span id="userName">User</span> 👋</h2>
+        <p style="margin:0; color:#8a92a6; font-size:14px;">Welcome back to NEXA</p>
     </div>
-
-    <div class="header-icons">
+    <div class="header-icons" style="display:flex; gap:20px; font-size:20px; color:#8a92a6;">
         <i class="fas fa-search"></i>
         <i class="fas fa-bell"></i>
     </div>
-
 </header>
 
-<div class="dashboard">
-
-    <div class="quick-actions">
-
-        <div class="action-card" id="newChat">
-            💬
-            <span>New Chat</span>
+<div class="dashboard" style="padding:20px;">
+    <div class="quick-actions" style="display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-bottom:30px;">
+        <div class="action-card" id="newChat" style="background:#151821; padding:20px 10px; border-radius:16px; text-align:center; border:1px solid #232838; cursor:pointer;">
+            💬<br><span style="font-size:12px;">New Chat</span>
         </div>
-
-        <div class="action-card">
-            👥
-            <span>Groups</span>
+        <div class="action-card" style="background:#151821; padding:20px 10px; border-radius:16px; text-align:center; border:1px solid #232838;">
+            👥<br><span style="font-size:12px;">Groups</span>
         </div>
-
-        <div class="action-card">
-            🌍
-            <span>Communities</span>
+        <div class="action-card" style="background:#151821; padding:20px 10px; border-radius:16px; text-align:center; border:1px solid #232838;">
+            🌍<br><span style="font-size:12px;">Communities</span>
         </div>
-
-        <div class="action-card">
-            📞
-            <span>Calls</span>
+        <div class="action-card" style="background:#151821; padding:20px 10px; border-radius:16px; text-align:center; border:1px solid #232838;">
+            📞<br><span style="font-size:12px;">Calls</span>
         </div>
-
     </div>
 
-    <h3>Recent Chats</h3>
-
+    <h3 style="margin-bottom:15px;">Recent Chats</h3>
     <div id="recentChats"></div>
 
-    <h3>Notifications</h3>
-
+    <h3 style="margin:30px 0 15px 0;">Notifications</h3>
     <div id="recentNotifications"></div>
-
 </div>
 
-<nav class="bottom-nav">
-
-    <a class="active">🏠<br>Home</a>
-    <a>💬<br>Chats</a>
-    <a>🔔<br>Alerts</a>
-    <a>👥<br>Groups</a>
-    <a>⚙<br>Settings</a>
-
+<nav class="bottom-nav" style="position:fixed; bottom:0; left:0; right:0; background:#151821; display:flex; justify-content:space-around; padding:10px 0; border-top:1px solid #232838;">
+    <a class="active" style="color:#E94560; text-align:center; font-size:12px; text-decoration:none;">🏠<br>Home</a>
+    <a href="chats.html" style="color:#8a92a6; text-align:center; font-size:12px; text-decoration:none;">💬<br>Chats</a>
+    <a href="alerts.html" style="color:#8a92a6; text-align:center; font-size:12px; text-decoration:none;">🔔<br>Alerts</a>
+    <a href="groups.html" style="color:#8a92a6; text-align:center; font-size:12px; text-decoration:none;">👥<br>Groups</a>
+    <a href="settings.html" style="color:#8a92a6; text-align:center; font-size:12px; text-decoration:none;">⚙<br>Settings</a>
 </nav>
-<script src="app-settings.js"></script>
 
+<!-- LOAD FIREBASE FIRST -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+
+<script>
+const dbRef = firebase.database();
+
+// GET CURRENT USER NAME
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        dbRef.ref("users/" + user.uid).once("value").then((snap) => {
+            if(snap.exists()){
+                document.getElementById("userName").textContent = snap.val().name;
+            }
+        });
+    } else {
+        location.href = "Login.html"; // kick out if not logged in
+    }
+});
+
+document.getElementById("newChat").onclick = () => {
+    location.href = "add-members.html";
+}
+</script>
 </body>
+</html>
