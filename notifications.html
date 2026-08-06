@@ -1,61 +1,79 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications | NEXA Digital Services</title>
+<meta name="theme-color" content="#E94560">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<!-- CSS -->
+<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="menu.css?v=5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<title>NEXA Notifications</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="notifications.css">
-
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
 </head>
-
 
 <body>
 
+<!-- ===== HEADER ===== -->
+<header class="topbar">
+    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
+    <div class="logo">
+        <img src="NEXA.png" alt="NEXA Logo">
+        <h2>NEXA Digital Services</h2>
+    </div>
+    <div class="top-icons">
+        <a href="notifications.html"><i class="fas fa-bell"></i><span id="notifCount">0</span></a>
+        <a href="profile.html"><i class="fas fa-user-circle"></i></a>
+    </div>
+</header>
 
-<div class="notification-page">
-
-
-<h2>
-🔔 Notifications
-</h2>
-
-
-<div id="notificationList">
-
-<div class="empty-card">
-
-No notifications yet.
-
+<!-- ===== SIDE MENU ===== -->
+<div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <hr>
+    <a href="community.html"><i class="fas fa-users"></i> Community</a>
+    <a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <hr>
+    <a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
 </div>
 
+<!-- ===== NOTIFICATIONS ===== -->
+<section class="section">
+    <div class="container" style="max-width:700px; margin:auto;">
+        <h2 style="color:var(--nexa); text-align:center; margin-bottom:25px;">
+            <i class="fas fa-bell"></i> Notifications
+        </h2>
 
-</div>
+        <div id="notificationList">
+            <div class="card" style="text-align:center; color:var(--gray);">
+                <i class="fas fa-bell-slash" style="font-size:40px; margin-bottom:10px; color:var(--border);"></i>
+                <p>No notifications yet.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<footer>
+    <div class="container">
+        <p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
+    </div>
+</footer>
 
-</div>
-
-
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-
-<script src="firebase.js"></script>
-
+<!-- JS -->
+<script src="menu.js"></script>
+<script src="app-settings.js"></script>
 <script src="notifications.js"></script>
-
-
 </body>
-
 </html>
