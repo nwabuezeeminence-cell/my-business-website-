@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXA Alerts</title>
+<link rel="stylesheet" href="chat-dark.css?v=6">
+<style>
+   .page { padding: 20px; padding-bottom: 100px; }
+   .title { font-size: 28px; font-weight: 700; color: #8b5cf6; margin-bottom: 20px; }
+   .alert { background: #1f1f1f; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
+   .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #222; }
+   .nav-item { color: #888; text-align: center; font-size: 12px; cursor: pointer; }
+   .nav-item.active { color: #8b5cf6; }
+</style>
+</head>
+<body class="dark">
+
+<div class="page">
+    <h1 class="title">🔔 Alerts</h1>
+    <div id="alertsList">
+        <p style="color:#777; text-align:center;">No new alerts</p>
+    </div>
+</div>
+
+<div class="bottom-nav">
+    <div class="nav-item" onclick="location='home.html'">🏠<br>Home</div>
+    <div class="nav-item" onclick="location='friends.html'">👥<br>Friends</div>
+    <div class="nav-item" onclick="location='chat.html'">💬<br>Chats</div>
+    <div class="nav-item active">🔔<br>Alerts</div>
+    <div class="nav-item" onclick="location='settings.html'">👤<br>Profile</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+<script>
+auth.onAuthStateChanged(u => { 
+    if(!u) location='index.html'; 
+    // load alerts from db.ref('notifications/' + u.uid)
+});
+</script>
+</body>
+</html>
