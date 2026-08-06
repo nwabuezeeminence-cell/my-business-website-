@@ -20,10 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const postBoxImg = document.querySelector(".post-box img");
                 if(postBoxImg) postBoxImg.src = currentUserData.photoURL || 'https://i.imgur.com/6VBx3io.png';
             });
-            loadPosts();
-            if(usersList) loadUsers(); // only run if it exists
-        } else {
-            location.href = "login.html";
         }
     });
 
