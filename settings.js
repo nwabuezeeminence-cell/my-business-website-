@@ -1,237 +1,43 @@
-// ===== NEXA Settings =====
-
-const auth = firebase.auth();
-const db = firebase.database();
-
-
 let currentUser = null;
 
+auth.onAuthStateChanged(user => {
+    if(!user) return window.location.href = 'index.html';
+    currentUser = user;
+    loadUserSettings();
+});
 
+function loadUserSettings(){
+    db.ref('users/' + currentUser.uid).once('value').then(snap => {
+        let u = snap.val() || {};
+        document.getElementById('darkMode').checked = u.darkMode || false;
+        document.getElementById('notifications').checked = u.notifications !== false;
+        document.getElementById('onlineStatus').checked = u.onlineStatus !== false;
+    })
+}
 
-auth.onAuthStateChanged((user)=>{
+document.getElementById('darkMode').onchange = e => {
+    db.ref('users/' + currentUser.uid + '/darkMode').set(e.target.checked);
+    document.body.classList.toggle('dark', e.target.checked);
+}
+document.getElementById('notifications').onchange = e => {
+    db.ref('users/' + currentUser.uid + '/notifications').set(e.target.checked);
+}
+document.getElementById('onlineStatus').onchange = e => {
+    db.ref('users/' + currentUser.uid + '/onlineStatus').set(e.target.checked);
+}
 
-
-    if(!user){
-
-        window.location.href="login.html";
-
-        return;
-
+document.getElementById('editProfileBtn').onclick = () => {
+    window.location.href = 'profile.html';
+}
+document.getElementById('changePasswordBtn').onclick = () => {
+    let newPass = prompt("Enter new password:");
+    if(newPass && newPass.length >= 6) {
+        auth.currentUser.updatePassword(newPass)
+        .then(() => alert("Password updated!"))
+        .catch(err => alert(err.message));
     }
-
-
-    currentUser=user;
-
-
-    loadSettings();
-
-
-});
-
-
-
-
-// Load saved settings
-
-function loadSettings(){
-
-
-    db.ref(
-    "settings/" + currentUser.uid
-    )
-
-    .once("value")
-
-    .then(snapshot=>{
-
-
-        const settings=snapshot.val();
-
-
-
-        if(!settings) return;
-
-
-
-        document.getElementById("darkModeToggle")
-        .checked=settings.darkMode || false;
-
-
-
-        document.getElementById("notificationToggle")
-        .checked=
-        settings.notifications !== false;
-
-
-
-        document.getElementById("onlineToggle")
-        .checked=
-        settings.showOnline !== false;
-
-
-
-        if(settings.darkMode){
-
-            document.body.classList.add("dark-mode");
-
-        }
-
-
-
-    });
-
-
 }
 
-
-
-
-// Dark Mode
-
-document
-.getElementById("darkModeToggle")
-.onclick=function(){
-
-
-const enabled=this.checked;
-
-
-document.body.classList.toggle(
-"dark-mode",
-enabled
-);
-
-
-saveSetting(
-"darkMode",
-enabled
-);
-
-
-};
-
-
-
-
-// Notification Toggle
-
-document
-.getElementById("notificationToggle")
-.onclick=function(){
-
-
-saveSetting(
-"notifications",
-this.checked
-);
-
-
-};
-
-
-
-
-// Online Status
-
-document
-.getElementById("onlineToggle")
-.onclick=function(){
-
-
-saveSetting(
-"showOnline",
-this.checked
-);
-
-
-};
-
-
-
-
-
-function saveSetting(key,value){
-
-
-db.ref(
-"settings/" + currentUser.uid + "/" + key
-)
-
-.set(value);
-
-
+function logout(){
+    auth.signOut().then(() => window.location.href = 'index.html');
 }
-
-
-
-
-
-function goProfile(){
-
-window.location.href="profile.html";
-
-}
-
-
-
-
-function changePassword(){
-
-
-const password =
-prompt(
-"Enter new password"
-);
-
-
-
-if(!password) return;
-
-
-
-currentUser
-.updatePassword(password)
-.then(()=>{
-
-
-showPopup(
-"Password Changed",
-"Your password was updated."
-);
-
-
-});
-
-
-}
-
-
-
-
-
-document
-.getElementById("logoutBtn")
-.onclick=function(){
-
-
-db.ref(
-"users/" + currentUser.uid
-)
-
-.update({
-
-online:false
-
-});
-
-
-
-auth.signOut()
-.then(()=>{
-
-window.location.href="login.html";
-
-});
-
-
-};
