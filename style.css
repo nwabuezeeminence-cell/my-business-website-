@@ -1,96 +1,103 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background: #1A1A2E !important; /* FORCE DARK BG */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:root{
+    --bg: #121212;
+    --card: #1E1E1E;
+    --border: #2A2A2A;
+    --text: #E0E0E0;
+    --gray: #A0A0A0;
+    --nexa: #E94560;
 }
 
-.form-box {
-  background: white !important;
-  padding: 40px 30px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 100% !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+body{
+    background: var(--bg);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text);
 }
 
-/* Only make it a card on big screens */
-@media (min-width: 600px) {
-  .form-box {
-    max-width: 480px !important;
-    height: auto !important;
-    border-radius: 20px !important;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
-  }
+/* ===== ONLY FOR HOME/OTHER PAGES, NOT CHAT ===== */
+body:not(.chat-page-body) .home-header{
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.form-box img { width: 130px; margin: 0 auto 15px; display:block; }
-.form-box h2 { font-size: 32px; text-align:center; color:#1A1A2E; margin-bottom:5px; }
-.form-box h3 { font-size: 20px; text-align:center; color:#E94560; margin-bottom:25px; }
-.form-box input { padding: 18px; font-size: 18px; margin: 12px 0; border-radius: 12px; border: 2px solid #EEE; }
-.button_1 { padding: 18px; font-size: 20px; background: #E94560; color:white; border:none; border-radius:12px; font-weight:800; margin-top:20px; }
-.form-box textarea {
-  width: 100%;
-  padding: 16px 18px;
-  margin: 14px 0;
-  border: 2px solid #EEE;
-  border-radius: 12px;
-  font-size: 17px;
-  font-family: inherit;
+body:not(.chat-page-body) .action-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: 0.2s;
 }
-.form-box input[type="file"] {
-  border: none;
-  padding: 10px 0;
-  font-size: 15px;
+body:not(.chat-page-body) .action-card:hover{
+    background: #2A2A2A;
+    border-color: var(--nexa);
 }
-.avatar-upload {
-  text-align: center;
-  margin: 20px 0 30px 0;
+
+body:not(.chat-page-body) .bottom-nav{
+    background: var(--card);
+    border-top: 1px solid var(--border);
 }
-.avatar-upload img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #E94560; /* PINK BORDER */
-  margin-bottom: 10px;
+body:not(.chat-page-body) .bottom-nav a{ color: var(--gray); }
+body:not(.chat-page-body) .bottom-nav a.active{ color: var(--nexa); }
+
+body:not(.chat-page-body) .header-icons i{ color: var(--gray); }
+body:not(.chat-page-body) .header-icons i:hover{ color: var(--text); }
+
+/* ===== GLOBAL BUTTONS - OK FOR ALL PAGES ===== */
+.btn-primary{
+    display:inline-block;
+    padding:14px 28px;
+    background:var(--nexa);
+    color:white;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.2s;
+    border:none;
+    cursor:pointer;
+    margin:10px auto 0;
 }
-.avatar-upload input[type="file"] {
-  display: none; /* HIDE THE UGLY INPUT */
+.btn-primary:hover{
+    background:#ff2e4f;
+    transform:translateY(-2px);
 }
-.avatar-upload label {
-  display: inline-block;
-  color: #E94560;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
+
+/* ===== OTHER PAGES ONLY ===== */
+body:not(.chat-page-body) .card-grid{ text-align:center; }
+body:not(.chat-page-body) .card{ text-align:center; }
+body:not(.chat-page-body) .card h3, .card p, .card h4{ text-align:center; }
+
+input:focus, textarea:focus{
+    outline:none;
+    border-color:var(--nexa);
 }
-.avatar-upload {
-  text-align: center;
-  margin: 10px 0 25px 0;
+
+.notif-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:0.3s;
 }
-.avatar-upload img {
-  width: 160px; /* BIGGER */
-  height: 160px; /* BIGGER */
-  border-radius: 50%;
-  object-fit: cover; /* THIS MAKES IT "FULL SEEN" NO CROPPING */
-  border: 4px solid #E94560;
-  background: #eee;
-}
-.avatar-upload input[type="file"] { display: none; }
-.avatar-upload label {
-  display: block;
-  color: #E94560;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 8px;
+.notif-card:hover{ border-color:var(--nexa); }
+.notif-card.unread{ border-left:4px solid var(--nexa); }
+.notif-time{ font-size:12px; color:var(--gray); }
+
+#notifCount{
+    background:var(--nexa);
+    color:#fff;
+    font-size:10px;
+    padding:2px 6px;
+    border-radius:10px;
+    position:absolute;
+    top:5px;
+    right:10px;
+    display:none;
 }
