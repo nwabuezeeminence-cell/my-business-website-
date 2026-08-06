@@ -3,110 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile | NEXA</title>
-<style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #1A1A2E; font-family: 'Segoe UI', Arial, sans-serif; color: #fff; }
- .profile-page { width: 100%; min-height: 100vh; }
- .cover-photo { position: relative; width: 100%; height: 200px; background: #16213E; overflow: hidden; }
- .cover-photo img { width: 100%; height: 100%; object-fit: cover; }
- .edit-cover { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; padding: 8px 12px; border-radius: 8px; font-size: 14px; cursor: pointer; }
- .profile-card { background: white; color: #1A1A2E; border-radius: 20px 20px 0 0; margin-top: -20px; padding: 70px 20px 30px 20px; position: relative; min-height: 80vh; }
- .profile-image { position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 120px; height: 120px; }
- .profile-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid white; background: #eee; }
- .profile-image label { position: absolute; bottom: 5px; right: 5px; background: #E94560; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid white; font-size: 16px; }
-  #fullName { text-align: center; font-size: 24px; font-weight: 800; margin-bottom: 5px; }
-  #username { text-align: center; color: #777; margin-bottom: 20px; }
- .profile-card input,.profile-card textarea { width: 100%; padding: 14px; margin: 8px 0; border: 2px solid #EEE; border-radius: 10px; font-size: 16px; color: #1A1A2E; }
- .profile-card label { font-size: 14px; color: #555; margin-top: 5px; display: block; }
-  #saveProfile { width: 100%; padding: 16px; background: #E94560; color: white; border: none; border-radius: 10px; font-weight: 800; font-size: 18px; margin-top: 15px; cursor: pointer; }
-</style>
-</head>
-<body>
-<div class="profile-page">
-    <div class="cover-photo">
-        <img id="coverPreview" src="https://via.placeholder.com/800x200/16213E/FFFFFF?text=Cover+Photo">
-        <label class="edit-cover">
-            📷 Change Cover
-            <input type="file" id="coverInput" accept="image/*" hidden>
-        </label>
-    </div>
+<title>My Profile | NEXA Digital Services</title>
+<meta name="theme-color" content="#E94560">
 
-    <div class="profile-card">
-        <div class="profile-image">
-            <img id="profilePreview" src="https://i.imgur.com/6VBx3io.png">
-            <label>
-                📷
-                <input type="file" id="profileInput" accept="image/*" hidden>
-            </label>
-        </div>
+<!-- CSS -->
+<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="menu.css?v=5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        <h2 id="fullName">Loading...</h2>
-        <p id="username">@username</p>
-
-        <input type="text" id="surname" placeholder="Surname *">
-        <input type="text" id="firstname" placeholder="First Name *">
-        <input type="text" id="lastname" placeholder="Last Name *">
-        <input type="number" id="age" placeholder="Age *" min="10" max="100">
-        <label>Date of Birth *</label>
-        <input type="date" id="dob">
-        <input type="text" id="country" placeholder="Country *" value="Nigeria">
-        <input type="text" id="state" placeholder="State of Origin *">
-        <textarea id="bio" placeholder="Tell everyone about yourself..."></textarea>
-
-        <button id="saveProfile">Save Profile</button>
-    </div>
-</div>
-
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 <script src="firebase.js"></script>
+</head>
 
-<script>
-const auth = firebase.auth();
-const db = firebase.database();
-const storage = firebase.storage();
-let currentUser = null;
-let selectedProfileFile = null;
-let selectedCoverFile = null;
+<body>
 
-auth.onAuthStateChanged(user => {
-  if(user){
-    currentUser = user;
-    document.getElementById('username').innerText = '@' + user.email.split('@')[0];
-  } else {
-    window.location.href = 'login.html';
-  }
-});
+<!-- ===== HEADER ===== -->
+<header class="topbar">
+    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
+    <div class="logo">
+        <img src="NEXA.png" alt="NEXA Logo">
+        <h2>NEXA Digital Services</h2>
+    </div>
+    <div class="top-icons">
+        <a href="notifications.html" style="position:relative;"><i class="fas fa-bell"></i><span id="notifCount">0</span></a>
+        <a href="profile.html"><i class="fas fa-user-circle"></i></a>
+    </div>
+</header>
 
-document.getElementById('profileInput').addEventListener('change', function(e){
-  selectedProfileFile = e.target.files[0];
-  if(selectedProfileFile){
-    const reader = new FileReader();
-    reader.onload = (event) => { document.getElementById('profilePreview').src = event.target.result; }
-    reader.readAsDataURL(selectedProfileFile);
-  }
-});
+<!-- ===== SIDE MENU ===== -->
+<div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <hr>
+    <a href="community.html"><i class="fas fa-users"></i> Community</a>
+    <a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <hr>
+    <a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
+</div>
 
-document.getElementById('coverInput').addEventListener('change', function(e){
-  selectedCoverFile = e.target.files[0];
-  if(selectedCoverFile){
-    const reader = new FileReader();
-    reader.onload = (event) => { document.getElementById('coverPreview').src = event.target.result; }
-    reader.readAsDataURL(selectedCoverFile);
-  }
-});
+<!-- ===== PROFILE ===== -->
+<section class="section">
+    <div class="container" style="max-width:750px; margin:auto;">
+        
+        <div class="card" style="padding:0; overflow:hidden;">
+            <!-- COVER -->
+            <div class="cover-photo" style="position:relative; height:220px; background:#2A2A2A;">
+                <img id="coverPreview" src="cover.jpg" style="width:100%; height:100%; object-fit:cover;">
+                <label class="edit-cover" style="position:absolute; bottom:10px; right:10px; background:var(--nexa); color:#fff; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:14px;">
+                    <i class="fas fa-camera"></i> Change Cover
+                    <input type="file" id="coverInput" accept="image/*" hidden>
+                </label>
+            </div>
 
-document.getElementById('saveProfile').addEventListener('click', async () => {
-  const surname = document.getElementById('surname').value;
-  const firstname = document.getElementById('firstname').value;
-  const lastname = document.getElementById('lastname').value;
-  const age = document.getElementById('age').value;
-  const dob = document.getElementById('dob').value;
-  const country = document.getElementById('country').value;
-  const state = document.getElementById('state').value;
-  const bio = document.getElementById('bio').value;
+            <!-- PROFILE BODY -->
+            <div style="padding:25px;">
+                <!-- AVATAR -->
+                <div class="profile-image" style="position:relative; width:130px; height:130px; margin:-65px auto 15px auto;">
+                    <img id="profilePreview" src="avatar.png" style="width:130px; height:130px; border-radius:50%; border:4px solid var(--card); object-fit:cover; background:var(--bg);">
+                    <label style="position:absolute; bottom:5px; right:5px; background:var(--nexa); width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#fff;">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" id="profileInput" accept="image/*" hidden>
+                    </label>
+                </div>
 
-  if(!surname ||!firstname ||!lastname ||!age ||!dob ||!country ||
+                <!-- NAME + STATS -->
+                <div style="text-align:center; margin-bottom:20px;">
+                    <h2 id="fullName" style="color:var(--text); margin-bottom:5px;">Loading...</h2>
+                    <p id="username" style="color:var(--gray); margin-bottom:10px;">@username</p>
+                    <p id="email" style="color:var(--gray); font-size:14px;"><i class="fas fa-envelope"></i> loading...</p>
+                </div>
+
+                <!-- STATS ROW -->
+                <div style="display:flex; justify-content:space-around; text-align:center; margin:20px 0; padding:15px; background:#2A2A2A; border-radius:12px;">
+                    <div>
+                        <h3 id="orderCount" style="color:var(--nexa); margin:0;">0</h3>
+                        <p style="color:var(--gray); font-size:12px; margin:0;">Orders</p>
+                    </div>
+                    <div>
+                        <h3 id="memberSince" style="color:var(--nexa); margin:0;">2026</h3>
+                        <p style="color:var(--gray); font-size:12px; margin:0;">Joined</p>
+                    </div>
+                    <div>
+                        <h3 id="accountType" style="color:var(--nexa); margin:0;">Student</h3>
+                        <p style="color:var(--gray); font-size:12px; margin:0;">Type</p>
+                    </div>
+                </div>
+
+                <!-- FORM FIELDS -->
+                <div style="display:grid; gap:15px;">
+                    <div>
+                        <label style="color:var(--text); font-weight:600; display:block; margin-bottom:5px;">Phone Number</label>
+                        <input id="phone" type="text" placeholder="+2348012345678" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
+                    </div>
+                    <div>
+                        <label style="color:var(--text); font-weight:600; display:block; margin-bottom:5px;">Location</label>
+                        <input id="location" type="text" placeholder="Lagos, Nigeria" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
+                    </div>
+                    <div>
+                        <label style="color:var(--text); font-weight:600; display:block; margin-bottom:5px;">WhatsApp</label>
+                        <input id="whatsapp" type="text" placeholder="+2348012345678" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
+                    </div>
+                    <div>
+                        <label style="color:var(--text); font-weight:600; display:block; margin-bottom:5px;">Instagram</label>
+                        <input id="instagram" type="text" placeholder="@yourhandle" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
+                    </div>
+                    <div>
+                        <label style="color:var(--text); font-weight:600; display:block; margin-bottom:5px;">About Me</label>
+                        <textarea id="bio" placeholder="Tell everyone about yourself..." style="width:100%; min-height:100px; padding:12px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text); resize:none;"></textarea>
+                    </div>
+                </div>
+
+                <button id="saveProfile" class="btn-primary" style="margin-top:20px; width:100%;">
+                    <i class="fas fa-save"></i> Save Profile
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- JS -->
+<script src="menu.js"></script>
+<script src="app-settings.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>
