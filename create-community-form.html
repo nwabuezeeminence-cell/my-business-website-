@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Community | NEXA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+    --bg:#0b0b0f; --card:#151821; --border:#232838; --text:#e9eef5; 
+    --gray:#8a92a6; --nexa:#E94560;
+}
+body{background:var(--bg); color:var(--text); font-family:sans-serif; margin:0; padding:0;}
+.header{padding:15px 20px; display:flex; align-items:center; gap:15px; background:var(--card); margin:10px; border-radius:12px;}
+.header i{font-size:20px; cursor:pointer;}
+.header h3{margin:0; font-size:18px;}
+.wrap{padding:0 20px;}
+.examples{color:var(--gray); font-size:14px; margin:20px 0 40px 0;} /* PINK: space */
+.examples span{color:var(--nexa); font-weight:bold;}
+
+/* BLUE: CIRCLE */
+.photo-wrap{text-align:center; margin:0 0 30px 0;}
+.photo-circle{
+    width:120px; height:120px; background:var(--card); border-radius:50%; 
+    margin:0 auto; position:relative; display:flex; align-items:center; 
+    justify-content:center; border:2px solid var(--border); cursor:pointer;
+}
+.photo-circle i.fa-users{font-size:45px; color:var(--gray);}
+.photo-circle.cam{
+    position:absolute; bottom:0; right:0; background:var(--nexa); color:white;
+    border-radius:50%; padding:8px; font-size:14px; border:3px solid var(--bg);
+}
+.photo-circle img{width:100%; height:100%; border-radius:50%; object-fit:cover;}
+
+.input-group{margin-bottom:20px;}
+.input-group input,.input-group textarea{
+    width:100%; background:var(--card); border:1px solid var(--border);
+    border-radius:12px; color:var(--text); padding:14px; font-size:15px;
+    outline:none; box-sizing:border-box;
+}
+.counter{text-align:right; font-size:12px; color:var(--gray); margin-top:5px;}
+
+/* GREEN: BUTTON RIGHT */
+.btn-float{
+    background:var(--nexa); color:white; border:none; width:56px; height:56px;
+    border-radius:50%; position:fixed; bottom:20px; right:20px; font-size:20px;
+    cursor:pointer; box-shadow:0 4px 12px rgba(233,69,96,0.4);
+    display:flex; align-items:center; justify-content:center; z-index:9999;
+}
+</style>
+</head>
+<body>
+
+<header class="header"> <!-- RED: FIXED BACK -->
+    <i class="fas fa-arrow-left" onclick="history.back()"></i>
+    <h3>New community</h3>
+</header>
+
+<div class="wrap">
+    <p class="examples"><span>See examples</span> of different communities</p> <!-- PINK -->
+    
+    
+    <!-- BLUE: CIRCLE WITH FILE UPLOAD -->
+<div class="photo-wrap">
+    <label for="photoUpload" class="photo-circle">
+        <img id="photoPreview" src="" style="display:none;">
+        <i id="peopleIcon" class="fas fa-users"></i>
+        <i id="cameraIcon" class="fas fa-camera cam"></i>
+    </label>
+    <input id="photoUpload" type="file" accept="image/*" style="display:none;" onchange="uploadPhoto(event)">
+    <input id="communityPhoto" type="hidden">
+</div>
+
+    <div class="input-group">
+        <input id="communityName" placeholder="Community name" maxlength="100" oninput="document.getElementById('c1').innerText=this.value.length">
+        <p class="counter"><span id="c1">0</span>/100</p>
+    </div>
+    
+    <div class="input-group">
+        <textarea id="communityDesc" placeholder="Hi everyone! This community is for members to chat..." maxlength="2048" oninput="document.getElementById('c2').innerText=this.value.length" rows="5"></textarea>
+        <p class="counter"><span id="c2">0</span>/2048</p>
+    </div>
+</div>
+
+<button class="btn-float" onclick="createCommunity()"><i class="fas fa-arrow-right"></i></button> <!-- GREEN -->
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script> 
+<script>
+const dbRef = firebase.database();
+let currentUser = null;
+
+firebase.auth().onAuthStateChanged(user => { 
+    if(user){ 
+        currentUser = user; 
+    } else { 
+        location.href = "login.html"; 
+    } 
+});
+
+async function uploadPhoto(event){
+    const file = event.target.files[0];
+    if(!file) return;
+
+    // Show preview immediately
+    const reader = new FileReader();
+    reader.onload = e => {
+        document.getElementById("photoPreview").src = e.target.result;
+        document.getElementById("photoPreview").style.display = "block";
+        document.getElementById("peopleIcon").style.display = "none";
+        document.getElementById("cameraIcon").style.display = "none";
+    }
+    reader.readAsDataURL(file);
+
+    // Upload to imgbb to get URL
+    const formData = new FormData();
+    formData.append("image", file);
+    
+    alert("Uploading photo...");
+    const res = await fetch("https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY", {
+        method: "POST",
+        body: formData
+    });
+    const data = await res.json();
+    
+    if(data.success){
+        document.getElementById("communityPhoto").value = data.data.url; // Save the URL
+        alert("Photo uploaded!");
+    } else {
+        alert("Upload failed");
+    }
+}
+
+function createCommunity(){
+    if(!currentUser){ alert("Please wait..."); return; }
+    const name = document.getElementById("communityName").value.trim();
+    const desc = document.getElementById("communityDesc").value.trim();
+    const photo = document.getElementById("communityPhoto").value.trim();
+    if(!name){ alert("Community name is required"); return; }
+
+    dbRef.ref("communities").push().set({
+        name: name, 
+        desc: desc, 
+        photo: photo, 
+        createdBy: currentUser.uid, 
+        createdAt: Date.now(),
+        members: { 
+            [currentUser.uid]: { 
+                name: currentUser.email.split('@')[0], 
+                email: currentUser.email, 
+                role: "admin", 
+                joinedAt: Date.now() 
+            }
+        } // <-- THIS BRACE WAS MISSING
+    }).then(() => { 
+        alert("Community Created!"); 
+        location.href = "communities.html"; 
+    }).catch(err => alert(err.message));
+}
+</script>
+</body>
+</html>
