@@ -1,25 +1,39 @@
-function showPopup(title,message,icon="✓"){
+function showPopup(title, message, icon="✓"){
+    const overlay = document.getElementById("popupOverlay");
+    const titleEl = document.getElementById("popupTitle");
+    const msgEl = document.getElementById("popupMessage");
+    const iconEl = document.getElementById("popupIcon");
+    const btn = document.getElementById("popupBtn");
 
-    document.getElementById("popupTitle").textContent=title;
+    // Only run if popup exists on this page
+    if(!overlay || !titleEl || !msgEl || !iconEl) return;
 
-    document.getElementById("popupMessage").textContent=message;
+    titleEl.textContent = title;
+    msgEl.textContent = message;
+    iconEl.textContent = icon;
+    overlay.classList.add("active");
 
-    document.getElementById("popupIcon").textContent=icon;
+    // Close button
+    if(btn){
+        btn.onclick = function(){
+            overlay.classList.remove("active");
+        }
+    }
 
-    document
-    .getElementById("popupOverlay")
-    .classList
-    .add("active");
-
+    // Auto close after 2 seconds
+    setTimeout(() => {
+        overlay.classList.remove("active");
+    }, 2000);
 }
 
-document
-.getElementById("popupButton")
-.onclick=function(){
-
-    document
-    .getElementById("popupOverlay")
-    .classList
-    .remove("active");
-
-}
+// Close when you click outside
+document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.getElementById("popupOverlay");
+    if(overlay){
+        overlay.addEventListener("click", (e) => {
+            if(e.target.id === "popupOverlay"){
+                overlay.classList.remove("active");
+            }
+        });
+    } // <-- YOU WERE MISSING THIS }
+}); // <-- AND THIS });
