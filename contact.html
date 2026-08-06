@@ -2,128 +2,106 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Contact Us | NEXA Digital Services</title>
-
 <meta name="description" content="Contact NEXA Digital Services for document formatting, PDF conversion, copywriting and digital support.">
-
+<meta name="theme-color" content="#E94560">
 <link rel="manifest" href="manifest.json">
 
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="menu.css">
+<!-- UPDATED CSS -->
+<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="menu.css?v=4">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<!-- EMAILJS + FIREBASE -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
 </head>
-
 <body>
 
+<!-- ===== HEADER ===== -->
 <header class="topbar">
-
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
-<div class="logo">
-    <img src="NEXA.png" alt="NEXA Logo">
-    <h2>NEXA Digital Services</h2>
-</div>
-
-<div class="top-icons">
-    <a href="notifications.html"><i class="fas fa-bell"></i></a>
-    <a href="profile.html"><i class="fas fa-user-circle"></i></a>
-</div>
-
+    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
+    <div class="logo">
+        <img src="NEXA.png" alt="NEXA Logo">
+        <h2>NEXA Digital Services</h2>
+    </div>
+    <div class="top-icons">
+        <a href="notifications.html"><i class="fas fa-bell"></i></a>
+        <a href="profile.html"><i class="fas fa-user-circle"></i></a>
+    </div>
 </header>
 
+<!-- ===== SIDE MENU ===== -->
 <div id="sideMenu" class="side-menu">
-
-<button class="close-btn" onclick="closeMenu()">✖</button>
-
-<a href="index.html"><i class="fas fa-home"></i> Home</a>
-<a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-<a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
-<a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
-
-<hr>
-
-<a href="community.html"><i class="fas fa-users"></i> Community</a>
-<a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
-<a href="groups.html"><i class="fas fa-user-friends"></i> Groups</a>
-<a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
-<a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-
-<hr>
-
-<a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
-
+    <button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+    <hr>
+    <a href="community.html"><i class="fas fa-users"></i> Community</a>
+    <a href="chat.html"><i class="fas fa-comments"></i> Chats</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <hr>
+    <a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>
 </div>
 
-<section class="page-header">
-
-<div class="container">
-
-<h1>Contact Us</h1>
-
-<p>We'd love to hear from you.</p>
-
-</div>
-
+<!-- ===== PAGE HEADER ===== -->
+<section class="section">
+    <div class="container" style="text-align:center;">
+        <h2 style="color:var(--nexa); font-size:32px;">Contact Us</h2>
+        <p class="subtext">We'd love to hear from you.</p>
+    </div>
 </section>
 
-<section class="container">
+<!-- ===== CONTACT FORM ===== -->
+<section class="section alt">
+    <div class="container" style="max-width:600px; margin:auto;">
+        
+        <form id="contactForm" class="card" style="text-align:left; padding:30px;">
+            <label style="color:var(--text); display:block; margin-bottom:6px;">Full Name</label>
+            <input type="text" id="name" required style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
 
-<form id="contactForm">
+            <label style="color:var(--text); display:block; margin-bottom:6px;">Email Address</label>
+            <input type="email" id="email" required style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
 
-<label>Full Name</label>
-<input type="text" id="name" required>
+            <label style="color:var(--text); display:block; margin-bottom:6px;">Subject</label>
+            <input type="text" id="subject" required style="width:100%; padding:12px; margin-bottom:15px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);">
 
-<label>Email Address</label>
-<input type="email" id="email" required>
+            <label style="color:var(--text); display:block; margin-bottom:6px;">Message</label>
+            <textarea id="message" rows="6" required style="width:100%; padding:12px; margin-bottom:20px; border-radius:10px; border:1px solid var(--border); background:#2A2A2A; color:var(--text);"></textarea>
 
-<label>Subject</label>
-<input type="text" id="subject" required>
+            <button type="submit" class="btn-primary" style="width:100%;">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
 
-<label>Message</label>
-<textarea id="message" rows="6" required></textarea>
+        <div style="text-align:center; margin-top:40px;">
+            <h3 style="color:var(--text);">Or contact us directly</h3>
+            <p style="color:var(--gray);"><strong>WhatsApp:</strong> +234 702 527 9121</p>
+            <a href="https://wa.me/2347025279121" class="btn-primary">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+        </div>
 
-<button type="submit" class="button_1">
-Send Message
-</button>
-
-</form>
-
-<br>
-
-<h3>Or contact us directly</h3>
-
-<p><strong>WhatsApp:</strong> +234 702 527 9121</p>
-
-<p>
-<a href="https://wa.me/2347025279121" class="button_1">
-Chat on WhatsApp
-</a>
-</p>
-
+    </div>
 </section>
 
+<!-- ===== FOOTER ===== -->
 <footer>
-
-<div class="container">
-
-<p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
-
-</div>
-
+    <div class="container">
+        <p>&copy; 2026 NEXA Digital Services. All Rights Reserved.</p>
+    </div>
 </footer>
 
 <script src="menu.js"></script>
 <script src="contact.js"></script>
 <script src="app-settings.js"></script>
-
 </body>
 </html>
