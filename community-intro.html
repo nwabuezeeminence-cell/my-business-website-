@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Community</title>
+<link rel="stylesheet" href="community.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{ --nexa:#E94560; --bg:#0F0F1A; --card:#1A1A2E; --text:#E9EDEF; --gray:#8696A0; }
+body{background:var(--bg); color:var(--text); font-family:Arial; margin:0;}
+.container{text-align:center; padding:40px 20px; height:100vh; display:flex; flex-direction:column; justify-content:space-between;}
+.box{background:var(--card); border-radius:20px; padding:30px; margin:20px 0;}
+.btn{background:var(--nexa); color:white; border:none; padding:14px; border-radius:50px; width:100%; font-size:16px; font-weight:bold; cursor:pointer;}
+.link{color:var(--nexa);}
+</style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <i class="fas fa-times" style="position:absolute; top:15px; left:20px; font-size:20px; cursor:pointer;" onclick="history.back()"></i>
+        <div class="box">
+            <i class="fas fa-bullhorn" style="font-size:50px; color:var(--nexa);"></i>
+            <i class="fas fa-users" style="font-size:40px; color:var(--nexa); margin-left:-10px;"></i>
+        </div>
+        <h2>Create a new community</h2>
+        <p style="color:var(--gray);">Bring together a neighborhood, school or more. Create topic-based groups for members, and easily send them admin announcements.</p>
+        <p class="link">See example communities ></p>
+    </div>
+    <button class="btn" onclick="location.href='create-community-form.html'">Get started</button>
+</div>
+</body>
+</html>
