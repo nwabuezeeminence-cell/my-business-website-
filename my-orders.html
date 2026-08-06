@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders | NEXA</title>
+<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="menu.css?v=5">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+    <button class="menu-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
+    <div class="logo"><img src="NEXA.png"><h2>NEXA</h2></div>
+    <div class="top-icons">
+        <a href="notifications.html" style="position:relative;"><i class="fas fa-bell"></i><span id="notifCount">0</span></a>
+        <a href="profile.html"><i class="fas fa-user-circle"></i></a>
+    </div>
+</header>
+
+<div id="sideMenu" class="side-menu">
+    <button class="close-btn" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="services.html"><i class="fas fa-briefcase"></i> Services</a>
+    <a href="my-orders.html"><i class="fas fa-box"></i> My Orders</a>
+    <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+</div>
+
+<section class="section">
+    <div class="container" style="max-width:800px; margin:auto;">
+        <h2 style="color:var(--nexa); text-align:center; margin-bottom:25px;"><i class="fas fa-box"></i> My Orders</h2>
+        <div id="ordersList">
+            <div class="card" style="text-align:center;">Loading...</div>
+        </div>
+    </div>
+</section>
+
+<script src="menu.js"></script>
+<script src="app-settings.js"></script>
+<script>
+const auth = firebase.auth();
+const db = firebase.database();
+
+auth.onAuthStateChanged(user => {
+    if(!user) return window.location.href = "login.html";
+    loadMyOrders(user.uid);
+});
+
+function loadMyOrders(uid){
+    const list = document.getElementById("ordersList");
+    db.ref("orders/" + uid).orderByChild("time").on("value", snap => {
+        list.innerHTML = "";
+        if(!snap.exists()){
+            list.innerHTML = `<div class="card" style="text-align:center;">No orders yet</div>`;
+            return;
+        }
+        snap.forEach(child => {
+            const o = child.val();
+            const color = o.status === "completed" ? "#4CAF50" : o.status === "processing" ? "orange" : "var(--nexa)";
+            list.innerHTML += `
+                <div class="card" style="margin-bottom:15px;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <h3 style="margin:0;">${o.service}</h3>
+                        <span style="background:${color}; padding:4px 10px; border-radius:20px; font-size:12px; color:#fff;">${o.status}</span>
+                    </div>
+                    <p style="color:var(--gray);">Price: ₦${o.price}</p>
+                    <p style="color:var(--gray); font-size:12px;">${new Date(o.time).toLocaleString()}</p>
+                </div>
+            `;
+        });
+    });
+}
+</script>
+</body>
+</html>
