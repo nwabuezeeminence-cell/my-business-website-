@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Announcements</title>
+<link rel="stylesheet" href="community.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{ --nexa:#E94560; --bg:#0F0F1A; --card:#1A1A2E; --text:#E9EDEF; --gray:#8696A0; }
+body{background:var(--bg); color:var(--text); font-family:Arial; margin:0; display:flex; flex-direction:column; height:100vh;}
+header{padding:15px; display:flex; align-items:center; gap:10px; background:var(--card);}
+.chat-area{flex:1; overflow-y:auto; padding:15px;}
+.post{background:var(--card); padding:15px; border-radius:12px; margin-bottom:10px;}
+.post b{color:var(--nexa);}
+.post small{color:var(--gray); font-size:11px;}
+.post-box{display:flex; gap:10px; background:var(--card); padding:10px; position:sticky; bottom:0;}
+.post-box input{flex:1; background:transparent; border:none; color:white; outline:none;}
+.btn-send{background:var(--nexa); border:none; color:white; padding:10px 14px; border-radius:8px; font-weight:bold;}
+.locked{opacity:0.4; pointer-events:none;}
+</style>
+</head>
+<body>
+
+<header>
+    <i class="fas fa-arrow-left" onclick="history.back()"></i>
+    <h3 style="margin:0;">Announcements</h3>
+</header>
+
+<div class="chat-area" id="announceArea"></div>
+
+<div class="post-box" id="postBox">
+    <input id="announceInput" placeholder="Write an announcement...">
+    <button class="btn-send" onclick="sendAnnounce()">Send</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script> 
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const communityId = urlParams.get('id');
+const dbRef = firebase.database();
+let currentUser, isAdmin = false;
+
+firebase.auth().onAuthStateChanged(user => {
+    if(user){ 
+        currentUser = user; 
+        checkAdmin();
+        loadAnnouncements(); 
+    } else location.href = "login.html";
+});
+
+function checkAdmin(){
+    dbRef.ref("communities/" + communityId).once("value").then(snap=>{
+        isAdmin = snap.val().createdBy === currentUser.uid;
+        if(!isAdmin){
+            document.getElementById("postBox").classList.add("locked");
+            document.getElementById("announceInput").placeholder = "Only admins can post announcements";
+        }
+    })
+}
+
+function loadAnnouncements(){
+    dbRef.ref("communityPosts/" + communityId).orderByChild("time").on("value", snap => {
+        const area = document.getElementById("announceArea");
+        area.innerHTML =!snap.exists()? "<p style='text-align:center; color:#aaa; padding:20px;'>No announcements yet</p>" : "";
+        snap.forEach(child => {
+            const p = child.val();
+            area.innerHTML += `<div class="post"><b>${p.name}</b><p>${p.text}</p><small>${new Date(p.time).toLocaleString()}</small></div>`;
+        });
+        area.scrollTop = area.scrollHeight;
+    });
+}
+
+function sendAnnounce(){
+    if(!isAdmin){ alert("Only admins can post announcements"); return; }
+    const text = document.getElementById("announceInput").value.trim();
+    if(!text) return;
+    dbRef.ref("communityPosts/" + communityId).push({
+        uid: currentUser.uid, name: currentUser.email.split('@')[0], text: text, time: Date.now()
+    });
+    document.getElementById("announceInput").value = "";
+}
+</script>
+</body>
+</html>
