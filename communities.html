@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Communities</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="community.css">
+</head>
+<body>
+<header>Communities</header>
+
+<div id="communityList">
+    <div class="item" onclick="location.href='create-community-intro.html'">
+        <div class="icon-box">
+            <i class="fas fa-users" style="font-size:20px; color:var(--gray);"></i>
+            <div class="plus-badge"><i class="fas fa-plus" style="font-size:10px; color:white;"></i></div>
+        </div>
+        <h3>New community</h3>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="firebase.js"></script> 
+<script>
+const dbRef = firebase.database();
+firebase.auth().onAuthStateChanged(user => {
+    if(user){ loadCommunities(); } else location.href = "login.html";
+});
+function loadCommunities(){
+    dbRef.ref("communities").orderByChild("createdAt").on("value", snap => {
+        const list = document.getElementById("communityList");
+        list.innerHTML = list.children[0].outerHTML;
+        snap.forEach(child => {
+            const c = child.val();
+            const photo = c.photo? `<img src="${c.photo}" style="width:100%; height:100%; object-fit:cover;">` : '<i class="fas fa-users" style="font-size:20px; color:var(--gray);"></i>';
+            list.innerHTML += `<div class="item" onclick="location.href='community-info.html?id=${child.key}'"><div class="icon-box">${photo}</div><div><h3>${c.name}</h3><p class="small gray">${c.desc || ''}</p></div></div>`;
+        })
+    })
+}
+</script>
+</body>
+</html>
