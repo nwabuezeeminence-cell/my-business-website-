@@ -1,82 +1,80 @@
-
-// ===== NEXA AUTH SYSTEM =====
-
-// Sign Up
-function signup(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-
-  if(password !== confirmPassword){
-    return alert("Passwords do not match");
-  }
-  if(password.length < 6){
-    return alert("Password must be at least 6 characters");
-  }
-
-  auth.createUserWithEmailAndPassword(email, password)
-.then(userCredential => {
-    const user = userCredential.user;
+// PUT THIS AT THE TOP OF auth.js
+firebase.auth().onAuthStateChanged((user) => {
+    const currentPage = window.location.pathname.split("/").pop();
     
-    // Create empty user profile. Will be filled in profile.html
-    db.ref("users/" + user.uid).set({
-      uid: user.uid,
-      email: email,
-      name: "",
-      photo: "",
-      bio: "",
-      online: true,
-      createdAt: Date.now()
-    });
-    
-    alert("Account created! Let's set up your profile");
-    window.location.href = "profile.html"; // THIS IS THE KEY REDIRECT
-  })
-.catch(error => alert(error.message));
-}
-
-function login(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  auth.signInWithEmailAndPassword(email, password)
-.then(() => window.location.href = "chat.html")
-.catch(error => alert(error.message));
-}
-
-// Logout - add this too
-function logout(){
-    const user = firebase.auth().currentUser;
-    if(user){
-        db.ref("users/" + user.uid).update({
-            online: false
-        });
-    }
-    firebase.auth().signOut().then(() => {
-        showPopup("Logged Out", "See you next time!");
-        setTimeout(()=>{
-            window.location.href="login.html";
-        },1000);
-    });
-}
-
-// Logout
-function logout() {
-
-    const user = firebase.auth().currentUser;
-
     if (user) {
-        db.ref("users/" + user.uid).update({
-            online: false
-        });
+        // If user IS logged in but they're on Login or Signup page, send to home
+        if(currentPage === "Login.html" || currentPage === "signup.html"){
+            location.href = "home.html"; // CHANGED FROM community.html
+        }
+    } else {
+        // If user is NOT logged in but they're on home, send to login
+        if(currentPage === "home.html"){
+            location.href = "Login.html";
+        }
+    }
+});
+
+
+function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    if (email === "" || password === "") { 
+        showPopup("Error", "Please fill all fields", "❌");
+        return; 
     }
 
-    firebase.auth().signOut().then(() => {
-        window.location.href = "login.html";
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+        showPopup("Success", "Login Successful!", "✓");
+        // NO redirect here anymore. onAuthStateChanged handles it
+    })
+    .catch((error) => {
+        showPopup("Error", error.message, "❌");
     });
+}
+function login(){
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    
+    if(!email || !password){ alert("Fill all fields"); return; }
 
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+        location.href = "index.html";
+    })
+    .catch(err => {
+        alert(err.message);
+    });
 }
 
-// Current User
-function getUser() {
-    return firebase.auth().currentUser;
+function forgotPass(){
+    const email = prompt("Enter your email to reset password");
+    if(email){
+        firebase.auth().sendPasswordResetEmail(email)
+        .then(() => alert("Reset link sent to " + email))
+        .catch(err => alert(err.message));
+    }
 }
+
+function togglePass(){
+    const pass = document.getElementById("password");
+    const icon = event.target;
+    if(pass.type === "password"){
+        pass.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        pass.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
+// Auto redirect if already logged in
+firebase.auth().onAuthStateChanged(user => {
+    if(user && location.pathname.includes("login.html")){
+        location.href = "communities.html";
+    }
+});
